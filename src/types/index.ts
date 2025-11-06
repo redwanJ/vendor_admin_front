@@ -13,6 +13,7 @@ export interface ApiError {
   message: string;
   code?: string;
   status?: number;
+  statusCode?: number;
   errors?: Record<string, string[]>;
 }
 

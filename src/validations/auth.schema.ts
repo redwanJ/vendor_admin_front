@@ -14,17 +14,17 @@ export const loginSchema = z.object({
 
 export type LoginFormData = z.infer<typeof loginSchema>;
 
-// Register schema
+// Register schema for vendor registration
 export const registerSchema = z
   .object({
-    name: z
-      .string()
-      .min(1, 'Name is required')
-      .min(2, 'Name must be at least 2 characters'),
     email: z
       .string()
       .min(1, 'Email is required')
       .email('Invalid email address'),
+    fullName: z
+      .string()
+      .min(1, 'Full name is required')
+      .min(2, 'Full name must be at least 2 characters'),
     password: z
       .string()
       .min(1, 'Password is required')
@@ -34,6 +34,19 @@ export const registerSchema = z
         'Password must contain at least one uppercase letter, one lowercase letter, and one number'
       ),
     confirmPassword: z.string().min(1, 'Please confirm your password'),
+    businessName: z
+      .string()
+      .min(1, 'Business name is required')
+      .min(2, 'Business name must be at least 2 characters'),
+    businessSlug: z
+      .string()
+      .min(1, 'Business slug is required')
+      .min(2, 'Business slug must be at least 2 characters')
+      .regex(/^[a-z0-9-]+$/, 'Business slug can only contain lowercase letters, numbers, and hyphens'),
+    phoneNumber: z
+      .string()
+      .min(1, 'Phone number is required'),
+    address: z.string().optional(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",

@@ -1,7 +1,8 @@
 'use client';
 
 import * as React from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 import { Formik, Form } from 'formik';
 import { toFormikValidationSchema } from '@/lib/formik-zod-adapter';
 import { loginSchema, type LoginFormData } from '@/validations/auth.schema';
@@ -23,6 +24,7 @@ interface LoginFormProps {
 
 export function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
   const t = useTranslations('auth.login');
+  const locale = useLocale();
 
   const initialValues: LoginFormData = {
     email: '',
@@ -66,10 +68,23 @@ export function LoginForm({ onSubmit, isLoading = false }: LoginFormProps) {
               >
                 {isSubmitting || isLoading ? t('submitting') : t('submit')}
               </Button>
-              <div className="text-sm text-center text-muted-foreground">
-                <a href="#" className="hover:text-primary transition-colors">
-                  {t('forgotPassword')}
-                </a>
+
+              <div className="space-y-2 text-center text-sm">
+                <div className="text-muted-foreground">
+                  <Link href={`/${locale}/forgot-password`} className="hover:text-primary transition-colors">
+                    {t('forgotPassword')}
+                  </Link>
+                </div>
+
+                <div className="border-t pt-4 text-muted-foreground">
+                  <span>{t('noAccount')} </span>
+                  <Link
+                    href={`/${locale}/register`}
+                    className="text-primary hover:underline font-medium transition-colors"
+                  >
+                    {t('signUp')}
+                  </Link>
+                </div>
               </div>
             </CardFooter>
           </Form>

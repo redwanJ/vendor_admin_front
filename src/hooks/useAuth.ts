@@ -8,7 +8,7 @@ import {
   setError,
   selectAuth,
 } from '@/store/slices/authSlice';
-import { authService } from '@/services/auth.service';
+import { authService } from '@/lib/auth.service';
 import { ROUTES } from '@/constants';
 import type { LoginFormData } from '@/validations/auth.schema';
 
@@ -32,7 +32,8 @@ export function useAuth() {
         dispatch(
           setCredentials({
             user: response.user,
-            token: response.token,
+            token: response.accessToken,
+            refreshToken: response.refreshToken,
           })
         );
 
