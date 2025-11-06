@@ -1,0 +1,59 @@
+{
+  "app": {
+    "name": "መናል ሀብ የሻጭ መግቢያ",
+    "description": "የመናል ሀብ የሻጭ ዳሽቦርድ",
+    "welcome": "እንኳን ደህና መጡ"
+  },
+  "nav": {
+    "dashboard": "ዳሽቦርድ",
+    "orders": "ትዕዛዞች",
+    "products": "ምርቶች",
+    "inventory": "ክምችት",
+    "sales": "ሽያጮች",
+    "settings": "ቅንብሮች"
+  },
+  "actions": {
+    "save": "አስቀምጥ",
+    "cancel": "ሰርዝ",
+    "delete": "ደምስስ",
+    "edit": "አርትዕ",
+    "create": "ፍጠር",
+    "search": "ፈልግ",
+    "filter": "አጣራ",
+    "export": "ወደ ውጭ ላክ",
+    "import": "ከውጭ አስገባ",
+    "submit": "አስገባ",
+    "reset": "ዳግም አስጀምር",
+    "back": "ተመለስ",
+    "next": "ቀጣይ",
+    "previous": "ቀዳሚ",
+    "loading": "በመጫን ላይ...",
+    "confirm": "አረጋግጥ"
+  },
+  "status": {
+    "active": "ንቁ",
+    "inactive": "ንቁ ያልሆነ",
+    "pending": "በመጠባበቅ ላይ",
+    "suspended": "ታግዷል",
+    "approved": "ጸድቋል",
+    "rejected": "ተቀባይነት አላገኘም"
+  },
+  "messages": {
+    "success": "ስራው በተሳካ ሁኔታ ተጠናቋል",
+    "error": "ስህተት ተከስቷል",
+    "warning": "ማስጠንቀቂያ",
+    "info": "መረጃ",
+    "noData": "ምንም መረጃ የለም",
+    "confirmDelete": "ይህን ንጥል መሰረዝ እርግጠኛ ነዎት?",
+    "unsavedChanges": "ያልተቀመጡ ለውጦች አሉዎት። መውጣት እርግጠኛ ነዎት?"
+  },
+  "validation": {
+    "required": "ይህ መስክ ያስፈልጋል",
+    "email": "ልክ ያልሆነ የኢሜይል አድራሻ",
+    "minLength": "ዝቅተኛ ርዝመት {min} ቁምፊዎች ነው",
+    "maxLength": "ከፍተኛ ርዝመት {max} ቁምፊዎች ነው",
+    "min": "ዝቅተኛ ዋጋ {min} ነው",
+    "max": "ከፍተኛ ዋጋ {max} ነው",
+    "pattern": "ልክ ያልሆነ ቅርጸት"
+  }
+}

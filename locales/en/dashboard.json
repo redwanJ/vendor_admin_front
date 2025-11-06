@@ -1,0 +1,29 @@
+{
+  "title": "Dashboard",
+  "overview": "Overview",
+  "statistics": "Statistics",
+  "recentActivity": "Recent Activity",
+  "quickActions": "Quick Actions",
+  "metrics": {
+    "totalUsers": "Total Users",
+    "totalOrders": "Total Orders",
+    "totalRevenue": "Total Revenue",
+    "totalProducts": "Total Products",
+    "activeUsers": "Active Users",
+    "pendingOrders": "Pending Orders",
+    "completedOrders": "Completed Orders"
+  },
+  "charts": {
+    "salesOverview": "Sales Overview",
+    "userGrowth": "User Growth",
+    "orderTrends": "Order Trends",
+    "topProducts": "Top Products"
+  },
+  "timeframes": {
+    "today": "Today",
+    "week": "This Week",
+    "month": "This Month",
+    "year": "This Year",
+    "custom": "Custom Range"
+  }
+}

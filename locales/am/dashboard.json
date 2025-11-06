@@ -1,0 +1,29 @@
+{
+  "title": "ዳሽቦርድ",
+  "overview": "አጠቃላይ እይታ",
+  "statistics": "ስታትስቲክስ",
+  "recentActivity": "የቅርብ ጊዜ እንቅስቃሴ",
+  "quickActions": "ፈጣን እርምጃዎች",
+  "metrics": {
+    "totalUsers": "ጠቅላላ ተጠቃሚዎች",
+    "totalOrders": "ጠቅላላ ትዕዛዞች",
+    "totalRevenue": "ጠቅላላ ገቢ",
+    "totalProducts": "ጠቅላላ ምርቶች",
+    "activeUsers": "ንቁ ተጠቃሚዎች",
+    "pendingOrders": "በመጠባበቅ ላይ ያሉ ትዕዛዞች",
+    "completedOrders": "የተጠናቀቁ ትዕዛዞች"
+  },
+  "charts": {
+    "salesOverview": "የሽያጭ አጠቃላይ እይታ",
+    "userGrowth": "የተጠቃሚ እድገት",
+    "orderTrends": "የትዕዛዝ አዝማሚያዎች",
+    "topProducts": "ከፍተኛ ምርቶች"
+  },
+  "timeframes": {
+    "today": "ዛሬ",
+    "week": "በዚህ ሳምንት",
+    "month": "በዚህ ወር",
+    "year": "በዚህ ዓመት",
+    "custom": "ብጁ ክልል"
+  }
+}
