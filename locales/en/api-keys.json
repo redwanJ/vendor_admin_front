@@ -1,0 +1,41 @@
+{
+  "title": "API Keys",
+  "description": "Manage API keys for accessing your services programmatically",
+  "actions": {
+    "create": "Create API Key",
+    "view": "View",
+    "edit": "Edit",
+    "revoke": "Revoke",
+    "delete": "Delete",
+    "revokeSelected": "Revoke Selected",
+    "deleteSelected": "Delete Selected",
+    "clearAll": "Clear all"
+  },
+  "filters": {
+    "status": "Status",
+    "tier": "Tier",
+    "environment": "Environment",
+    "activeFilters": "Active filters:",
+    "allStatuses": "All Statuses",
+    "allTiers": "All Tiers",
+    "allEnvironments": "All Environments"
+  },
+  "columns": {
+    "name": "Name",
+    "status": "Status",
+    "tier": "Tier",
+    "environment": "Environment",
+    "lastUsed": "Last Used",
+    "created": "Created"
+  },
+  "empty": {
+    "list": "No API keys found. Create your first API key to get started."
+  },
+  "confirm": {
+    "revoke": "Are you sure you want to revoke \"{name}\"? This action cannot be undone.",
+    "delete": "Are you sure you want to delete \"{name}\"?",
+    "bulkDelete": "Are you sure you want to delete {count} API key(s)?",
+    "bulkRevoke": "Are you sure you want to revoke {count} API key(s)?"
+  }
+}
+

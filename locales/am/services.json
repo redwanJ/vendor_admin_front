@@ -1,0 +1,38 @@
+{
+  "title": "አገልግሎቶች",
+  "description": "አገልግሎቶችዎን እና ቅናሾችዎን ያስተዳድሩ",
+  "actions": {
+    "add": "አገልግሎት ጨምር",
+    "view": "አሳይ",
+    "edit": "አርትዕ",
+    "delete": "ሰርዝ",
+    "deleteSelected": "የተመረጡትን ሰርዝ",
+    "clearAll": "ሁሉንም አጽዳ"
+  },
+  "filters": {
+    "status": "ሁኔታ",
+    "type": "የአገልግሎት አይነት",
+    "category": "ምድብ",
+    "activeFilters": "ንቁ ማጣሪያዎች፡",
+    "allStatuses": "ሁሉም ሁኔታዎች",
+    "allTypes": "ሁሉም አይነቶች",
+    "allCategories": "ሁሉም ምድቦች"
+  },
+  "columns": {
+    "service": "አገልግሎት",
+    "type": "አይነት",
+    "category": "ምድብ",
+    "price": "ዋጋ",
+    "status": "ሁኔታ",
+    "featured": "የሚመረጡ",
+    "updated": "የመጨረሻ ማዘመኛ"
+  },
+  "searchPlaceholder": "አገልግሎቶችን ፈልግ...",
+  "empty": {
+    "list": "ምንም አገልግሎቶች አልተገኙም። ለመጀመር የመጀመሪያ አገልግሎትዎን ይፍጠሩ።"
+  },
+  "confirm": {
+    "delete": "\"{name}\" ለመሰረዝ እፈልጋለሁ ብለው ነው?",
+    "bulkDelete": "{count} አገልግሎት(ዎች) ለመሰረዝ እፈልጋለሁ ብለው ነው?"
+  }
+}

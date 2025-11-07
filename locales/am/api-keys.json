@@ -1,0 +1,40 @@
+{
+  "title": "የ API ቁልፎች",
+  "description": "ለአገልግሎቶችዎ ፕሮግራማዊ መዳረሻ የ API ቁልፎችን ያስተዳድሩ",
+  "actions": {
+    "create": "የ API ቁልፍ ፍጠር",
+    "view": "አሳይ",
+    "edit": "አርትዕ",
+    "revoke": "ማስተላለፍ",
+    "delete": "ሰርዝ",
+    "revokeSelected": "የተመረጡትን ሰርዝ",
+    "deleteSelected": "የተመረጡትን ሰርዝ",
+    "clearAll": "ሁሉንም አጽዳ"
+  },
+  "filters": {
+    "status": "ሁኔታ",
+    "tier": "ደረጃ",
+    "environment": "አካባቢ",
+    "activeFilters": "ንቁ ማጣሪያዎች፡",
+    "allStatuses": "ሁሉም ሁኔታዎች",
+    "allTiers": "ሁሉም ደረጃዎች",
+    "allEnvironments": "ሁሉም አካባቢዎች"
+  },
+  "columns": {
+    "name": "ስም",
+    "status": "ሁኔታ",
+    "tier": "ደረጃ",
+    "environment": "አካባቢ",
+    "lastUsed": "ለመጨረሻ ጊዜ የተጠቀመው",
+    "created": "የተፈጠረው"
+  },
+  "empty": {
+    "list": "ምንም የ API ቁልፎች አልተገኙም። ለመጀመር የመጀመሪያ የ API ቁልፍዎን ይፍጠሩ።"
+  },
+  "confirm": {
+    "revoke": "\"{name}\" ማስተላለፍ እፈልጋለሁ ብለው ነው? ይህ እርምጃ ሊመለስ አይችልም።",
+    "delete": "\"{name}\" ለመሰረዝ እፈልጋለሁ ብለው ነው?",
+    "bulkDelete": "{count} የ API ቁልፍ(ዎች) ለመሰረዝ እፈልጋለሁ ብለው ነው?",
+    "bulkRevoke": "{count} የ API ቁልፍ(ዎች) ማስተላለፍ እፈልጋለሁ ብለው ነው?"
+  }
+}

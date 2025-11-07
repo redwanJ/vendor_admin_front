@@ -2,34 +2,24 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import { Plus, Trash2, Eye, Edit, XCircle, Ban } from 'lucide-react';
-import { DataTable, DataTableColumn, DataTableFilter, DataTableBulkAction, DataTableRowAction } from '@/components/shared/DataTable';
-import { MultiSelectFilter, MultiSelectFilterBadges } from '@/components/shared/MultiSelectFilter';
+import { useTranslations } from 'next-intl';
+//
 import { ApiKeyListSkeleton } from '@/components/shared/ServiceSkeletons';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { apiKeyService } from '@/services/apiKeyService';
-import type { ApiKeyListDto, ApiKeyStatus, ApiKeyTier, ApiKeyFilters } from '@/types/apiKey';
+import type { ApiKeyListDto, ApiKeyStatus, ApiKeyTier } from '@/types/apiKey';
+import ApiKeysHeader from '@/components/api-keys/ApiKeysHeader';
+import ApiKeysFilters from '@/components/api-keys/ApiKeysFilters';
+import ApiKeysTable from '@/components/api-keys/ApiKeysTable';
 
-const statusColors: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
-  Active: 'default',
-  Revoked: 'destructive',
-  Expired: 'secondary',
-  Suspended: 'outline',
-};
-
-const tierColors: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
-  Public: 'secondary',
-  Basic: 'default',
-  Premium: 'default',
-};
+// colors are handled in ApiKeysTable
 
 export default function ApiKeysPage() {
   const router = useRouter();
   const params = useParams();
   const locale = params?.locale as string || 'en';
   const { toast } = useToast();
+  const t = useTranslations('apiKeys');
 
   const [apiKeys, setApiKeys] = useState<ApiKeyListDto[]>([]);
   const [loading, setLoading] = useState(true);
@@ -93,7 +83,7 @@ export default function ApiKeysPage() {
   }, []);
 
   const handleRevoke = async (apiKey: ApiKeyListDto) => {
-    if (!confirm(`Are you sure you want to revoke "${apiKey.name}"? This action cannot be undone.`)) {
+    if (!confirm(t('confirm.revoke', { name: apiKey.name }))) {
       return;
     }
 
@@ -131,7 +121,7 @@ export default function ApiKeysPage() {
   };
 
   const handleBulkDelete = async (ids: string[]) => {
-    if (!confirm(`Are you sure you want to delete ${ids.length} API key(s)?`)) {
+    if (!confirm(t('confirm.bulkDelete', { count: ids.length }))) {
       return;
     }
 
@@ -153,7 +143,7 @@ export default function ApiKeysPage() {
   };
 
   const handleBulkRevoke = async (ids: string[]) => {
-    if (!confirm(`Are you sure you want to revoke ${ids.length} API key(s)?`)) {
+    if (!confirm(t('confirm.bulkRevoke', { count: ids.length }))) {
       return;
     }
 
@@ -174,61 +164,7 @@ export default function ApiKeysPage() {
     }
   };
 
-  // Table columns
-  const columns: DataTableColumn<ApiKeyListDto>[] = [
-    {
-      key: 'name',
-      label: 'Name',
-      sortable: true,
-      render: (apiKey) => (
-        <div className="flex flex-col">
-          <span className="font-medium">{apiKey.name}</span>
-          <span className="text-xs text-muted-foreground font-mono">
-            {apiKey.keyPrefix}...
-          </span>
-        </div>
-      ),
-    },
-    {
-      key: 'status',
-      label: 'Status',
-      sortable: true,
-      render: (apiKey) => (
-        <Badge variant={statusColors[apiKey.status] || 'default'}>
-          {apiKey.status}
-        </Badge>
-      ),
-    },
-    {
-      key: 'tier',
-      label: 'Tier',
-      render: (apiKey) => (
-        <Badge variant={tierColors[apiKey.tier] || 'default'}>
-          {apiKey.tier}
-        </Badge>
-      ),
-    },
-    {
-      key: 'environment',
-      label: 'Environment',
-      render: (apiKey) => (
-        <span className="text-sm">{apiKey.environment}</span>
-      ),
-    },
-    {
-      key: 'lastUsedAt',
-      label: 'Last Used',
-      render: (apiKey) => apiKey.lastUsedAt
-        ? new Date(apiKey.lastUsedAt).toLocaleDateString()
-        : 'Never',
-    },
-    {
-      key: 'createdAt',
-      label: 'Created',
-      sortable: true,
-      render: (apiKey) => new Date(apiKey.createdAt).toLocaleDateString(),
-    },
-  ];
+  // Table columns are encapsulated in ApiKeysTable
 
   // Filter options
   const statusOptions = [
@@ -250,70 +186,15 @@ export default function ApiKeysPage() {
     { label: 'Development', value: 'development' },
   ];
 
-  // Bulk actions
-  const bulkActions: DataTableBulkAction[] = [
-    {
-      label: 'Revoke Selected',
-      icon: <Ban className="h-4 w-4 mr-2" />,
-      onClick: handleBulkRevoke,
-      variant: 'destructive',
-    },
-    {
-      label: 'Delete Selected',
-      icon: <Trash2 className="h-4 w-4 mr-2" />,
-      onClick: handleBulkDelete,
-      variant: 'destructive',
-    },
-  ];
+  // Bulk actions handled in ApiKeysTable via callbacks
 
-  // Row actions
-  const rowActions: DataTableRowAction<ApiKeyListDto>[] = [
-    {
-      label: 'View',
-      icon: <Eye className="h-4 w-4 mr-2" />,
-      onClick: (apiKey) => router.push(`/${locale}/dashboard/api-keys/${apiKey.id}`),
-    },
-    {
-      label: 'Edit',
-      icon: <Edit className="h-4 w-4 mr-2" />,
-      onClick: (apiKey) => router.push(`/${locale}/dashboard/api-keys/${apiKey.id}/edit`),
-    },
-    {
-      label: 'Revoke',
-      icon: <Ban className="h-4 w-4 mr-2" />,
-      onClick: handleRevoke,
-      variant: 'destructive',
-    },
-    {
-      label: 'Delete',
-      icon: <Trash2 className="h-4 w-4 mr-2" />,
-      onClick: async (apiKey) => {
-        if (confirm(`Are you sure you want to delete "${apiKey.name}"?`)) {
-          await handleDelete(apiKey.id);
-        }
-      },
-      variant: 'destructive',
-    },
-  ];
+  // Row actions handled in ApiKeysTable via callbacks
 
   // Show skeleton on initial load
   if (loading && apiKeys.length === 0 && totalCount === 0) {
     return (
       <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">API Keys</h1>
-            <p className="text-muted-foreground">
-              Manage API keys for accessing your services programmatically
-            </p>
-          </div>
-          <Button onClick={() => router.push(`/${locale}/dashboard/api-keys/new`)}>
-            <Plus className="h-4 w-4 mr-2" />
-            Create API Key
-          </Button>
-        </div>
-
+        <ApiKeysHeader onAdd={() => router.push(`/${locale}/dashboard/api-keys/new`)} />
         <ApiKeyListSkeleton count={10} />
       </div>
     );
@@ -321,100 +202,47 @@ export default function ApiKeysPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">API Keys</h1>
-          <p className="text-muted-foreground">
-            Manage API keys for accessing your services programmatically
-          </p>
-        </div>
-        <Button onClick={() => router.push(`/${locale}/dashboard/api-keys/new`)}>
-          <Plus className="h-4 w-4 mr-2" />
-          Create API Key
-        </Button>
-      </div>
+      <ApiKeysHeader onAdd={() => router.push(`/${locale}/dashboard/api-keys/new`)} />
 
-      {/* Multi-Select Filters */}
-      <div className="flex flex-wrap items-center gap-3">
-        <MultiSelectFilter
-          label="Status"
-          options={statusOptions}
-          selectedValues={selectedStatuses}
-          onChange={handleStatusChange}
-          placeholder="All Statuses"
-        />
-        <MultiSelectFilter
-          label="Tier"
-          options={tierOptions}
-          selectedValues={selectedTiers}
-          onChange={handleTierChange}
-          placeholder="All Tiers"
-        />
-        <MultiSelectFilter
-          label="Environment"
-          options={environmentOptions}
-          selectedValues={selectedEnvironments}
-          onChange={handleEnvironmentChange}
-          placeholder="All Environments"
-        />
-      </div>
+      <ApiKeysFilters
+        statusOptions={statusOptions}
+        tierOptions={tierOptions}
+        environmentOptions={environmentOptions}
+        selectedStatuses={selectedStatuses}
+        selectedTiers={selectedTiers}
+        selectedEnvironments={selectedEnvironments}
+        onStatusChange={handleStatusChange}
+        onTierChange={handleTierChange}
+        onEnvironmentChange={handleEnvironmentChange}
+        onClearAll={() => {
+          setSelectedStatuses([]);
+          setSelectedTiers([]);
+          setSelectedEnvironments([]);
+          setCurrentPage(1);
+        }}
+      />
 
-      {/* Active Filters Display */}
-      {(selectedStatuses.length > 0 || selectedTiers.length > 0 || selectedEnvironments.length > 0) && (
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-muted-foreground">Active filters:</span>
-          <MultiSelectFilterBadges
-            selectedValues={selectedStatuses}
-            options={statusOptions}
-            onRemove={(value) => handleStatusChange(selectedStatuses.filter(v => v !== value))}
-          />
-          <MultiSelectFilterBadges
-            selectedValues={selectedTiers}
-            options={tierOptions}
-            onRemove={(value) => handleTierChange(selectedTiers.filter(v => v !== value))}
-          />
-          <MultiSelectFilterBadges
-            selectedValues={selectedEnvironments}
-            options={environmentOptions}
-            onRemove={(value) => handleEnvironmentChange(selectedEnvironments.filter(v => v !== value))}
-          />
-          {(selectedStatuses.length > 0 || selectedTiers.length > 0 || selectedEnvironments.length > 0) && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => {
-                setSelectedStatuses([]);
-                setSelectedTiers([]);
-                setSelectedEnvironments([]);
-                setCurrentPage(1);
-              }}
-              className="h-7"
-            >
-              Clear all
-            </Button>
-          )}
-        </div>
-      )}
-
-      {/* Data Table */}
-      <DataTable
+      <ApiKeysTable
         data={apiKeys}
-        columns={columns}
-        keyExtractor={(apiKey) => apiKey.id}
+        loading={loading}
         currentPage={currentPage}
         totalPages={totalPages}
         pageSize={pageSize}
         totalCount={totalCount}
         onPageChange={setCurrentPage}
         onPageSizeChange={setPageSize}
-        selectable
         selectedIds={selectedIds}
         onSelectionChange={setSelectedIds}
-        bulkActions={bulkActions}
-        rowActions={rowActions}
-        loading={loading}
-        emptyMessage="No API keys found. Create your first API key to get started."
+        onView={(apiKey) => router.push(`/${locale}/dashboard/api-keys/${apiKey.id}`)}
+        onEdit={(apiKey) => router.push(`/${locale}/dashboard/api-keys/${apiKey.id}/edit`)}
+        onRevoke={handleRevoke}
+        onDelete={async (apiKey) => {
+          if (confirm(t('confirm.delete', { name: apiKey.name }))) {
+            await handleDelete(apiKey.id);
+          }
+        }}
+        onBulkRevoke={handleBulkRevoke}
+        onBulkDelete={handleBulkDelete}
       />
     </div>
   );

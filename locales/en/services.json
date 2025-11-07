@@ -1,0 +1,39 @@
+{
+  "title": "Services",
+  "description": "Manage your services and offerings",
+  "actions": {
+    "add": "Add Service",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteSelected": "Delete Selected",
+    "clearAll": "Clear all"
+  },
+  "filters": {
+    "status": "Status",
+    "type": "Service Type",
+    "category": "Category",
+    "activeFilters": "Active filters:",
+    "allStatuses": "All Statuses",
+    "allTypes": "All Types",
+    "allCategories": "All Categories"
+  },
+  "columns": {
+    "service": "Service",
+    "type": "Type",
+    "category": "Category",
+    "price": "Price",
+    "status": "Status",
+    "featured": "Featured",
+    "updated": "Last Updated"
+  },
+  "searchPlaceholder": "Search services...",
+  "empty": {
+    "list": "No services found. Create your first service to get started."
+  },
+  "confirm": {
+    "delete": "Are you sure you want to delete \"{name}\"?",
+    "bulkDelete": "Are you sure you want to delete {count} service(s)?"
+  }
+}
+

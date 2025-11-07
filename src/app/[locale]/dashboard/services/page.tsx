@@ -2,9 +2,13 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { Plus, Trash2, Eye, Edit, Trash } from 'lucide-react';
 import { DataTable, DataTableColumn, DataTableFilter, DataTableBulkAction, DataTableRowAction } from '@/components/shared/DataTable';
 import { MultiSelectFilter, MultiSelectFilterBadges } from '@/components/shared/MultiSelectFilter';
+import ServicesHeader from '@/components/services/ServicesHeader';
+import ServicesFilters from '@/components/services/ServicesFilters';
+import ServicesTable from '@/components/services/ServicesTable';
 import { ServiceListSkeleton } from '@/components/shared/ServiceSkeletons';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -27,6 +31,7 @@ export default function ServicesPage() {
   const params = useParams();
   const locale = params?.locale as string || 'en';
   const { toast } = useToast();
+  const t = useTranslations('services');
 
   const [services, setServices] = useState<ServiceListDto[]>([]);
   const [serviceTypes, setServiceTypes] = useState<ServiceTypeLookup[]>([]);
@@ -275,19 +280,7 @@ export default function ServicesPage() {
   if (loading && services.length === 0 && totalCount === 0) {
     return (
       <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Services</h1>
-            <p className="text-muted-foreground">
-              Manage your services and offerings
-            </p>
-          </div>
-          <Button onClick={() => router.push(`/${locale}/dashboard/services/new`)}>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Service
-          </Button>
-        </div>
+        <ServicesHeader onAdd={() => router.push(`/${locale}/dashboard/services/new`)} />
 
         <ServiceListSkeleton count={10} />
       </div>
@@ -296,107 +289,50 @@ export default function ServicesPage() {
 
   return (
     <div className="space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Services</h1>
-            <p className="text-muted-foreground">
-              Manage your services and offerings
-            </p>
-          </div>
-          <Button onClick={() => router.push(`/${locale}/dashboard/services/new`)}>
-            <Plus className="h-4 w-4 mr-2" />
-            Add Service
-          </Button>
-        </div>
+      <ServicesHeader onAdd={() => router.push(`/${locale}/dashboard/services/new`)} />
 
-        {/* Multi-Select Filters */}
-        <div className="flex flex-wrap items-center gap-3">
-          <MultiSelectFilter
-            label="Status"
-            options={statusOptions}
-            selectedValues={selectedStatuses}
-            onChange={handleStatusChange}
-            placeholder="All Statuses"
-          />
-          <MultiSelectFilter
-            label="Service Type"
-            options={serviceTypeOptions}
-            selectedValues={selectedServiceTypes}
-            onChange={handleServiceTypeChange}
-            placeholder="All Types"
-          />
-          <MultiSelectFilter
-            label="Category"
-            options={categoryOptions}
-            selectedValues={selectedCategories}
-            onChange={handleCategoryChange}
-            placeholder="All Categories"
-          />
-        </div>
+      <ServicesFilters
+        statusOptions={statusOptions}
+        serviceTypeOptions={serviceTypeOptions}
+        categoryOptions={categoryOptions}
+        selectedStatuses={selectedStatuses}
+        selectedServiceTypes={selectedServiceTypes}
+        selectedCategories={selectedCategories}
+        onStatusChange={handleStatusChange}
+        onServiceTypeChange={handleServiceTypeChange}
+        onCategoryChange={handleCategoryChange}
+        onClearAll={() => {
+          setSelectedStatuses([]);
+          setSelectedServiceTypes([]);
+          setSelectedCategories([]);
+          setCurrentPage(1);
+        }}
+      />
 
-        {/* Active Filters Display */}
-        {(selectedStatuses.length > 0 || selectedServiceTypes.length > 0 || selectedCategories.length > 0) && (
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-sm text-muted-foreground">Active filters:</span>
-            <MultiSelectFilterBadges
-              selectedValues={selectedStatuses}
-              options={statusOptions}
-              onRemove={(value) => handleStatusChange(selectedStatuses.filter(v => v !== value))}
-            />
-            <MultiSelectFilterBadges
-              selectedValues={selectedServiceTypes}
-              options={serviceTypeOptions}
-              onRemove={(value) => handleServiceTypeChange(selectedServiceTypes.filter(v => v !== value))}
-            />
-            <MultiSelectFilterBadges
-              selectedValues={selectedCategories}
-              options={categoryOptions}
-              onRemove={(value) => handleCategoryChange(selectedCategories.filter(v => v !== value))}
-            />
-            {(selectedStatuses.length > 0 || selectedServiceTypes.length > 0 || selectedCategories.length > 0) && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setSelectedStatuses([]);
-                  setSelectedServiceTypes([]);
-                  setSelectedCategories([]);
-                  setCurrentPage(1);
-                }}
-                className="h-7"
-              >
-                Clear all
-              </Button>
-            )}
-          </div>
-        )}
-
-        {/* Data Table */}
-        <DataTable
-          data={services}
-          columns={columns}
-          keyExtractor={(service) => service.id}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          pageSize={pageSize}
-          totalCount={totalCount}
-          onPageChange={setCurrentPage}
-          onPageSizeChange={setPageSize}
-          searchable
-          searchPlaceholder="Search services..."
-          onSearch={handleSearch}
-          selectable
-          selectedIds={selectedIds}
-          onSelectionChange={setSelectedIds}
-          bulkActions={bulkActions}
-          rowActions={rowActions}
-          sortBy={sortBy}
-          sortDescending={sortDescending}
-          onSort={handleSort}
-          loading={loading}
-          emptyMessage="No services found. Create your first service to get started."
-        />
+      <ServicesTable
+        data={services}
+        loading={loading}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        totalCount={totalCount}
+        onPageChange={setCurrentPage}
+        onPageSizeChange={setPageSize}
+        selectedIds={selectedIds}
+        onSelectionChange={setSelectedIds}
+        sortBy={sortBy}
+        sortDescending={sortDescending}
+        onSort={handleSort}
+        onSearch={handleSearch}
+        onView={(service) => router.push(`/${locale}/dashboard/services/${service.id}`)}
+        onEdit={(service) => router.push(`/${locale}/dashboard/services/${service.id}/edit`)}
+        onDelete={async (service) => {
+          if (confirm(t('confirm.delete', { name: service.name }))) {
+            await handleDelete(service.id);
+          }
+        }}
+        onBulkDelete={handleBulkDelete}
+      />
     </div>
   );
 }
