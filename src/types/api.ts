@@ -27,3 +27,9 @@ export interface PaginationParams {
   sortOrder?: 'asc' | 'desc';
   search?: string;
 }
+
+export interface BaseLookup {
+  id: string;
+  name: string;
+  slug: string;
+}

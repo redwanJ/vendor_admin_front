@@ -2,14 +2,11 @@
 
 import * as React from 'react';
 import { useTranslations } from 'next-intl';
-import { AppShell } from '@/components/layout/AppShell';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useAppSelector } from '@/store/hooks';
 import { LayoutDashboard, Calendar, Users, Package } from 'lucide-react';
 
 export default function DashboardPage() {
   const t = useTranslations('dashboard');
-  const user = useAppSelector((state) => state.auth.user);
 
   // Mock stats - replace with real data from API
   const stats = [
@@ -40,20 +37,14 @@ export default function DashboardPage() {
   ];
 
   return (
-    <AppShell user={user}>
-      <div className="space-y-6">
-        {/* Header */}
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground">
-            Welcome back, {user?.fullName || 'Vendor'}!
-          </p>
-          {user?.tenant && (
-            <p className="text-sm text-muted-foreground mt-1">
-              {user.tenant.businessName}
-            </p>
-          )}
-        </div>
+    <div className="space-y-6">
+      {/* Header */}
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <p className="text-muted-foreground">
+          Welcome back!
+        </p>
+      </div>
 
         {/* Stats Grid */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -112,7 +103,6 @@ export default function DashboardPage() {
             </div>
           </CardContent>
         </Card>
-      </div>
-    </AppShell>
+    </div>
   );
 }

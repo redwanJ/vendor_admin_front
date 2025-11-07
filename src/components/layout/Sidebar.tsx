@@ -48,7 +48,7 @@ export function Sidebar({ user, collapsed, onLogout }: SidebarProps) {
     },
     {
       titleKey: 'services',
-      href: `/${locale}/services`,
+      href: `/${locale}/dashboard/services`,
       icon: Package,
     },
     {
