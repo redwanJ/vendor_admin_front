@@ -8,6 +8,7 @@ import * as z from 'zod';
 import { ArrowLeft, Save, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { ServiceFormSkeleton } from '@/components/shared/ServiceSkeletons';
 import {
   Form,
   FormControl,
@@ -201,14 +202,7 @@ export default function EditServicePage({ params: paramsPromise }: { params: Pro
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading service...</p>
-        </div>
-      </div>
-    );
+    return <ServiceFormSkeleton />;
   }
 
   if (!service) {
@@ -278,18 +272,18 @@ export default function EditServicePage({ params: paramsPromise }: { params: Pro
                       name="categoryId"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Category</FormLabel>
+                          <FormLabel>Category (Optional)</FormLabel>
                           <Select
-                            onValueChange={(value) => field.onChange(value === 'none' ? undefined : value)}
-                            value={field.value || 'none'}
+                            onValueChange={(value) => field.onChange(value === '__none__' ? undefined : value)}
+                            value={field.value || '__none__'}
                           >
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select category (optional)" />
+                                <SelectValue placeholder="Select a category" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="none">None</SelectItem>
+                              <SelectItem value="__none__">No category</SelectItem>
                               {categories.map(category => (
                                 <SelectItem key={category.id} value={category.id}>
                                   {category.name}

@@ -244,18 +244,18 @@ export default function NewServicePage() {
                       name="categoryId"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Category</FormLabel>
+                          <FormLabel>Category (Optional)</FormLabel>
                           <Select
-                            onValueChange={(value) => field.onChange(value === 'none' ? undefined : value)}
-                            value={field.value || 'none'}
+                            onValueChange={(value) => field.onChange(value === '__none__' ? undefined : value)}
+                            value={field.value || '__none__'}
                           >
                             <FormControl>
                               <SelectTrigger>
-                                <SelectValue placeholder="Select category (optional)" />
+                                <SelectValue placeholder="Select a category" />
                               </SelectTrigger>
                             </FormControl>
                             <SelectContent>
-                              <SelectItem value="none">None</SelectItem>
+                              <SelectItem value="__none__">No category</SelectItem>
                               {categories.map(category => (
                                 <SelectItem key={category.id} value={category.id}>
                                   {category.name}

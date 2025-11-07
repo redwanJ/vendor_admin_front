@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Plus, Trash2, Eye, Edit, Trash } from 'lucide-react';
 import { DataTable, DataTableColumn, DataTableFilter, DataTableBulkAction, DataTableRowAction } from '@/components/shared/DataTable';
+import { ServiceListSkeleton } from '@/components/shared/ServiceSkeletons';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
@@ -277,6 +278,29 @@ export default function ServicesPage() {
       variant: 'destructive',
     },
   ];
+
+  // Show skeleton on initial load
+  if (loading && services.length === 0 && totalCount === 0) {
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Services</h1>
+            <p className="text-muted-foreground">
+              Manage your services and offerings
+            </p>
+          </div>
+          <Button onClick={() => router.push(`/${locale}/dashboard/services/new`)}>
+            <Plus className="h-4 w-4 mr-2" />
+            Add Service
+          </Button>
+        </div>
+
+        <ServiceListSkeleton count={10} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { ServiceDetailSkeleton } from '@/components/shared/ServiceSkeletons';
 import { useToast } from '@/hooks/use-toast';
 import { serviceService } from '@/services/serviceService';
 import type { ServiceDto } from '@/types/service';
@@ -77,14 +78,7 @@ export default function ServiceDetailPage({ params: paramsPromise }: { params: P
   };
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center h-96">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-muted-foreground">Loading service...</p>
-        </div>
-      </div>
-    );
+    return <ServiceDetailSkeleton />;
   }
 
   if (!service) {
