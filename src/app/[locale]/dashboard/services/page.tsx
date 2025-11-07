@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import { Plus, Trash2 } from 'lucide-react';
-import { DataTable, DataTableColumn, DataTableFilter, DataTableBulkAction } from '@/components/shared/DataTable';
+import { useRouter, useParams } from 'next/navigation';
+import { Plus, Trash2, Eye, Edit, Trash } from 'lucide-react';
+import { DataTable, DataTableColumn, DataTableFilter, DataTableBulkAction, DataTableRowAction } from '@/components/shared/DataTable';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
@@ -14,6 +14,7 @@ import type { ServiceTypeLookup, CategoryLookup } from '@/types/service';
 
 const statusColors: Record<string, 'default' | 'secondary' | 'destructive' | 'outline'> = {
   Draft: 'secondary',
+  PendingApproval: 'outline',
   Active: 'default',
   Inactive: 'outline',
   Archived: 'destructive',
@@ -21,6 +22,8 @@ const statusColors: Record<string, 'default' | 'secondary' | 'destructive' | 'ou
 
 export default function ServicesPage() {
   const router = useRouter();
+  const params = useParams();
+  const locale = params?.locale as string || 'en';
   const { toast } = useToast();
 
   const [services, setServices] = useState<ServiceListDto[]>([]);
@@ -221,6 +224,7 @@ export default function ServicesPage() {
       type: 'select',
       options: [
         { label: 'Draft', value: 'Draft' },
+        { label: 'Pending Approval', value: 'PendingApproval' },
         { label: 'Active', value: 'Active' },
         { label: 'Inactive', value: 'Inactive' },
         { label: 'Archived', value: 'Archived' },
@@ -250,6 +254,30 @@ export default function ServicesPage() {
     },
   ];
 
+  // Row actions
+  const rowActions: DataTableRowAction<ServiceListDto>[] = [
+    {
+      label: 'View',
+      icon: <Eye className="h-4 w-4 mr-2" />,
+      onClick: (service) => router.push(`/${locale}/dashboard/services/${service.id}`),
+    },
+    {
+      label: 'Edit',
+      icon: <Edit className="h-4 w-4 mr-2" />,
+      onClick: (service) => router.push(`/${locale}/dashboard/services/${service.id}/edit`),
+    },
+    {
+      label: 'Delete',
+      icon: <Trash className="h-4 w-4 mr-2" />,
+      onClick: async (service) => {
+        if (confirm(`Are you sure you want to delete "${service.name}"?`)) {
+          await handleDelete(service.id);
+        }
+      },
+      variant: 'destructive',
+    },
+  ];
+
   return (
     <div className="space-y-6">
         {/* Header */}
@@ -260,7 +288,7 @@ export default function ServicesPage() {
               Manage your services and offerings
             </p>
           </div>
-          <Button onClick={() => router.push('/en/dashboard/services/new')}>
+          <Button onClick={() => router.push(`/${locale}/dashboard/services/new`)}>
             <Plus className="h-4 w-4 mr-2" />
             Add Service
           </Button>
@@ -286,6 +314,7 @@ export default function ServicesPage() {
           selectedIds={selectedIds}
           onSelectionChange={setSelectedIds}
           bulkActions={bulkActions}
+          rowActions={rowActions}
           sortBy={filters.sortBy}
           sortDescending={filters.sortDescending}
           onSort={handleSort}

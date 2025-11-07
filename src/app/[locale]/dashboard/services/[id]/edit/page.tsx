@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import {
   Form,
   FormControl,
@@ -31,10 +32,9 @@ import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { serviceService } from '@/services/serviceService';
 import { lookupService } from '@/services/lookupService';
-import type { CreateServiceDto, ServiceTypeLookup, CategoryLookup } from '@/types/service';
+import type { UpdateServiceDto, ServiceDto, ServiceTypeLookup, CategoryLookup } from '@/types/service';
 
 const serviceFormSchema = z.object({
-  serviceTypeId: z.string().min(1, 'Service type is required'),
   categoryId: z.string().optional().nullable(),
   name: z.string().min(1, 'Name is required').max(200, 'Name must be less than 200 characters'),
   shortDescription: z.string().max(500, 'Short description must be less than 500 characters').optional(),
@@ -56,18 +56,19 @@ const serviceFormSchema = z.object({
   metaDescription: z.string().max(500, 'Meta description must be less than 500 characters').optional(),
 });
 
-export default function NewServicePage() {
+export default function EditServicePage({ params: paramsPromise }: { params: Promise<{ id: string; locale: string }> }) {
+  const params = use(paramsPromise);
   const router = useRouter();
   const { toast } = useToast();
   const [saving, setSaving] = useState(false);
-  const [serviceTypes, setServiceTypes] = useState<ServiceTypeLookup[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [service, setService] = useState<ServiceDto | null>(null);
   const [categories, setCategories] = useState<CategoryLookup[]>([]);
 
   const form = useForm({
     resolver: zodResolver(serviceFormSchema),
     mode: 'onChange',
     defaultValues: {
-      serviceTypeId: '',
       categoryId: undefined,
       name: '',
       shortDescription: '',
@@ -82,26 +83,55 @@ export default function NewServicePage() {
     },
   });
 
-  // Load lookups
+  // Load service and lookups
   useEffect(() => {
-    const loadLookups = async () => {
+    const loadData = async () => {
+      setLoading(true);
       try {
-        const [serviceTypesData, categoriesData] = await Promise.all([
-          lookupService.getServiceTypes(),
+        const [serviceData, categoriesData] = await Promise.all([
+          serviceService.getServiceById(params.id),
           lookupService.getCategories(),
         ]);
-        setServiceTypes(serviceTypesData);
+
+        setService(serviceData);
         setCategories(categoriesData);
-      } catch (error) {
+
+        // Populate form with existing data
+        form.reset({
+          categoryId: serviceData.category?.id,
+          name: serviceData.name,
+          shortDescription: serviceData.shortDescription || '',
+          description: serviceData.description || '',
+          basePrice: serviceData.basePrice,
+          currency: serviceData.currency as any,
+          pricingModel: serviceData.pricingModel as any,
+          minPrice: serviceData.minPrice,
+          maxPrice: serviceData.maxPrice,
+          minCapacity: serviceData.minCapacity,
+          maxCapacity: serviceData.maxCapacity,
+          durationMinutes: serviceData.durationMinutes,
+          setupTimeMinutes: serviceData.setupTimeMinutes,
+          teardownTimeMinutes: serviceData.teardownTimeMinutes,
+          leadTimeDays: serviceData.leadTimeDays,
+          maxAdvanceBookingDays: serviceData.maxAdvanceBookingDays,
+          isFeatured: serviceData.isFeatured,
+          metaTitle: serviceData.metaTitle || '',
+          metaDescription: serviceData.metaDescription || '',
+        });
+      } catch (error: any) {
         toast({
           title: 'Error',
-          description: 'Failed to load form options',
+          description: error.response?.data?.error || 'Failed to load service',
           variant: 'destructive',
         });
+        router.push(`/${params.locale}/dashboard/services`);
+      } finally {
+        setLoading(false);
       }
     };
-    loadLookups();
-  }, [toast]);
+
+    loadData();
+  }, [params.id, params.locale, router, toast, form]);
 
   const onSubmit = async (values: z.infer<typeof serviceFormSchema>) => {
     setSaving(true);
@@ -114,8 +144,7 @@ export default function NewServicePage() {
         return val;
       };
 
-      const createDto: CreateServiceDto = {
-        serviceTypeId: values.serviceTypeId,
+      const updateDto: UpdateServiceDto = {
         categoryId: filterValue(values.categoryId),
         name: values.name,
         shortDescription: filterValue(values.shortDescription),
@@ -137,14 +166,14 @@ export default function NewServicePage() {
         metaDescription: filterValue(values.metaDescription),
       };
 
-      await serviceService.createService(createDto);
+      await serviceService.updateService(params.id, updateDto);
 
       toast({
         title: 'Success',
-        description: 'Service created successfully',
+        description: 'Service updated successfully and sent for admin review',
       });
 
-      router.push('/en/dashboard/services');
+      router.push(`/${params.locale}/dashboard/services/${params.id}`);
     } catch (error: any) {
       // Check if it's a validation error with details
       const errorData = error.response?.data;
@@ -162,7 +191,7 @@ export default function NewServicePage() {
       } else {
         toast({
           title: 'Error',
-          description: errorData?.detail || errorData?.error || error.message || 'Failed to create service',
+          description: errorData?.detail || errorData?.error || error.message || 'Failed to update service',
           variant: 'destructive',
         });
       }
@@ -170,6 +199,21 @@ export default function NewServicePage() {
       setSaving(false);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">Loading service...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!service) {
+    return null;
+  }
 
   return (
     <div className="space-y-6">
@@ -184,13 +228,22 @@ export default function NewServicePage() {
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">Create New Service</h1>
+            <h1 className="text-3xl font-bold tracking-tight">Edit Service</h1>
             <p className="text-muted-foreground">
-              Add a new service to your catalog
+              Update service details
             </p>
           </div>
         </div>
       </div>
+
+      {/* Admin Review Alert */}
+      <Alert>
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Admin Review Required</AlertTitle>
+        <AlertDescription>
+          Any changes made to this service will be sent for admin review before being published.
+        </AlertDescription>
+      </Alert>
 
       {/* Form */}
       <Form {...form}>
@@ -214,30 +267,11 @@ export default function NewServicePage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="serviceTypeId"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Service Type *</FormLabel>
-                          <Select onValueChange={field.onChange} value={field.value}>
-                            <FormControl>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Select service type" />
-                              </SelectTrigger>
-                            </FormControl>
-                            <SelectContent>
-                              {serviceTypes.map(type => (
-                                <SelectItem key={type.id} value={type.id}>
-                                  {type.name}
-                                </SelectItem>
-                              ))}
-                            </SelectContent>
-                          </Select>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                    <div className="bg-muted p-4 rounded-lg">
+                      <h4 className="text-sm font-medium text-muted-foreground mb-1">Service Type</h4>
+                      <p className="text-base font-medium">{service.serviceType.name}</p>
+                      <p className="text-xs text-muted-foreground mt-1">Cannot be changed after creation</p>
+                    </div>
 
                     <FormField
                       control={form.control}
@@ -440,7 +474,11 @@ export default function NewServicePage() {
                               step="0.01"
                               placeholder="0.00"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseFloat(val) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormMessage />
@@ -460,7 +498,11 @@ export default function NewServicePage() {
                               step="0.01"
                               placeholder="0.00"
                               {...field}
-                              onChange={(e) => field.onChange(parseFloat(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseFloat(val) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormMessage />
@@ -494,7 +536,11 @@ export default function NewServicePage() {
                               type="number"
                               placeholder="e.g., 10"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormMessage />
@@ -513,7 +559,11 @@ export default function NewServicePage() {
                               type="number"
                               placeholder="e.g., 500"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormMessage />
@@ -543,7 +593,11 @@ export default function NewServicePage() {
                             type="number"
                             placeholder="e.g., 240 (4 hours)"
                             {...field}
-                            onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                            }}
+                            value={field.value ?? ''}
                           />
                         </FormControl>
                         <FormMessage />
@@ -563,7 +617,11 @@ export default function NewServicePage() {
                               type="number"
                               placeholder="e.g., 60"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormMessage />
@@ -582,7 +640,11 @@ export default function NewServicePage() {
                               type="number"
                               placeholder="e.g., 30"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormMessage />
@@ -603,7 +665,11 @@ export default function NewServicePage() {
                               type="number"
                               placeholder="e.g., 7"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormDescription>
@@ -625,7 +691,11 @@ export default function NewServicePage() {
                               type="number"
                               placeholder="e.g., 365"
                               {...field}
-                              onChange={(e) => field.onChange(parseInt(e.target.value) || undefined)}
+                              onChange={(e) => {
+                                const val = e.target.value;
+                                field.onChange(val === '' ? undefined : parseInt(val, 10) || undefined);
+                              }}
+                              value={field.value ?? ''}
                             />
                           </FormControl>
                           <FormDescription>
@@ -710,7 +780,7 @@ export default function NewServicePage() {
               ) : (
                 <>
                   <Save className="h-4 w-4 mr-2" />
-                  Create Service
+                  Update Service
                 </>
               )}
             </Button>

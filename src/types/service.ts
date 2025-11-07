@@ -3,7 +3,7 @@
 import { BaseLookup } from "./api";
 
 export type PricingModel = 'FixedPrice' | 'PerPerson' | 'PerHour' | 'PerDay' | 'Custom';
-export type ServiceStatus = 'Draft' | 'Active' | 'Inactive' | 'Archived';
+export type ServiceStatus = 'Draft' | 'PendingApproval' | 'Active' | 'Inactive' | 'Archived';
 
 export interface ServiceTypeLookup extends BaseLookup {
   // Add service-type specific properties here if needed

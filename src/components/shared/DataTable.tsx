@@ -50,6 +50,13 @@ export interface DataTableBulkAction {
   variant?: 'default' | 'destructive';
 }
 
+export interface DataTableRowAction<T> {
+  label: string;
+  icon?: React.ReactNode;
+  onClick: (item: T) => void;
+  variant?: 'default' | 'destructive';
+}
+
 export interface DataTableProps<T> {
   data: T[];
   columns: DataTableColumn<T>[];
@@ -80,6 +87,9 @@ export interface DataTableProps<T> {
   // Bulk actions
   bulkActions?: DataTableBulkAction[];
 
+  // Row actions
+  rowActions?: DataTableRowAction<T>[];
+
   // Sorting
   sortBy?: string;
   sortDescending?: boolean;
@@ -102,6 +112,7 @@ export function DataTable<T>({
   totalCount,
   onPageChange,
   onPageSizeChange,
+  rowActions,
   searchable = false,
   searchPlaceholder = 'Search...',
   onSearch,
@@ -268,19 +279,21 @@ export function DataTable<T>({
                   </div>
                 </TableHead>
               ))}
-              <TableHead className="w-12"></TableHead>
+              {rowActions && rowActions.length > 0 && (
+                <TableHead className="w-12"></TableHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={columns.length + (selectable ? 2 : 1)} className="text-center py-8">
+                <TableCell colSpan={columns.length + (selectable ? 1 : 0) + (rowActions && rowActions.length > 0 ? 1 : 0)} className="text-center py-8">
                   Loading...
                 </TableCell>
               </TableRow>
             ) : data.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={columns.length + (selectable ? 2 : 1)} className="text-center py-8 text-muted-foreground">
+                <TableCell colSpan={columns.length + (selectable ? 1 : 0) + (rowActions && rowActions.length > 0 ? 1 : 0)} className="text-center py-8 text-muted-foreground">
                   {emptyMessage}
                 </TableCell>
               </TableRow>
@@ -304,20 +317,29 @@ export function DataTable<T>({
                         {column.render ? column.render(item) : String((item as any)[column.key] || '')}
                       </TableCell>
                     ))}
-                    <TableCell>
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem>View</DropdownMenuItem>
-                          <DropdownMenuItem>Edit</DropdownMenuItem>
-                          <DropdownMenuItem className="text-destructive">Delete</DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
+                    {rowActions && rowActions.length > 0 && (
+                      <TableCell>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger asChild>
+                            <Button variant="ghost" size="icon">
+                              <MoreHorizontal className="h-4 w-4" />
+                            </Button>
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent align="end">
+                            {rowActions.map((action, index) => (
+                              <DropdownMenuItem
+                                key={index}
+                                onClick={() => action.onClick(item)}
+                                className={action.variant === 'destructive' ? 'text-destructive' : ''}
+                              >
+                                {action.icon}
+                                {action.label}
+                              </DropdownMenuItem>
+                            ))}
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    )}
                   </TableRow>
                 );
               })
