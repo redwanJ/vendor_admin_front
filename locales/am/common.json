@@ -85,6 +85,7 @@
   "nav": {
     "dashboard": "ዳሽቦርድ",
     "services": "አገልግሎቶች",
+    "api_keys": "ኤፒአይ ቁልፎች",
     "bookings": "ቦታ ማስያዝ",
     "customers": "ደንበኞች",
     "settings": "ቅንብሮች"

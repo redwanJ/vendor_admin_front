@@ -3,21 +3,110 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 /**
  * Skeleton loader for service list table rows
+ * Matches the DataTable structure
  */
-export function ServiceListSkeleton({ count = 5 }: { count?: number }) {
+export function ServiceListSkeleton({ count = 10 }: { count?: number }) {
   return (
-    <div className="space-y-3">
-      {Array.from({ length: count }).map((_, i) => (
-        <div key={i} className="flex items-center space-x-4 p-4 border rounded-lg">
-          <Skeleton className="h-12 w-12 rounded-full" />
-          <div className="flex-1 space-y-2">
-            <Skeleton className="h-4 w-[250px]" />
-            <Skeleton className="h-3 w-[200px]" />
-          </div>
-          <Skeleton className="h-6 w-20" />
-          <Skeleton className="h-8 w-8 rounded" />
+    <div className="space-y-4">
+      {/* Search and filters skeleton */}
+      <div className="flex items-center justify-between gap-4">
+        <Skeleton className="h-10 w-[300px]" />
+        <div className="flex gap-2">
+          <Skeleton className="h-10 w-[150px]" />
+          <Skeleton className="h-10 w-[150px]" />
+          <Skeleton className="h-10 w-[150px]" />
         </div>
-      ))}
+      </div>
+
+      {/* Table skeleton */}
+      <div className="rounded-md border">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            {/* Table header */}
+            <thead>
+              <tr className="border-b bg-muted/50">
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-4" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[100px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[80px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[80px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[70px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[80px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[60px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[100px]" />
+                </th>
+                <th className="h-12 px-4 w-12"></th>
+              </tr>
+            </thead>
+            {/* Table body */}
+            <tbody>
+              {Array.from({ length: count }).map((_, i) => (
+                <tr key={i} className="border-b transition-colors hover:bg-muted/50">
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-4" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <div className="space-y-1">
+                      <Skeleton className="h-4 w-[180px]" />
+                      <Skeleton className="h-3 w-[150px]" />
+                    </div>
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[80px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[70px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <div className="space-y-1">
+                      <Skeleton className="h-4 w-[90px]" />
+                      <Skeleton className="h-3 w-[70px]" />
+                    </div>
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-6 w-[80px] rounded-full" />
+                  </td>
+                  <td className="p-4 align-middle text-center">
+                    <Skeleton className="h-4 w-6 mx-auto" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[80px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-8 w-8 rounded" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* Pagination skeleton */}
+      <div className="flex items-center justify-between">
+        <Skeleton className="h-4 w-[200px]" />
+        <div className="flex items-center gap-6">
+          <Skeleton className="h-10 w-[120px]" />
+          <div className="flex gap-2">
+            <Skeleton className="h-10 w-10" />
+            <Skeleton className="h-10 w-10" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -204,6 +293,84 @@ export function DashboardCardSkeleton({ count = 4 }: { count?: number }) {
           </CardContent>
         </Card>
       ))}
+    </div>
+  );
+}
+
+/**
+ * Skeleton loader for API keys list table
+ */
+export function ApiKeyListSkeleton({ count = 5 }: { count?: number }) {
+  return (
+    <div className="space-y-4">
+      {/* Filters skeleton */}
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex gap-2">
+          <Skeleton className="h-10 w-[120px]" />
+          <Skeleton className="h-10 w-[120px]" />
+          <Skeleton className="h-10 w-[140px]" />
+        </div>
+      </div>
+
+      {/* Table skeleton */}
+      <div className="rounded-md border">
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            {/* Table header */}
+            <thead>
+              <tr className="border-b bg-muted/50">
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[80px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[90px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[50px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[60px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[100px]" />
+                </th>
+                <th className="h-12 px-4 text-left align-middle">
+                  <Skeleton className="h-4 w-[70px]" />
+                </th>
+                <th className="h-12 px-4 w-12"></th>
+              </tr>
+            </thead>
+            {/* Table body */}
+            <tbody>
+              {Array.from({ length: count }).map((_, i) => (
+                <tr key={i} className="border-b transition-colors hover:bg-muted/50">
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[140px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[100px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-6 w-[70px] rounded-full" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-6 w-[60px] rounded-full" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[80px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-[80px]" />
+                  </td>
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-8 w-8 rounded" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 }

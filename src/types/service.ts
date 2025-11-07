@@ -115,9 +115,9 @@ export interface UpdateServiceDto extends Omit<CreateServiceDto, 'serviceTypeId'
 export interface ServiceFilters {
   page?: number;
   pageSize?: number;
-  serviceTypeId?: string;
-  categoryId?: string;
-  status?: ServiceStatus;
+  serviceTypeIds?: string[];  // Changed to array for multi-select
+  categoryIds?: string[];     // Changed to array for multi-select
+  statuses?: ServiceStatus[];  // Changed to array for multi-select
   isFeatured?: boolean;
   searchTerm?: string;
   sortBy?: string;

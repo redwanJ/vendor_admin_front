@@ -11,15 +11,25 @@ import type {
 export const serviceService = {
   /**
    * Get paginated list of services
+   * Supports multi-select filtering
    */
   async getServices(filters?: ServiceFilters): Promise<PagedResult<ServiceListDto>> {
     const params = new URLSearchParams();
 
     if (filters?.page) params.append('page', filters.page.toString());
     if (filters?.pageSize) params.append('pageSize', filters.pageSize.toString());
-    if (filters?.serviceTypeId) params.append('serviceTypeId', filters.serviceTypeId);
-    if (filters?.categoryId) params.append('categoryId', filters.categoryId);
-    if (filters?.status) params.append('status', filters.status);
+
+    // Multi-select filters - append multiple values
+    if (filters?.serviceTypeIds && filters.serviceTypeIds.length > 0) {
+      filters.serviceTypeIds.forEach(id => params.append('serviceTypeIds', id));
+    }
+    if (filters?.categoryIds && filters.categoryIds.length > 0) {
+      filters.categoryIds.forEach(id => params.append('categoryIds', id));
+    }
+    if (filters?.statuses && filters.statuses.length > 0) {
+      filters.statuses.forEach(status => params.append('statuses', status));
+    }
+
     if (filters?.isFeatured !== undefined) params.append('isFeatured', filters.isFeatured.toString());
     if (filters?.searchTerm) params.append('searchTerm', filters.searchTerm);
     if (filters?.sortBy) params.append('sortBy', filters.sortBy);

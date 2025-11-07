@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { Plus, Trash2, Eye, Edit, Trash } from 'lucide-react';
 import { DataTable, DataTableColumn, DataTableFilter, DataTableBulkAction, DataTableRowAction } from '@/components/shared/DataTable';
+import { MultiSelectFilter, MultiSelectFilterBadges } from '@/components/shared/MultiSelectFilter';
 import { ServiceListSkeleton } from '@/components/shared/ServiceSkeletons';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -39,15 +40,13 @@ export default function ServicesPage() {
   const [totalCount, setTotalCount] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
 
-  // Filter state
-  const [filters, setFilters] = useState<ServiceFilters>({
-    searchTerm: '',
-    status: undefined,
-    serviceTypeId: undefined,
-    categoryId: undefined,
-    sortBy: 'UpdatedAt',
-    sortDescending: true,
-  });
+  // Filter state - using arrays for multi-select
+  const [selectedStatuses, setSelectedStatuses] = useState<ServiceStatus[]>([]);
+  const [selectedServiceTypes, setSelectedServiceTypes] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('UpdatedAt');
+  const [sortDescending, setSortDescending] = useState(true);
 
   // Load lookups
   useEffect(() => {
@@ -73,7 +72,12 @@ export default function ServicesPage() {
       const result = await serviceService.getServices({
         page: currentPage,
         pageSize,
-        ...filters,
+        statuses: selectedStatuses.length > 0 ? selectedStatuses : undefined,
+        serviceTypeIds: selectedServiceTypes.length > 0 ? selectedServiceTypes : undefined,
+        categoryIds: selectedCategories.length > 0 ? selectedCategories : undefined,
+        searchTerm: searchTerm || undefined,
+        sortBy,
+        sortDescending,
       });
 
       setServices(result.items);
@@ -88,32 +92,36 @@ export default function ServicesPage() {
     } finally {
       setLoading(false);
     }
-  }, [currentPage, pageSize, filters, toast]);
+  }, [currentPage, pageSize, selectedStatuses, selectedServiceTypes, selectedCategories, searchTerm, sortBy, sortDescending, toast]);
 
   useEffect(() => {
     loadServices();
   }, [loadServices]);
 
-  // Handlers
-  const handleSearch = useCallback((searchTerm: string) => {
-    setFilters(prev => ({ ...prev, searchTerm }));
+  // Filter handlers
+  const handleStatusChange = useCallback((values: string[]) => {
+    setSelectedStatuses(values as ServiceStatus[]);
     setCurrentPage(1);
   }, []);
 
-  const handleFilterChange = useCallback((filterKey: string, value: string) => {
-    setFilters(prev => ({
-      ...prev,
-      [filterKey]: value || undefined,
-    }));
+  const handleServiceTypeChange = useCallback((values: string[]) => {
+    setSelectedServiceTypes(values);
+    setCurrentPage(1);
+  }, []);
+
+  const handleCategoryChange = useCallback((values: string[]) => {
+    setSelectedCategories(values);
+    setCurrentPage(1);
+  }, []);
+
+  const handleSearch = useCallback((value: string) => {
+    setSearchTerm(value);
     setCurrentPage(1);
   }, []);
 
   const handleSort = useCallback((column: string, descending: boolean) => {
-    setFilters(prev => ({
-      ...prev,
-      sortBy: column,
-      sortDescending: descending,
-    }));
+    setSortBy(column);
+    setSortDescending(descending);
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -217,33 +225,17 @@ export default function ServicesPage() {
     },
   ];
 
-  // Table filters
-  const tableFilters: DataTableFilter[] = [
-    {
-      key: 'status',
-      label: 'Status',
-      type: 'select',
-      options: [
-        { label: 'Draft', value: 'Draft' },
-        { label: 'Pending Approval', value: 'PendingApproval' },
-        { label: 'Active', value: 'Active' },
-        { label: 'Inactive', value: 'Inactive' },
-        { label: 'Archived', value: 'Archived' },
-      ],
-    },
-    {
-      key: 'serviceTypeId',
-      label: 'Service Type',
-      type: 'select',
-      options: serviceTypes.map(st => ({ label: st.name, value: st.id })),
-    },
-    {
-      key: 'categoryId',
-      label: 'Category',
-      type: 'select',
-      options: categories.map(c => ({ label: c.name, value: c.id })),
-    },
+  // Filter options
+  const statusOptions = [
+    { label: 'Draft', value: 'Draft' },
+    { label: 'Pending Approval', value: 'PendingApproval' },
+    { label: 'Active', value: 'Active' },
+    { label: 'Inactive', value: 'Inactive' },
+    { label: 'Archived', value: 'Archived' },
   ];
+
+  const serviceTypeOptions = serviceTypes.map(st => ({ label: st.name, value: st.id }));
+  const categoryOptions = categories.map(c => ({ label: c.name, value: c.id }));
 
   // Bulk actions
   const bulkActions: DataTableBulkAction[] = [
@@ -318,6 +310,68 @@ export default function ServicesPage() {
           </Button>
         </div>
 
+        {/* Multi-Select Filters */}
+        <div className="flex flex-wrap items-center gap-3">
+          <MultiSelectFilter
+            label="Status"
+            options={statusOptions}
+            selectedValues={selectedStatuses}
+            onChange={handleStatusChange}
+            placeholder="All Statuses"
+          />
+          <MultiSelectFilter
+            label="Service Type"
+            options={serviceTypeOptions}
+            selectedValues={selectedServiceTypes}
+            onChange={handleServiceTypeChange}
+            placeholder="All Types"
+          />
+          <MultiSelectFilter
+            label="Category"
+            options={categoryOptions}
+            selectedValues={selectedCategories}
+            onChange={handleCategoryChange}
+            placeholder="All Categories"
+          />
+        </div>
+
+        {/* Active Filters Display */}
+        {(selectedStatuses.length > 0 || selectedServiceTypes.length > 0 || selectedCategories.length > 0) && (
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="text-sm text-muted-foreground">Active filters:</span>
+            <MultiSelectFilterBadges
+              selectedValues={selectedStatuses}
+              options={statusOptions}
+              onRemove={(value) => handleStatusChange(selectedStatuses.filter(v => v !== value))}
+            />
+            <MultiSelectFilterBadges
+              selectedValues={selectedServiceTypes}
+              options={serviceTypeOptions}
+              onRemove={(value) => handleServiceTypeChange(selectedServiceTypes.filter(v => v !== value))}
+            />
+            <MultiSelectFilterBadges
+              selectedValues={selectedCategories}
+              options={categoryOptions}
+              onRemove={(value) => handleCategoryChange(selectedCategories.filter(v => v !== value))}
+            />
+            {(selectedStatuses.length > 0 || selectedServiceTypes.length > 0 || selectedCategories.length > 0) && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setSelectedStatuses([]);
+                  setSelectedServiceTypes([]);
+                  setSelectedCategories([]);
+                  setCurrentPage(1);
+                }}
+                className="h-7"
+              >
+                Clear all
+              </Button>
+            )}
+          </div>
+        )}
+
         {/* Data Table */}
         <DataTable
           data={services}
@@ -332,15 +386,13 @@ export default function ServicesPage() {
           searchable
           searchPlaceholder="Search services..."
           onSearch={handleSearch}
-          filters={tableFilters}
-          onFilterChange={handleFilterChange}
           selectable
           selectedIds={selectedIds}
           onSelectionChange={setSelectedIds}
           bulkActions={bulkActions}
           rowActions={rowActions}
-          sortBy={filters.sortBy}
-          sortDescending={filters.sortDescending}
+          sortBy={sortBy}
+          sortDescending={sortDescending}
           onSort={handleSort}
           loading={loading}
           emptyMessage="No services found. Create your first service to get started."

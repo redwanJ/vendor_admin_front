@@ -13,6 +13,7 @@ import {
   LogOut,
   User,
   MoreVertical,
+  Key,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -50,6 +51,11 @@ export function Sidebar({ user, collapsed, onLogout }: SidebarProps) {
       titleKey: 'services',
       href: `/${locale}/dashboard/services`,
       icon: Package,
+    },
+    {
+      titleKey: 'api_keys',
+      href: `/${locale}/dashboard/api-keys`,
+      icon: Key,
     },
     {
       titleKey: 'bookings',
