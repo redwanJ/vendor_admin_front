@@ -33,6 +33,7 @@ export default function ApiKeysPage() {
 
   const [apiKeys, setApiKeys] = useState<ApiKeyListDto[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -129,6 +130,50 @@ export default function ApiKeysPage() {
     }
   };
 
+  const handleBulkDelete = async (ids: string[]) => {
+    if (!confirm(`Are you sure you want to delete ${ids.length} API key(s)?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(ids.map(id => apiKeyService.deleteApiKey(id)));
+      toast({
+        title: 'Success',
+        description: `${ids.length} API key(s) deleted successfully`,
+      });
+      setSelectedIds([]);
+      loadApiKeys();
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.response?.data?.error || 'Failed to delete API keys',
+        variant: 'destructive',
+      });
+    }
+  };
+
+  const handleBulkRevoke = async (ids: string[]) => {
+    if (!confirm(`Are you sure you want to revoke ${ids.length} API key(s)?`)) {
+      return;
+    }
+
+    try {
+      await Promise.all(ids.map(id => apiKeyService.revokeApiKey(id)));
+      toast({
+        title: 'Success',
+        description: `${ids.length} API key(s) revoked successfully`,
+      });
+      setSelectedIds([]);
+      loadApiKeys();
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.response?.data?.error || 'Failed to revoke API keys',
+        variant: 'destructive',
+      });
+    }
+  };
+
   // Table columns
   const columns: DataTableColumn<ApiKeyListDto>[] = [
     {
@@ -203,6 +248,22 @@ export default function ApiKeysPage() {
     { label: 'Production', value: 'production' },
     { label: 'Staging', value: 'staging' },
     { label: 'Development', value: 'development' },
+  ];
+
+  // Bulk actions
+  const bulkActions: DataTableBulkAction[] = [
+    {
+      label: 'Revoke Selected',
+      icon: <Ban className="h-4 w-4 mr-2" />,
+      onClick: handleBulkRevoke,
+      variant: 'destructive',
+    },
+    {
+      label: 'Delete Selected',
+      icon: <Trash2 className="h-4 w-4 mr-2" />,
+      onClick: handleBulkDelete,
+      variant: 'destructive',
+    },
   ];
 
   // Row actions
@@ -347,6 +408,10 @@ export default function ApiKeysPage() {
         totalCount={totalCount}
         onPageChange={setCurrentPage}
         onPageSizeChange={setPageSize}
+        selectable
+        selectedIds={selectedIds}
+        onSelectionChange={setSelectedIds}
+        bulkActions={bulkActions}
         rowActions={rowActions}
         loading={loading}
         emptyMessage="No API keys found. Create your first API key to get started."

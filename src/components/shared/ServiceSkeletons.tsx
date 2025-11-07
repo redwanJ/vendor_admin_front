@@ -299,6 +299,7 @@ export function DashboardCardSkeleton({ count = 4 }: { count?: number }) {
 
 /**
  * Skeleton loader for API keys list table
+ * Includes checkbox column for bulk actions
  */
 export function ApiKeyListSkeleton({ count = 5 }: { count?: number }) {
   return (
@@ -319,6 +320,10 @@ export function ApiKeyListSkeleton({ count = 5 }: { count?: number }) {
             {/* Table header */}
             <thead>
               <tr className="border-b bg-muted/50">
+                {/* Checkbox column */}
+                <th className="h-12 px-4 w-12 text-left align-middle">
+                  <Skeleton className="h-4 w-4" />
+                </th>
                 <th className="h-12 px-4 text-left align-middle">
                   <Skeleton className="h-4 w-[80px]" />
                 </th>
@@ -344,6 +349,10 @@ export function ApiKeyListSkeleton({ count = 5 }: { count?: number }) {
             <tbody>
               {Array.from({ length: count }).map((_, i) => (
                 <tr key={i} className="border-b transition-colors hover:bg-muted/50">
+                  {/* Checkbox column */}
+                  <td className="p-4 align-middle">
+                    <Skeleton className="h-4 w-4" />
+                  </td>
                   <td className="p-4 align-middle">
                     <Skeleton className="h-4 w-[140px]" />
                   </td>
