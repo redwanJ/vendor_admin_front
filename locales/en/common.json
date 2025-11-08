@@ -83,11 +83,14 @@
     }
   },
   "nav": {
+    "main": "Main",
+    "settings_section": "Settings",
     "dashboard": "Dashboard",
     "services": "Services",
     "api_keys": "API Keys",
     "bookings": "Bookings",
     "customers": "Customers",
+    "staff": "Staff",
     "settings": "Settings"
   },
   "actions": {

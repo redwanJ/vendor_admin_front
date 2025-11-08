@@ -80,12 +80,7 @@ export function MobileNav({ user, open, onClose, onLogout }: MobileNavProps) {
     <Sheet open={open} onOpenChange={onClose}>
       <SheetContent side="left" className="w-80 p-0">
         <SheetHeader className="border-b p-4">
-          <SheetTitle className="flex items-center justify-between">
-            <span>Menu</span>
-            <Button variant="ghost" size="icon" onClick={onClose}>
-              <X className="h-5 w-5" />
-            </Button>
-          </SheetTitle>
+          <SheetTitle>Menu</SheetTitle>
         </SheetHeader>
 
         <ScrollArea className="h-[calc(100vh-12rem)] py-4">

@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 //
 import { ApiKeyListSkeleton } from '@/components/shared/ServiceSkeletons';
 import { useToast } from '@/hooks/use-toast';
+import { useConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { apiKeyService } from '@/services/apiKeyService';
 import type { ApiKeyListDto, ApiKeyStatus, ApiKeyTier } from '@/types/apiKey';
 import ApiKeysHeader from '@/components/api-keys/ApiKeysHeader';
@@ -19,6 +20,7 @@ export default function ApiKeysPage() {
   const params = useParams();
   const locale = params?.locale as string || 'en';
   const { toast } = useToast();
+  const { confirm, dialog } = useConfirmDialog();
   const t = useTranslations('apiKeys');
 
   const [apiKeys, setApiKeys] = useState<ApiKeyListDto[]>([]);
@@ -83,24 +85,30 @@ export default function ApiKeysPage() {
   }, []);
 
   const handleRevoke = async (apiKey: ApiKeyListDto) => {
-    if (!confirm(t('confirm.revoke', { name: apiKey.name }))) {
-      return;
-    }
-
-    try {
-      await apiKeyService.revokeApiKey(apiKey.id);
-      toast({
-        title: 'Success',
-        description: 'API key revoked successfully',
-      });
-      loadApiKeys();
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to revoke API key',
-        variant: 'destructive',
-      });
-    }
+    await confirm({
+      title: 'Revoke API Key',
+      description: `Are you sure you want to revoke "${apiKey.name}"? This will immediately stop all applications using this key.`,
+      confirmText: 'Revoke',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await apiKeyService.revokeApiKey(apiKey.id);
+          toast({
+            title: 'Success',
+            description: 'API key revoked successfully',
+          });
+          loadApiKeys();
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to revoke API key',
+            variant: 'destructive',
+          });
+          throw error;
+        }
+      },
+    });
   };
 
   const handleDelete = async (id: string) => {
@@ -121,47 +129,59 @@ export default function ApiKeysPage() {
   };
 
   const handleBulkDelete = async (ids: string[]) => {
-    if (!confirm(t('confirm.bulkDelete', { count: ids.length }))) {
-      return;
-    }
-
-    try {
-      await Promise.all(ids.map(id => apiKeyService.deleteApiKey(id)));
-      toast({
-        title: 'Success',
-        description: `${ids.length} API key(s) deleted successfully`,
-      });
-      setSelectedIds([]);
-      loadApiKeys();
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to delete API keys',
-        variant: 'destructive',
-      });
-    }
+    await confirm({
+      title: 'Delete API Keys',
+      description: `Are you sure you want to delete ${ids.length} API key(s)? This action cannot be undone.`,
+      confirmText: 'Delete All',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await Promise.all(ids.map(id => apiKeyService.deleteApiKey(id)));
+          toast({
+            title: 'Success',
+            description: `${ids.length} API key(s) deleted successfully`,
+          });
+          setSelectedIds([]);
+          loadApiKeys();
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to delete API keys',
+            variant: 'destructive',
+          });
+          throw error;
+        }
+      },
+    });
   };
 
   const handleBulkRevoke = async (ids: string[]) => {
-    if (!confirm(t('confirm.bulkRevoke', { count: ids.length }))) {
-      return;
-    }
-
-    try {
-      await Promise.all(ids.map(id => apiKeyService.revokeApiKey(id)));
-      toast({
-        title: 'Success',
-        description: `${ids.length} API key(s) revoked successfully`,
-      });
-      setSelectedIds([]);
-      loadApiKeys();
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to revoke API keys',
-        variant: 'destructive',
-      });
-    }
+    await confirm({
+      title: 'Revoke API Keys',
+      description: `Are you sure you want to revoke ${ids.length} API key(s)? This will immediately stop all applications using these keys.`,
+      confirmText: 'Revoke All',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await Promise.all(ids.map(id => apiKeyService.revokeApiKey(id)));
+          toast({
+            title: 'Success',
+            description: `${ids.length} API key(s) revoked successfully`,
+          });
+          setSelectedIds([]);
+          loadApiKeys();
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to revoke API keys',
+            variant: 'destructive',
+          });
+          throw error;
+        }
+      },
+    });
   };
 
   // Table columns are encapsulated in ApiKeysTable
@@ -237,13 +257,21 @@ export default function ApiKeysPage() {
         onEdit={(apiKey) => router.push(`/${locale}/dashboard/api-keys/${apiKey.id}/edit`)}
         onRevoke={handleRevoke}
         onDelete={async (apiKey) => {
-          if (confirm(t('confirm.delete', { name: apiKey.name }))) {
-            await handleDelete(apiKey.id);
-          }
+          await confirm({
+            title: 'Delete API Key',
+            description: `Are you sure you want to delete "${apiKey.name}"? This action cannot be undone.`,
+            confirmText: 'Delete',
+            cancelText: 'Cancel',
+            variant: 'destructive',
+            onConfirm: async () => {
+              await handleDelete(apiKey.id);
+            },
+          });
         }}
         onBulkRevoke={handleBulkRevoke}
         onBulkDelete={handleBulkDelete}
       />
+      {dialog}
     </div>
   );
 }

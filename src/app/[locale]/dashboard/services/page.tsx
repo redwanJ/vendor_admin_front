@@ -13,6 +13,7 @@ import { ServiceListSkeleton } from '@/components/shared/ServiceSkeletons';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
+import { useConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { serviceService } from '@/services/serviceService';
 import { lookupService } from '@/services/lookupService';
 import type { ServiceListDto, ServiceStatus, ServiceFilters } from '@/types/service';
@@ -31,6 +32,7 @@ export default function ServicesPage() {
   const params = useParams();
   const locale = params?.locale as string || 'en';
   const { toast } = useToast();
+  const { confirm, dialog } = useConfirmDialog();
   const t = useTranslations('services');
 
   const [services, setServices] = useState<ServiceListDto[]>([]);
@@ -130,38 +132,60 @@ export default function ServicesPage() {
   }, []);
 
   const handleDelete = async (id: string) => {
-    try {
-      await serviceService.deleteService(id);
-      toast({
-        title: 'Success',
-        description: 'Service deleted successfully',
-      });
-      loadServices();
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to delete service',
-        variant: 'destructive',
-      });
-    }
+    const service = services.find(s => s.id === id);
+
+    await confirm({
+      title: 'Delete Service',
+      description: `Are you sure you want to delete "${service?.name}"? This action cannot be undone.`,
+      confirmText: 'Delete',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await serviceService.deleteService(id);
+          toast({
+            title: 'Success',
+            description: 'Service deleted successfully',
+          });
+          loadServices();
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to delete service',
+            variant: 'destructive',
+          });
+          throw error; // Re-throw to prevent dialog from closing
+        }
+      },
+    });
   };
 
   const handleBulkDelete = async (ids: string[]) => {
-    try {
-      await serviceService.bulkDeleteServices(ids);
-      toast({
-        title: 'Success',
-        description: `${ids.length} service(s) deleted successfully`,
-      });
-      setSelectedIds([]);
-      loadServices();
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to delete services',
-        variant: 'destructive',
-      });
-    }
+    await confirm({
+      title: 'Delete Services',
+      description: `Are you sure you want to delete ${ids.length} service(s)? This action cannot be undone.`,
+      confirmText: 'Delete All',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await serviceService.bulkDeleteServices(ids);
+          toast({
+            title: 'Success',
+            description: `${ids.length} service(s) deleted successfully`,
+          });
+          setSelectedIds([]);
+          loadServices();
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to delete services',
+            variant: 'destructive',
+          });
+          throw error; // Re-throw to prevent dialog from closing
+        }
+      },
+    });
   };
 
   // Table columns
@@ -279,60 +303,62 @@ export default function ServicesPage() {
   // Show skeleton on initial load
   if (loading && services.length === 0 && totalCount === 0) {
     return (
-      <div className="space-y-6">
-        <ServicesHeader onAdd={() => router.push(`/${locale}/dashboard/services/new`)} />
+      <>
+        <div className="space-y-6">
+          <ServicesHeader onAdd={() => router.push(`/${locale}/dashboard/services/new`)} />
 
-        <ServiceListSkeleton count={10} />
-      </div>
+          <ServiceListSkeleton count={10} />
+        </div>
+        {dialog}
+      </>
     );
   }
 
   return (
-    <div className="space-y-6">
-      <ServicesHeader onAdd={() => router.push(`/${locale}/dashboard/services/new`)} />
+    <>
+      <div className="space-y-6">
+        <ServicesHeader onAdd={() => router.push(`/${locale}/dashboard/services/new`)} />
 
-      <ServicesFilters
-        statusOptions={statusOptions}
-        serviceTypeOptions={serviceTypeOptions}
-        categoryOptions={categoryOptions}
-        selectedStatuses={selectedStatuses}
-        selectedServiceTypes={selectedServiceTypes}
-        selectedCategories={selectedCategories}
-        onStatusChange={handleStatusChange}
-        onServiceTypeChange={handleServiceTypeChange}
-        onCategoryChange={handleCategoryChange}
-        onClearAll={() => {
-          setSelectedStatuses([]);
-          setSelectedServiceTypes([]);
-          setSelectedCategories([]);
-          setCurrentPage(1);
-        }}
-      />
+        <ServicesFilters
+          statusOptions={statusOptions}
+          serviceTypeOptions={serviceTypeOptions}
+          categoryOptions={categoryOptions}
+          selectedStatuses={selectedStatuses}
+          selectedServiceTypes={selectedServiceTypes}
+          selectedCategories={selectedCategories}
+          onStatusChange={handleStatusChange}
+          onServiceTypeChange={handleServiceTypeChange}
+          onCategoryChange={handleCategoryChange}
+          onClearAll={() => {
+            setSelectedStatuses([]);
+            setSelectedServiceTypes([]);
+            setSelectedCategories([]);
+            setCurrentPage(1);
+          }}
+        />
 
-      <ServicesTable
-        data={services}
-        loading={loading}
-        currentPage={currentPage}
-        totalPages={totalPages}
-        pageSize={pageSize}
-        totalCount={totalCount}
-        onPageChange={setCurrentPage}
-        onPageSizeChange={setPageSize}
-        selectedIds={selectedIds}
-        onSelectionChange={setSelectedIds}
-        sortBy={sortBy}
-        sortDescending={sortDescending}
-        onSort={handleSort}
-        onSearch={handleSearch}
-        onView={(service) => router.push(`/${locale}/dashboard/services/${service.id}`)}
-        onEdit={(service) => router.push(`/${locale}/dashboard/services/${service.id}/edit`)}
-        onDelete={async (service) => {
-          if (confirm(t('confirm.delete', { name: service.name }))) {
-            await handleDelete(service.id);
-          }
-        }}
-        onBulkDelete={handleBulkDelete}
-      />
-    </div>
+        <ServicesTable
+          data={services}
+          loading={loading}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          pageSize={pageSize}
+          totalCount={totalCount}
+          onPageChange={setCurrentPage}
+          onPageSizeChange={setPageSize}
+          selectedIds={selectedIds}
+          onSelectionChange={setSelectedIds}
+          sortBy={sortBy}
+          sortDescending={sortDescending}
+          onSort={handleSort}
+          onSearch={handleSearch}
+          onView={(service) => router.push(`/${locale}/dashboard/services/${service.id}`)}
+          onEdit={(service) => router.push(`/${locale}/dashboard/services/${service.id}/edit`)}
+          onDelete={(service) => handleDelete(service.id)}
+          onBulkDelete={handleBulkDelete}
+        />
+      </div>
+      {dialog}
+    </>
   );
 }

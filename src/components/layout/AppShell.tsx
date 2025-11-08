@@ -43,20 +43,12 @@ export function AppShell({ children, user }: AppShellProps) {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navbar */}
-      <Navbar
-        onMobileMenuToggle={handleToggleMobileMenu}
-        sidebarCollapsed={sidebarCollapsed}
-        onSidebarToggle={handleToggleSidebar}
-      />
-
+    <div className="flex h-screen bg-background overflow-hidden">
       {/* Desktop Sidebar */}
       <div className="hidden md:block">
         <Sidebar
           user={user}
           collapsed={sidebarCollapsed}
-          onLogout={handleLogout}
         />
       </div>
 
@@ -68,15 +60,20 @@ export function AppShell({ children, user }: AppShellProps) {
         onLogout={handleLogout}
       />
 
-      {/* Main Content */}
-      <main
-        className={cn(
-          'min-h-[calc(100vh-4rem)] pt-16 transition-all duration-300',
-          sidebarCollapsed ? 'md:ml-16' : 'md:ml-64'
-        )}
-      >
-        <div className="container mx-auto p-4 md:p-6 lg:p-8">{children}</div>
-      </main>
+      {/* Main Area: Navbar + Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Navbar */}
+        <Navbar
+          onMobileMenuToggle={handleToggleMobileMenu}
+          sidebarCollapsed={sidebarCollapsed}
+          onSidebarToggle={handleToggleSidebar}
+        />
+
+        {/* Main Content */}
+        <main className="flex-1 overflow-auto">
+          <div className="container mx-auto p-4 md:p-6 lg:p-8">{children}</div>
+        </main>
+      </div>
     </div>
   );
 }

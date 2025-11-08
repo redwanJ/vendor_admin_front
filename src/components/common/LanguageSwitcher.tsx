@@ -3,7 +3,14 @@
 import * as React from 'react';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
+import { Globe, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { localeNames, type Locale } from '@/i18n';
 
 export function LanguageSwitcher() {
@@ -19,18 +26,24 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-2">
-      {Object.entries(localeNames).map(([loc, name]) => (
-        <Button
-          key={loc}
-          variant={locale === loc ? 'default' : 'ghost'}
-          size="sm"
-          onClick={() => switchLocale(loc as Locale)}
-          className="text-sm"
-        >
-          {name}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon">
+          <Globe className="h-5 w-5" />
         </Button>
-      ))}
-    </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {Object.entries(localeNames).map(([loc, name]) => (
+          <DropdownMenuItem
+            key={loc}
+            onClick={() => switchLocale(loc as Locale)}
+            className="flex items-center justify-between cursor-pointer"
+          >
+            <span>{name}</span>
+            {locale === loc && <Check className="h-4 w-4 ml-2" />}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { ServiceDetailSkeleton } from '@/components/shared/ServiceSkeletons';
 import { useToast } from '@/hooks/use-toast';
+import { useConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { apiKeyService } from '@/services/apiKeyService';
 import type { ApiKeyDto } from '@/types/apiKey';
 
@@ -29,6 +30,7 @@ export default function ApiKeyDetailPage({ params: paramsPromise }: { params: Pr
   const params = use(paramsPromise);
   const router = useRouter();
   const { toast } = useToast();
+  const { confirm, dialog } = useConfirmDialog();
   const [apiKey, setApiKey] = useState<ApiKeyDto | null>(null);
   const [loading, setLoading] = useState(true);
   const [revoking, setRevoking] = useState(false);
@@ -59,50 +61,62 @@ export default function ApiKeyDetailPage({ params: paramsPromise }: { params: Pr
   };
 
   const handleRevoke = async () => {
-    if (!confirm(`Are you sure you want to revoke "${apiKey?.name}"? This action cannot be undone.`)) {
-      return;
-    }
-
-    setRevoking(true);
-    try {
-      await apiKeyService.revokeApiKey(params.id);
-      toast({
-        title: 'Success',
-        description: 'API key revoked successfully',
-      });
-      // Reload to show updated status
-      const data = await apiKeyService.getApiKeyById(params.id);
-      setApiKey(data);
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to revoke API key',
-        variant: 'destructive',
-      });
-    } finally {
-      setRevoking(false);
-    }
+    await confirm({
+      title: 'Revoke API Key',
+      description: `Are you sure you want to revoke "${apiKey?.name}"? This will immediately stop all applications using this key.`,
+      confirmText: 'Revoke',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        setRevoking(true);
+        try {
+          await apiKeyService.revokeApiKey(params.id);
+          toast({
+            title: 'Success',
+            description: 'API key revoked successfully',
+          });
+          // Reload to show updated status
+          const data = await apiKeyService.getApiKeyById(params.id);
+          setApiKey(data);
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to revoke API key',
+            variant: 'destructive',
+          });
+          throw error;
+        } finally {
+          setRevoking(false);
+        }
+      },
+    });
   };
 
   const handleDelete = async () => {
-    if (!confirm(`Are you sure you want to delete "${apiKey?.name}"? This action cannot be undone.`)) {
-      return;
-    }
-
-    try {
-      await apiKeyService.deleteApiKey(params.id);
-      toast({
-        title: 'Success',
-        description: 'API key deleted successfully',
-      });
-      router.push(`/${params.locale}/dashboard/api-keys`);
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to delete API key',
-        variant: 'destructive',
-      });
-    }
+    await confirm({
+      title: 'Delete API Key',
+      description: `Are you sure you want to delete "${apiKey?.name}"? This action cannot be undone.`,
+      confirmText: 'Delete',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await apiKeyService.deleteApiKey(params.id);
+          toast({
+            title: 'Success',
+            description: 'API key deleted successfully',
+          });
+          router.push(`/${params.locale}/dashboard/api-keys`);
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to delete API key',
+            variant: 'destructive',
+          });
+          throw error;
+        }
+      },
+    });
   };
 
   if (loading) {
@@ -359,6 +373,7 @@ export default function ApiKeyDetailPage({ params: paramsPromise }: { params: Pr
           </Card>
         </div>
       </div>
+      {dialog}
     </div>
   );
 }

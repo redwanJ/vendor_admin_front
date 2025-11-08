@@ -34,17 +34,24 @@ class ApiClient {
 
       try {
         const errorData = await response.json();
-        error.message = errorData.message || errorData.detail || error.message;
+        error.message = errorData.detail || errorData.message || errorData.title || error.message;
         error.errors = errorData.errors;
       } catch {
         error.message = `HTTP Error ${response.status}: ${response.statusText}`;
       }
 
-      // Handle 401 - redirect to login
+      // Handle 401 - redirect to login (but not during login/register)
       if (response.status === 401 && typeof window !== 'undefined') {
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
-        window.location.href = '/login';
+        const isAuthEndpoint = response.url.includes('/auth/login') || response.url.includes('/auth/register');
+        const currentPath = window.location.pathname;
+        const isOnLoginPage = currentPath.includes('/login');
+
+        // Only redirect if we're not logging in and not already on login page
+        if (!isAuthEndpoint && !isOnLoginPage) {
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          window.location.href = '/login';
+        }
       }
 
       throw error;

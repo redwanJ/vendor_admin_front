@@ -16,6 +16,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/common/ThemeToggle';
 import { LanguageSwitcher } from '@/components/common/LanguageSwitcher';
+import { UserNav } from '@/components/common/UserNav';
 import { cn } from '@/lib/utils';
 
 interface NavbarProps {
@@ -56,7 +57,7 @@ export function Navbar({ onMobileMenuToggle, sidebarCollapsed, onSidebarToggle }
   const unreadCount = notifications.filter((n) => n.unread).length;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="h-16 border-b bg-background flex-shrink-0">
       <div className="flex h-full items-center justify-between px-4">
         {/* Left Section */}
         <div className="flex items-center gap-4">
@@ -85,23 +86,10 @@ export function Navbar({ onMobileMenuToggle, sidebarCollapsed, onSidebarToggle }
             )}
           </Button>
 
-          {/* Logo / Brand */}
-          <Link
-            href={`/${locale}/dashboard`}
-            className="flex items-center gap-2 font-semibold"
-          >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <span className="text-sm font-bold">MH</span>
-            </div>
-            <span
-              className={cn(
-                'text-lg font-bold transition-all',
-                sidebarCollapsed ? 'md:inline' : 'hidden lg:inline'
-              )}
-            >
-              Menal Hub
-            </span>
-          </Link>
+          {/* Page Title or Breadcrumb can go here */}
+          <div className="text-lg font-semibold hidden md:block">
+            {/* This can be dynamic based on current page */}
+          </div>
         </div>
 
         {/* Right Section */}
@@ -170,6 +158,9 @@ export function Navbar({ onMobileMenuToggle, sidebarCollapsed, onSidebarToggle }
 
           {/* Theme Toggle */}
           <ThemeToggle />
+
+          {/* User Profile */}
+          <UserNav />
         </div>
       </div>
     </header>

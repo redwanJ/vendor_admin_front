@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator';
 import { ServiceDetailSkeleton } from '@/components/shared/ServiceSkeletons';
 import { useToast } from '@/hooks/use-toast';
+import { useConfirmDialog } from '@/components/shared/ConfirmDialog';
 import { serviceService } from '@/services/serviceService';
 import type { ServiceDto } from '@/types/service';
 
@@ -24,9 +25,9 @@ export default function ServiceDetailPage({ params: paramsPromise }: { params: P
   const params = use(paramsPromise);
   const router = useRouter();
   const { toast } = useToast();
+  const { confirm, dialog } = useConfirmDialog();
   const [service, setService] = useState<ServiceDto | null>(null);
   const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const loadService = async () => {
@@ -54,27 +55,30 @@ export default function ServiceDetailPage({ params: paramsPromise }: { params: P
   };
 
   const handleDelete = async () => {
-    if (!confirm('Are you sure you want to delete this service? This action cannot be undone.')) {
-      return;
-    }
-
-    setDeleting(true);
-    try {
-      await serviceService.deleteService(params.id);
-      toast({
-        title: 'Success',
-        description: 'Service deleted successfully',
-      });
-      router.push(`/${params.locale}/dashboard/services`);
-    } catch (error: any) {
-      toast({
-        title: 'Error',
-        description: error.response?.data?.error || 'Failed to delete service',
-        variant: 'destructive',
-      });
-    } finally {
-      setDeleting(false);
-    }
+    await confirm({
+      title: 'Delete Service',
+      description: `Are you sure you want to delete "${service?.name}"? This action cannot be undone.`,
+      confirmText: 'Delete',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+      onConfirm: async () => {
+        try {
+          await serviceService.deleteService(params.id);
+          toast({
+            title: 'Success',
+            description: 'Service deleted successfully',
+          });
+          router.push(`/${params.locale}/dashboard/services`);
+        } catch (error: any) {
+          toast({
+            title: 'Error',
+            description: error?.message || 'Failed to delete service',
+            variant: 'destructive',
+          });
+          throw error;
+        }
+      },
+    });
   };
 
   if (loading) {
@@ -113,12 +117,13 @@ export default function ServiceDetailPage({ params: paramsPromise }: { params: P
             <Edit className="h-4 w-4 mr-2" />
             Edit
           </Button>
-          <Button onClick={handleDelete} variant="destructive" disabled={deleting}>
+          <Button onClick={handleDelete} variant="destructive">
             <Trash2 className="h-4 w-4 mr-2" />
-            {deleting ? 'Deleting...' : 'Delete'}
+            Delete
           </Button>
         </div>
       </div>
+      {dialog}
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Content */}

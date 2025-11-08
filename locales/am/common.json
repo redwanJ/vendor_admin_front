@@ -83,11 +83,14 @@
     }
   },
   "nav": {
+    "main": "ዋና",
+    "settings_section": "ቅንብሮች",
     "dashboard": "ዳሽቦርድ",
     "services": "አገልግሎቶች",
     "api_keys": "ኤፒአይ ቁልፎች",
     "bookings": "ቦታ ማስያዝ",
     "customers": "ደንበኞች",
+    "staff": "ሰራተኞች",
     "settings": "ቅንብሮች"
   },
   "actions": {
