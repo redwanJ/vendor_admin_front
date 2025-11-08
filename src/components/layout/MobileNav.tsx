@@ -43,7 +43,7 @@ export function MobileNav({ user, open, onClose, onLogout }: MobileNavProps) {
     },
     {
       titleKey: 'services',
-      href: `/${locale}/services`,
+      href: `/${locale}/dashboard/services`,
       icon: Package,
     },
     {
@@ -53,7 +53,7 @@ export function MobileNav({ user, open, onClose, onLogout }: MobileNavProps) {
     },
     {
       titleKey: 'customers',
-      href: `/${locale}/customers`,
+      href: `/${locale}/dashboard/customers`,
       icon: Users,
     },
     {

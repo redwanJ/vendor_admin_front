@@ -1,0 +1,148 @@
+{
+  "title": "Customers",
+  "description": "Manage your customer base and their information",
+  "actions": {
+    "add": "Add Customer",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteSelected": "Delete Selected",
+    "clearAll": "Clear all"
+  },
+  "filters": {
+    "customerType": "Customer Type",
+    "status": "Status",
+    "activeFilters": "Active filters:",
+    "allCustomerTypes": "All Types",
+    "allStatuses": "All Statuses"
+  },
+  "columns": {
+    "name": "Name",
+    "phone": "Phone",
+    "type": "Type",
+    "status": "Status",
+    "tags": "Tags",
+    "created": "Created"
+  },
+  "types": {
+    "Individual": "Individual",
+    "Business": "Business",
+    "EventPlanner": "Event Planner"
+  },
+  "status": {
+    "Active": "Active",
+    "Inactive": "Inactive",
+    "Blocked": "Blocked",
+    "Archived": "Archived"
+  },
+  "empty": {
+    "list": "No customers found. Add your first customer to get started."
+  },
+  "confirm": {
+    "delete": "Are you sure you want to delete \"{name}\"?",
+    "bulkDelete": "Are you sure you want to delete {count} customer(s)?",
+    "deleteTitle": "Delete Customer",
+    "bulkDeleteTitle": "Delete Customers"
+  },
+  "toasts": {
+    "loadError": "Failed to load customers",
+    "deleteSuccess": "Customer deleted successfully",
+    "deleteError": "Failed to delete customer",
+    "bulkDeleteSuccess": "{count} customer(s) deleted successfully",
+    "bulkDeleteError": "Failed to delete customers",
+    "createSuccess": "Customer created successfully",
+    "createError": "Failed to create customer",
+    "updateSuccess": "Customer updated successfully",
+    "updateError": "Failed to update customer"
+  },
+  "form": {
+    "newDescription": "Create a new customer record",
+    "editTitle": "Edit {name}",
+    "editDescription": "Update customer information",
+    "tabs": {
+      "basic": "Basic Info",
+      "address": "Address",
+      "social": "Social Media",
+      "notes": "Notes"
+    },
+    "sections": {
+      "basicInfo": "Basic Information",
+      "basicInfoDesc": "Essential customer details and contact information",
+      "address": "Address",
+      "addressDesc": "Customer's physical address",
+      "socialMedia": "Social Media Links",
+      "socialMediaDesc": "Social media profiles (optional)",
+      "notes": "Notes",
+      "notesDesc": "Internal notes about this customer"
+    },
+    "fields": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number",
+      "alternatePhone": "Alternate Phone",
+      "customerType": "Customer Type",
+      "customerTypeReadonly": "Customer type cannot be changed after creation",
+      "preferredContactMethod": "Preferred Contact Method",
+      "companyName": "Company Name",
+      "taxIdNumber": "Tax ID Number",
+      "tags": "Tags",
+      "tagsDesc": "Comma-separated tags (e.g., VIP, Corporate, Regular)",
+      "notes": "Notes",
+      "addressStreet": "Street Address",
+      "addressCity": "City",
+      "addressState": "State/Province",
+      "addressPostalCode": "Postal Code",
+      "addressCountry": "Country",
+      "facebookUrl": "Facebook URL",
+      "instagramUrl": "Instagram URL",
+      "linkedInUrl": "LinkedIn URL"
+    },
+    "placeholders": {
+      "fullName": "Enter customer's full name",
+      "email": "customer@example.com",
+      "phoneNumber": "+251 91 234 5678",
+      "alternatePhone": "+251 91 234 5678",
+      "customerType": "Select customer type",
+      "preferredContactMethod": "Select preferred method",
+      "companyName": "Enter company name",
+      "taxIdNumber": "Enter tax ID",
+      "tags": "VIP, Corporate, Regular",
+      "notes": "Add any notes about this customer...",
+      "addressStreet": "123 Main Street",
+      "addressCity": "Addis Ababa",
+      "addressState": "Addis Ababa",
+      "addressPostalCode": "1000",
+      "addressCountry": "Ethiopia",
+      "facebookUrl": "https://facebook.com/...",
+      "instagramUrl": "https://instagram.com/...",
+      "linkedInUrl": "https://linkedin.com/in/..."
+    },
+    "customerTypes": {
+      "Individual": "Individual",
+      "Business": "Business",
+      "EventPlanner": "Event Planner"
+    },
+    "contactMethods": {
+      "Email": "Email",
+      "Phone": "Phone",
+      "WhatsApp": "WhatsApp"
+    }
+  },
+  "detail": {
+    "contactInfo": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "alternatePhone": "Alternate Phone",
+    "preferredContactMethod": "Preferred Contact Method",
+    "address": "Address",
+    "businessInfo": "Business Information",
+    "companyName": "Company Name",
+    "taxIdNumber": "Tax ID Number",
+    "socialMedia": "Social Media",
+    "notes": "Notes",
+    "tags": "Tags",
+    "metadata": "Metadata",
+    "created": "Created",
+    "updated": "Last Updated"
+  }
+}

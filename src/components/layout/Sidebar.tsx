@@ -80,7 +80,7 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
         },
         {
           titleKey: 'customers',
-          href: `/${locale}/customers`,
+          href: `/${locale}/dashboard/customers`,
           icon: Users,
         },
         {

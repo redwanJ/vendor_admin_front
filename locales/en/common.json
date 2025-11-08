@@ -125,6 +125,7 @@
     "warning": "Warning",
     "info": "Information",
     "noData": "No data available",
+    "saving": "Saving...",
     "confirmDelete": "Are you sure you want to delete this item?",
     "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
   },
