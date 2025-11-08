@@ -25,7 +25,8 @@
     "price": "ዋጋ",
     "status": "ሁኔታ",
     "featured": "የሚመረጡ",
-    "updated": "የመጨረሻ ማዘመኛ"
+    "updated": "የመጨረሻ ማዘመኛ",
+    "image": "ማሰናጃ"
   },
   "searchPlaceholder": "አገልግሎቶችን ፈልግ...",
   "empty": {

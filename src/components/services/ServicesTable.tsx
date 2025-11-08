@@ -63,6 +63,23 @@ export default function ServicesTable({
   const t = useTranslations('services');
   const columns: DataTableColumn<ServiceListDto>[] = [
     {
+      key: 'image',
+      label: t('columns.image'),
+      render: (service) => (
+        <div className="w-16 h-16 relative rounded overflow-hidden bg-muted flex items-center justify-center">
+          {service.primaryImageUrl ? (
+            <img
+              src={service.primaryImageUrl}
+              alt={service.name}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <span className="text-xs text-muted-foreground">No image</span>
+          )}
+        </div>
+      ),
+    },
+    {
       key: 'name',
       label: t('columns.service'),
       sortable: true,

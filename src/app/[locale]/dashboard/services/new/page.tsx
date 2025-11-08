@@ -32,6 +32,8 @@ import { useToast } from '@/hooks/use-toast';
 import { serviceService } from '@/services/serviceService';
 import { lookupService } from '@/services/lookupService';
 import type { CreateServiceDto, ServiceTypeLookup, CategoryLookup } from '@/types/service';
+import ImageUpload from '@/components/shared/ImageUpload';
+import { UploadContext } from '@/types/upload';
 
 const serviceFormSchema = z.object({
   serviceTypeId: z.string().min(1, 'Service type is required'),
@@ -62,6 +64,8 @@ export default function NewServicePage() {
   const [saving, setSaving] = useState(false);
   const [serviceTypes, setServiceTypes] = useState<ServiceTypeLookup[]>([]);
   const [categories, setCategories] = useState<CategoryLookup[]>([]);
+  const [primaryImageUrl, setPrimaryImageUrl] = useState('');
+  const [primaryImageId, setPrimaryImageId] = useState('');
 
   const form = useForm({
     resolver: zodResolver(serviceFormSchema),
@@ -133,6 +137,7 @@ export default function NewServicePage() {
         leadTimeDays: filterValue(values.leadTimeDays),
         maxAdvanceBookingDays: filterValue(values.maxAdvanceBookingDays),
         isFeatured: values.isFeatured,
+        primaryImageUrl: filterValue(primaryImageUrl),
         metaTitle: filterValue(values.metaTitle),
         metaDescription: filterValue(values.metaDescription),
       };
@@ -198,6 +203,7 @@ export default function NewServicePage() {
           <Tabs defaultValue="basic" className="w-full">
             <TabsList>
               <TabsTrigger value="basic">Basic Info</TabsTrigger>
+              <TabsTrigger value="images">Images</TabsTrigger>
               <TabsTrigger value="pricing">Pricing</TabsTrigger>
               <TabsTrigger value="capacity">Capacity & Timing</TabsTrigger>
               <TabsTrigger value="seo">SEO</TabsTrigger>
@@ -338,6 +344,39 @@ export default function NewServicePage() {
                       </FormItem>
                     )}
                   />
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            {/* Images Tab */}
+            <TabsContent value="images" className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Service Images</CardTitle>
+                  <CardDescription>
+                    Add a primary image to showcase your service
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">
+                      Primary Image (Featured Image)
+                    </label>
+                    <ImageUpload
+                      context={UploadContext.ServicePrimaryImage}
+                      value={primaryImageUrl}
+                      uploadId={primaryImageId}
+                      onChange={(url, id) => {
+                        setPrimaryImageUrl(url);
+                        setPrimaryImageId(id);
+                      }}
+                      maxSize={5 * 1024 * 1024}
+                      aspectRatio="16/9"
+                    />
+                    <p className="text-sm text-muted-foreground mt-2">
+                      This image will be displayed prominently in service listings. Recommended size: 1200x675px (16:9 ratio)
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </TabsContent>

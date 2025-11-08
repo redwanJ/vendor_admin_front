@@ -25,7 +25,8 @@
     "price": "Price",
     "status": "Status",
     "featured": "Featured",
-    "updated": "Last Updated"
+    "updated": "Last Updated",
+    "image": "Image"
   },
   "searchPlaceholder": "Search services...",
   "empty": {
