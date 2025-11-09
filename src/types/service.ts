@@ -1,6 +1,7 @@
 // Service-related types
 
 import { BaseLookup } from "./api";
+import { ServiceKind, RentalConfiguration } from "./rental";
 
 export type PricingModel = 'FixedPrice' | 'PerPerson' | 'PerHour' | 'PerDay' | 'Custom';
 export type ServiceStatus = 'Draft' | 'PendingApproval' | 'Active' | 'Inactive' | 'Archived';
@@ -32,6 +33,7 @@ export interface ServiceListDto {
   name: string;
   slug: string;
   shortDescription?: string;
+  kind: ServiceKind;
   serviceType: ServiceTypeLookup;
   category?: CategoryLookup;
   basePrice: number;
@@ -52,6 +54,8 @@ export interface ServiceDto {
   slug: string;
   description?: string;
   shortDescription?: string;
+  kind: ServiceKind;
+  rentalConfiguration?: RentalConfiguration;
   basePrice: number;
   currency: string;
   pricingModel: string;
@@ -86,6 +90,8 @@ export interface CreateServiceDto {
   name: string;
   description?: string;
   shortDescription?: string;
+  kind: ServiceKind;
+  rentalConfiguration?: RentalConfiguration;
   basePrice: number;
   currency: string;
   pricingModel: string;

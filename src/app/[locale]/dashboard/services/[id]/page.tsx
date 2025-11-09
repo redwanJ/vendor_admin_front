@@ -2,7 +2,7 @@
 
 import { useState, useEffect, use } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Edit, Trash2, MapPin, Calendar, Users, Clock, DollarSign } from 'lucide-react';
+import { ArrowLeft, Edit, Trash2, MapPin, Calendar, Users, Clock, DollarSign, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -153,6 +153,12 @@ export default function ServiceDetailPage({ params: paramsPromise }: { params: P
                   <p className="text-base">{service.category?.name || 'None'}</p>
                 </div>
                 <div>
+                  <h4 className="text-sm font-medium text-muted-foreground">Service Kind</h4>
+                  <p className="text-base">
+                    <Badge variant="outline">{service.kind}</Badge>
+                  </p>
+                </div>
+                <div>
                   <h4 className="text-sm font-medium text-muted-foreground">Slug</h4>
                   <p className="text-base font-mono text-sm">{service.slug}</p>
                 </div>
@@ -190,6 +196,57 @@ export default function ServiceDetailPage({ params: paramsPromise }: { params: P
               </div>
             </CardContent>
           </Card>
+
+          {/* Rental Configuration */}
+          {service.kind === 'Rental' && service.rentalConfiguration && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Package className="h-5 w-5" />
+                  Rental Configuration
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-sm font-medium text-muted-foreground">Inventory Quantity</h4>
+                    <p className="text-2xl font-bold">{service.rentalConfiguration.inventoryQuantity}</p>
+                    <p className="text-sm text-muted-foreground">items available</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-medium text-muted-foreground">Rental Period</h4>
+                    <p className="text-base">
+                      Min {service.rentalConfiguration.minimumRentalPeriod} {service.rentalConfiguration.rentalPeriodUnit}(s)
+                    </p>
+                  </div>
+                  {service.rentalConfiguration.depositAmount && (
+                    <div>
+                      <h4 className="text-sm font-medium text-muted-foreground">Deposit Amount</h4>
+                      <p className="text-base font-semibold">
+                        {service.currency} {service.rentalConfiguration.depositAmount.toLocaleString()}
+                      </p>
+                    </div>
+                  )}
+                  {(service.rentalConfiguration.bufferTimeBefore || service.rentalConfiguration.bufferTimeAfter) && (
+                    <div>
+                      <h4 className="text-sm font-medium text-muted-foreground">Buffer Times</h4>
+                      <p className="text-sm">
+                        {service.rentalConfiguration.bufferTimeBefore && `${service.rentalConfiguration.bufferTimeBefore}m before`}
+                        {service.rentalConfiguration.bufferTimeBefore && service.rentalConfiguration.bufferTimeAfter && ' / '}
+                        {service.rentalConfiguration.bufferTimeAfter && `${service.rentalConfiguration.bufferTimeAfter}m after`}
+                      </p>
+                    </div>
+                  )}
+                  <div className="col-span-2">
+                    <h4 className="text-sm font-medium text-muted-foreground">Simultaneous Bookings</h4>
+                    <Badge variant={service.rentalConfiguration.allowSimultaneousBookings ? "default" : "secondary"}>
+                      {service.rentalConfiguration.allowSimultaneousBookings ? 'Allowed' : 'Not Allowed'}
+                    </Badge>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           {/* Capacity & Timing */}
           <Card>

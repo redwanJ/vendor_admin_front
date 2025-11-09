@@ -35,6 +35,131 @@
   "confirm": {
     "delete": "Are you sure you want to delete \"{name}\"?",
     "bulkDelete": "Are you sure you want to delete {count} service(s)?"
+  },
+  "form": {
+    "tabs": {
+      "basic": "Basic Info",
+      "images": "Images",
+      "pricing": "Pricing",
+      "rental": "Rental Configuration",
+      "capacity": "Capacity & Timing",
+      "seo": "SEO"
+    },
+    "basic": {
+      "title": "Basic Information",
+      "description": "Essential details about your service",
+      "serviceType": "Service Type",
+      "selectServiceType": "Select service type",
+      "category": "Category",
+      "selectCategory": "Select a category",
+      "noCategory": "No category",
+      "kind": "Service Kind",
+      "selectKind": "Select service kind",
+      "kindDescription": "Choose the type of service you're offering",
+      "kinds": {
+        "standard": "Standard Service",
+        "rental": "Rental Service",
+        "package": "Package"
+      },
+      "name": "Service Name",
+      "namePlaceholder": "e.g., Grand Ballroom Venue",
+      "shortDescription": "Short Description",
+      "shortDescriptionPlaceholder": "Brief summary (max 500 characters)",
+      "shortDescriptionHint": "This will be shown in service listings",
+      "description": "Full Description",
+      "descriptionPlaceholder": "Detailed description of your service",
+      "featured": "Featured Service",
+      "featuredDescription": "Display this service prominently on your page"
+    },
+    "images": {
+      "title": "Service Images",
+      "description": "Add a primary image to showcase your service",
+      "primaryImage": "Primary Image (Featured Image)",
+      "primaryImageHint": "This image will be displayed prominently in service listings. Recommended size: 1200x675px (16:9 ratio)"
+    },
+    "pricing": {
+      "title": "Pricing Information",
+      "description": "Set your pricing model and rates",
+      "basePrice": "Base Price",
+      "basePricePlaceholder": "Enter base price",
+      "currency": "Currency",
+      "pricingModel": "Pricing Model",
+      "models": {
+        "fixed": "Fixed Price",
+        "perPerson": "Per Person",
+        "perHour": "Per Hour",
+        "perDay": "Per Day",
+        "custom": "Custom"
+      },
+      "minPrice": "Minimum Price (Optional)",
+      "maxPrice": "Maximum Price (Optional)"
+    },
+    "rental": {
+      "title": "Rental Configuration",
+      "description": "Configure inventory and rental terms",
+      "inventory": {
+        "title": "Inventory",
+        "quantity": "Inventory Quantity",
+        "quantityDescription": "Total number of items available for rental",
+        "simultaneousBookings": "Allow Simultaneous Bookings",
+        "simultaneousBookingsDescription": "Allow multiple bookings for the same time period if inventory permits"
+      },
+      "period": {
+        "title": "Rental Period",
+        "unit": "Rental Period Unit",
+        "selectUnit": "Select unit",
+        "unitDescription": "Base unit for rental periods",
+        "units": {
+          "hour": "Hour",
+          "day": "Day",
+          "week": "Week",
+          "month": "Month"
+        },
+        "minimum": "Minimum Rental Period",
+        "minimumDescription": "Minimum number of periods required"
+      },
+      "financial": {
+        "title": "Financial",
+        "deposit": "Deposit Amount (Optional)",
+        "depositDescription": "Security deposit required from customers"
+      },
+      "buffer": {
+        "title": "Buffer Times",
+        "description": "Add time before and after rentals for setup and cleanup",
+        "before": "Buffer Time Before (minutes)",
+        "beforeDescription": "Setup time before rental starts",
+        "after": "Buffer Time After (minutes)",
+        "afterDescription": "Cleanup time after rental ends"
+      }
+    },
+    "capacity": {
+      "title": "Capacity",
+      "description": "Set capacity limits for your service",
+      "min": "Minimum Capacity",
+      "max": "Maximum Capacity"
+    },
+    "timing": {
+      "title": "Timing",
+      "description": "Define time requirements and lead times",
+      "duration": "Service Duration (minutes)",
+      "durationHint": "e.g., 240 for 4 hours",
+      "setup": "Setup Time (minutes)",
+      "teardown": "Teardown Time (minutes)",
+      "leadTime": "Lead Time (days)",
+      "leadTimeHint": "Minimum days notice required",
+      "maxAdvance": "Max Advance Booking (days)",
+      "maxAdvanceHint": "Maximum days in advance to book"
+    },
+    "seo": {
+      "title": "SEO Optimization",
+      "description": "Improve search engine visibility",
+      "metaTitle": "Meta Title",
+      "metaTitlePlaceholder": "SEO-friendly title",
+      "metaTitleHint": "Recommended: 50-60 characters",
+      "metaDescription": "Meta Description",
+      "metaDescriptionPlaceholder": "SEO-friendly description",
+      "metaDescriptionHint": "Recommended: 150-160 characters"
+    }
   }
 }
 

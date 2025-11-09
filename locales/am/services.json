@@ -35,5 +35,130 @@
   "confirm": {
     "delete": "\"{name}\" ለመሰረዝ እፈልጋለሁ ብለው ነው?",
     "bulkDelete": "{count} አገልግሎት(ዎች) ለመሰረዝ እፈልጋለሁ ብለው ነው?"
+  },
+  "form": {
+    "tabs": {
+      "basic": "መሰረታዊ መረጃ",
+      "images": "ምስሎች",
+      "pricing": "የዋጋ አሰጣጥ",
+      "rental": "የኪራይ ውቅር",
+      "capacity": "አቅም እና ጊዜ",
+      "seo": "SEO"
+    },
+    "basic": {
+      "title": "መሰረታዊ መረጃ",
+      "description": "ስለ አገልግሎትዎ አስፈላጊ ዝርዝሮች",
+      "serviceType": "የአገልግሎት አይነት",
+      "selectServiceType": "የአገልግሎት አይነት ይምረጡ",
+      "category": "ምድብ",
+      "selectCategory": "ምድብ ይምረጡ",
+      "noCategory": "ምድብ የለም",
+      "kind": "የአገልግሎት ዓይነት",
+      "selectKind": "የአገልግሎት ዓይነት ይምረጡ",
+      "kindDescription": "የሚሰጡትን የአገልግሎት ዓይነት ይምረጡ",
+      "kinds": {
+        "standard": "መደበኛ አገልግሎት",
+        "rental": "የኪራይ አገልግሎት",
+        "package": "ፓኬጅ"
+      },
+      "name": "የአገልግሎት ስም",
+      "namePlaceholder": "ለምሳሌ፣ ታላቅ የሰርጋቸን አዳራሽ",
+      "shortDescription": "አጭር መግለጫ",
+      "shortDescriptionPlaceholder": "አጭር ማጠቃለያ (ከ 500 ቁምፊዎች)",
+      "shortDescriptionHint": "ይህ በአገልግሎት ዝርዝሮች ውስጥ ይታያል",
+      "description": "ሙሉ መግለጫ",
+      "descriptionPlaceholder": "ስለ አገልግሎትዎ ዝርዝር መግለጫ",
+      "featured": "የሚመከር አገልግሎት",
+      "featuredDescription": "ይህን አገልግሎት በገፅዎ ላይ በማሳየት ያስፋፉ"
+    },
+    "images": {
+      "title": "የአገልግሎት ምስሎች",
+      "description": "አገልግሎትዎን ለማሳየት ዋና ምስል ያክሉ",
+      "primaryImage": "ዋና ምስል (የሚታየው ምስል)",
+      "primaryImageHint": "ይህ ምስል በአገልግሎት ዝርዝሮች ውስጥ በማሳየት ይታያል። የሚመከር መጠን፡ 1200x675px (16:9 ሬሾ)"
+    },
+    "pricing": {
+      "title": "የዋጋ አሰጣጥ መረጃ",
+      "description": "የዋጋ አሰጣጥ ሞዴልዎን እና ተመኖችን ያዘጋጁ",
+      "basePrice": "መሰረታዊ ዋጋ",
+      "basePricePlaceholder": "መሰረታዊ ዋጋ ያስገቡ",
+      "currency": "ምንዛሪ",
+      "pricingModel": "የዋጋ አሰጣጥ ሞዴል",
+      "models": {
+        "fixed": "ቋሚ ዋጋ",
+        "perPerson": "በአንድ ሰው",
+        "perHour": "በሰዓት",
+        "perDay": "በቀን",
+        "custom": "ብጁ"
+      },
+      "minPrice": "ዝቅተኛ ዋጋ (አማራጭ)",
+      "maxPrice": "ከፍተኛ ዋጋ (አማራጭ)"
+    },
+    "rental": {
+      "title": "የኪራይ ውቅር",
+      "description": "የእቃዎች መጠን እና የኪራይ ውሎችን ያዋቅሩ",
+      "inventory": {
+        "title": "የእቃዎች መጠን",
+        "quantity": "የእቃዎች ብዛት",
+        "quantityDescription": "ለኪራይ የሚገኙ የእቃዎች ጠቅላላ ብዛት",
+        "simultaneousBookings": "በተመሳሳይ ጊዜ መያዝ ይፈቀድ",
+        "simultaneousBookingsDescription": "የእቃዎች መጠን ከፈቀደ በተመሳሳይ ጊዜ ወቅት ብዙ ቦታ ቦታ መያዝ ይፈቀድ"
+      },
+      "period": {
+        "title": "የኪራይ ጊዜ",
+        "unit": "የኪራይ ጊዜ ክፍል",
+        "selectUnit": "ክፍል ይምረጡ",
+        "unitDescription": "ለኪራይ ጊዜዎች መሰረታዊ ክፍል",
+        "units": {
+          "hour": "ሰዓት",
+          "day": "ቀን",
+          "week": "ሳምንት",
+          "month": "ወር"
+        },
+        "minimum": "ዝቅተኛ የኪራይ ጊዜ",
+        "minimumDescription": "የሚፈለገው ዝቅተኛ የጊዜ ብዛት"
+      },
+      "financial": {
+        "title": "ፋይናንስ",
+        "deposit": "የማስያዣ መጠን (አማራጭ)",
+        "depositDescription": "ከደንበኞች የሚፈለግ የደህንነት ማስያዣ"
+      },
+      "buffer": {
+        "title": "የቋሚ ጊዜ",
+        "description": "ለማዘጋጀት እና ለማፅዳት ከኪራይ በፊት እና በኋላ ጊዜ ያክሉ",
+        "before": "ከኪራይ በፊት ጊዜ (ደቂቃዎች)",
+        "beforeDescription": "ኪራይ ከመጀመሩ በፊት የማዘጋጀት ጊዜ",
+        "after": "ከኪራይ በኋላ ጊዜ (ደቂቃዎች)",
+        "afterDescription": "ኪራይ ከተጠናቀቀ በኋላ የማፅዳት ጊዜ"
+      }
+    },
+    "capacity": {
+      "title": "አቅም",
+      "description": "ለአገልግሎትዎ የአቅም ገደቦችን ያዘጋጁ",
+      "min": "ዝቅተኛ አቅም",
+      "max": "ከፍተኛ አቅም"
+    },
+    "timing": {
+      "title": "ጊዜ አሰጣጥ",
+      "description": "የጊዜ መስፈርቶችን እና የእድል ጊዜዎችን ይግለጹ",
+      "duration": "የአገልግሎት ጊዜ (ደቂቃዎች)",
+      "durationHint": "ለምሳሌ፣ 240 ለ 4 ሰዓታት",
+      "setup": "የማዘጋጀት ጊዜ (ደቂቃዎች)",
+      "teardown": "የማፅዳት ጊዜ (ደቂቃዎች)",
+      "leadTime": "የእድል ጊዜ (ቀናት)",
+      "leadTimeHint": "የሚፈለገው ዝቅተኛ የቅድመ ማስጠንቀቂያ ቀናት",
+      "maxAdvance": "ከፍተኛ የቅድመ መያዣ (ቀናት)",
+      "maxAdvanceHint": "ቀድሞ የሚያዝ ከፍተኛ ቀናት"
+    },
+    "seo": {
+      "title": "SEO ማሻሻያ",
+      "description": "የፍለጋ ሞተር ታይነትን ያሻሽሉ",
+      "metaTitle": "ሜታ ርዕስ",
+      "metaTitlePlaceholder": "SEO-ተስማሚ ርዕስ",
+      "metaTitleHint": "የሚመከር፡ 50-60 ቁምፊዎች",
+      "metaDescription": "ሜታ መግለጫ",
+      "metaDescriptionPlaceholder": "SEO-ተስማሚ መግለጫ",
+      "metaDescriptionHint": "የሚመከር፡ 150-160 ቁምፊዎች"
+    }
   }
 }

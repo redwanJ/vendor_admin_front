@@ -7,6 +7,11 @@ import type {
   ServiceFilters,
   PagedResult,
 } from '@/types/service';
+import type {
+  CheckAvailabilityRequest,
+  AvailabilityResult,
+  AvailabilitySlot,
+} from '@/types/rental';
 
 export const serviceService = {
   /**
@@ -75,5 +80,36 @@ export const serviceService = {
    */
   async bulkDeleteServices(serviceIds: string[]): Promise<void> {
     await Promise.all(serviceIds.map(id => this.deleteService(id)));
+  },
+
+  /**
+   * Check availability for a rental service
+   * Verifies if requested quantity is available for the specified date range
+   */
+  async checkAvailability(
+    serviceId: string,
+    request: CheckAvailabilityRequest
+  ): Promise<AvailabilityResult> {
+    const response = await api.post<AvailabilityResult>(
+      `/vendor/services/${serviceId}/check-availability`,
+      request
+    );
+    return response.data;
+  },
+
+  /**
+   * Get availability breakdown for a rental service
+   * Returns slot-by-slot availability for calendar visualization
+   */
+  async getAvailabilityBreakdown(
+    serviceId: string,
+    rangeStart: string,
+    rangeEnd: string
+  ): Promise<AvailabilitySlot[]> {
+    const response = await api.get<AvailabilitySlot[]>(
+      `/vendor/services/${serviceId}/availability-breakdown`,
+      { params: { rangeStart, rangeEnd } }
+    );
+    return response.data;
   },
 };
