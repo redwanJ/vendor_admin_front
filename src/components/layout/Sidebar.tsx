@@ -85,7 +85,7 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
         },
         {
           titleKey: 'staff',
-          href: `/${locale}/staff`,
+          href: `/${locale}/dashboard/staff`,
           icon: UserPlus,
         },
       ],

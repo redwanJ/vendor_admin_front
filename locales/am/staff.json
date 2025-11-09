@@ -1,0 +1,61 @@
+{
+  "title": "Staff Management",
+  "description": "Manage your team members and their roles",
+  "actions": {
+    "invite": "Invite Staff",
+    "view": "View",
+    "edit": "Edit",
+    "clearAll": "Clear all"
+  },
+  "filters": {
+    "search": "Search by name or email...",
+    "status": "Status",
+    "allStatuses": "All Statuses",
+    "activeFilters": "Active filters:"
+  },
+  "columns": {
+    "name": "Name",
+    "status": "Status",
+    "roles": "Roles",
+    "lastLogin": "Last Login"
+  },
+  "status": {
+    "Active": "Active",
+    "Inactive": "Inactive",
+    "Pending": "Pending",
+    "Suspended": "Suspended"
+  },
+  "labels": {
+    "role": "role",
+    "roles": "roles",
+    "neverLoggedIn": "Never logged in"
+  },
+  "empty": {
+    "list": "No staff members found. Invite your first team member to get started."
+  },
+  "toasts": {
+    "loadError": "Failed to load staff members",
+    "inviteSuccess": "Staff invitation sent successfully",
+    "inviteError": "Failed to send invitation",
+    "updateSuccess": "Staff member updated successfully",
+    "updateError": "Failed to update staff member",
+    "roleAssignSuccess": "Role assigned successfully",
+    "roleAssignError": "Failed to assign role"
+  },
+  "invite": {
+    "title": "Invite Staff Member",
+    "description": "Send an invitation to a new team member",
+    "form": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "phoneNumber": "Phone Number (Optional)",
+      "role": "Role",
+      "selectRole": "Select a role"
+    },
+    "placeholders": {
+      "fullName": "Enter staff member's full name",
+      "email": "staffmember@example.com",
+      "phoneNumber": "+251 91 234 5678"
+    }
+  }
+}
