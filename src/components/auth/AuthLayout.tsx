@@ -143,8 +143,11 @@ export function AuthLayout({ children }: AuthLayoutProps) {
       </div>
 
       {/* Right Section - Authentication Panel */}
-      <div className="flex items-center justify-center p-8 bg-background">
-        <div className="w-full max-w-md">
+      <div className="relative flex items-center justify-center p-8 bg-background overflow-hidden">
+        {/* subtle animated blobs */}
+        <div className="pointer-events-none absolute -top-24 -right-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl animate-pulse" />
+        <div className="pointer-events-none absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-secondary/10 blur-3xl animate-pulse [animation-duration:4s]" />
+        <div className="w-full max-w-md animate-in fade-in-0 slide-in-from-bottom-2 duration-500">
           {children}
         </div>
       </div>

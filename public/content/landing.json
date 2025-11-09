@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "eyebrow": "Built for Vendors",
+    "title": "Sell faster. Operate smarter.",
+    "subtitle": "All-in-one tools to manage services, bookings, clients, inventory and growth.",
+    "primaryCta": { "label": "Get Started", "href": "/register" },
+    "secondaryCta": { "label": "Sign In", "href": "/login" },
+    "badges": [
+      { "label": "Modern UX", "icon": "Zap" },
+      { "label": "Secure", "icon": "Shield" },
+      { "label": "Global", "icon": "Globe" }
+    ]
+  },
+  "features": [
+    { "title": "Service Management", "description": "Create, bundle and schedule services with ease.", "icon": "LayoutDashboard" },
+    { "title": "Smart Bookings", "description": "Calendar-first experience with availability rules.", "icon": "Calendar" },
+    { "title": "Client CRM", "description": "Profiles, notes and segments to grow loyalty.", "icon": "Users" },
+    { "title": "Realtime Inventory", "description": "Instant stock sync to prevent overselling.", "icon": "Activity" },
+    { "title": "Automations", "description": "Notifications and workflows that save hours.", "icon": "Cog" },
+    { "title": "Insights", "description": "Analytics that turn data into action.", "icon": "BarChart3" }
+  ],
+  "stats": [
+    { "label": "Vendors", "value": "8k+" },
+    { "label": "Bookings/month", "value": "1.2M" },
+    { "label": "Avg. Uptime", "value": "99.99%" },
+    { "label": "Countries", "value": "40+" }
+  ],
+  "testimonials": [
+    { "quote": "Our booking flow feels premium now.", "author": "Maya S.", "role": "Owner, Lumi Spa" },
+    { "quote": "Set-up was painless, results were instant.", "author": "Samir K.", "role": "Manager, QuickFix" },
+    { "quote": "Love the automations and analytics.", "author": "Rina P.", "role": "Founder, Bloom" }
+  ],
+  "cta": {
+    "title": "Ready to grow your vendor business?",
+    "description": "Create your account and start in minutes.",
+    "primary": { "label": "Create account", "href": "/register" },
+    "secondary": { "label": "Contact sales", "href": "/contact" }
+  }
+}
+
