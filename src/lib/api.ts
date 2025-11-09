@@ -2,6 +2,14 @@ import type { ApiError } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
+// Helper to get current locale from URL
+const getCurrentLocale = (): string => {
+  if (typeof window === 'undefined') return 'en';
+  const pathSegments = window.location.pathname.split('/').filter(Boolean);
+  const locale = pathSegments[0];
+  return ['en', 'am'].includes(locale) ? locale : 'en';
+};
+
 class ApiClient {
   private baseURL: string;
 
@@ -50,7 +58,8 @@ class ApiClient {
         if (!isAuthEndpoint && !isOnLoginPage) {
           localStorage.removeItem('accessToken');
           localStorage.removeItem('refreshToken');
-          window.location.href = '/login';
+          const locale = getCurrentLocale();
+          window.location.href = `/${locale}/login`;
         }
       }
 

@@ -3,6 +3,14 @@ import { getAccessToken, getRefreshToken, setAccessToken, clearAuthTokens } from
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
+// Helper to get current locale from URL
+const getCurrentLocale = (): string => {
+  if (typeof window === 'undefined') return 'en';
+  const pathSegments = window.location.pathname.split('/').filter(Boolean);
+  const locale = pathSegments[0];
+  return ['en', 'am'].includes(locale) ? locale : 'en';
+};
+
 export const api = axios.create({
   baseURL,
   headers: {
@@ -73,7 +81,8 @@ api.interceptors.response.use(
         // No refresh token, redirect to login
         clearAuthTokens();
         if (typeof window !== 'undefined') {
-          window.location.href = '/en/login';
+          const locale = getCurrentLocale();
+          window.location.href = `/${locale}/login`;
         }
         return Promise.reject(error);
       }
@@ -103,7 +112,8 @@ api.interceptors.response.use(
         isRefreshing = false;
         clearAuthTokens();
         if (typeof window !== 'undefined') {
-          window.location.href = '/en/login';
+          const locale = getCurrentLocale();
+          window.location.href = `/${locale}/login`;
         }
         return Promise.reject(refreshError);
       }
