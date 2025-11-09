@@ -89,6 +89,7 @@
     "services": "Services",
     "api_keys": "API Keys",
     "bookings": "Bookings",
+    "inventory": "Inventory",
     "customers": "Customers",
     "staff": "Staff",
     "settings": "Settings"

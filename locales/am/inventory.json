@@ -1,0 +1,117 @@
+{
+  "title": "ዕቃ እና ቦታ ማስያዝ",
+  "description": "የኪራይ እቃዎችን እና ቦታ ማስያዣዎችን ያስተዳድሩ",
+  "stats": {
+    "totalReservations": "ጠቅላላ ቦታ ማስያዣዎች",
+    "activeRentals": "ንቁ ኪራዮች",
+    "upcoming": "ቀጣይ",
+    "allTime": "ከሁሉም ጊዜ ማስያዣዎች",
+    "inUse": "በአሁኑ ጊዜ በአጠቃቀም ላይ",
+    "confirmed": "የተረጋገጡ ማስያዣዎች"
+  },
+  "quickActions": {
+    "title": "ፈጣን እርምጃዎች",
+    "description": "የኪራይ እቃዎችዎን ያስተዳድሩ",
+    "viewReservations": "ሁሉንም ማስያዣዎች ይመልከቱ",
+    "createReservation": "ቦታ ማስያዝ ይፍጠሩ"
+  },
+  "rentalServices": {
+    "title": "የኪራይ አገልግሎቶች",
+    "description": "ከዕቃ ክትትል ጋር አገልግሎቶች",
+    "noServices": "ምንም የኪራይ አገልግሎት አልተገኘም።",
+    "noServicesHint": "አገልግሎት ይፍጠሩ እና እንደ ኪራይ አገልግሎት ያዋቅሩት እቃዎችን መከታተል ለመጀመር።",
+    "units": "ክፍሎች",
+    "minRental": "ዝቅተኛ ኪራይ",
+    "viewCalendar": "ቀን መቁጠሪያ ይመልከቱ"
+  },
+  "reservations": {
+    "title": "ማስያዣዎች",
+    "description": "ሁሉንም የእቃ ማስያዣዎች ያስተዳድሩ",
+    "noReservations": "ምንም ማስያዣ አልተገኘም",
+    "noReservationsHint": "ለመጀመር የመጀመሪያዎን ማስያዝ ይፍጠሩ",
+    "adjustFilters": "ማጣሪያዎችዎን ማስተካከል ይሞክሩ"
+  },
+  "filters": {
+    "search": "በደንበኛ ወይም አገልግሎት ይፈልጉ...",
+    "status": "በሁኔታ አጣራ",
+    "type": "በአይነት አጣራ",
+    "allStatuses": "ሁሉም ሁኔታዎች",
+    "allTypes": "ሁሉም ዓይነቶች"
+  },
+  "status": {
+    "Pending": "በመጠባበቅ ላይ",
+    "Confirmed": "የተረጋገጠ",
+    "InUse": "በአጠቃቀም ላይ",
+    "Completed": "ተጠናቋል",
+    "Cancelled": "ተሰርዟል",
+    "NoShow": "አልመጣም"
+  },
+  "type": {
+    "Booking": "ቦታ ማስያዝ",
+    "SoftHold": "ጊዜያዊ መያዝ",
+    "Maintenance": "ጥገና",
+    "Blocked": "የታገደ"
+  },
+  "actions": {
+    "confirm": "አረጋግጥ",
+    "markInUse": "እንደ በአጠቃቀም ምልክት አድርግ",
+    "complete": "ጨርስ",
+    "cancel": "ሰርዝ",
+    "noShow": "አልመጣም",
+    "edit": "አርትዕ",
+    "view": "ዝርዝሮች ይመልከቱ"
+  },
+  "reservation": {
+    "startDate": "የመጀመሪያ ቀን",
+    "endDate": "የመጨረሻ ቀን",
+    "quantity": "መጠን",
+    "customer": "ደንበኛ",
+    "service": "አገልግሎት",
+    "expired": "ጊዜው አልፏል"
+  },
+  "createDialog": {
+    "title": "ቦታ ማስያዝ ይፍጠሩ",
+    "description": "ለደንበኛ እቃ ያስያዙ ወይም ለጥገና ያግዱት",
+    "serviceLabel": "አገልግሎት",
+    "servicePlaceholder": "የኪራይ አገልግሎት ይምረጡ",
+    "startDateLabel": "የመጀመሪያ ቀን",
+    "endDateLabel": "የመጨረሻ ቀን",
+    "quantityLabel": "መጠን",
+    "typeLabel": "አይነት",
+    "typeDescription": "ጊዜያዊ መያዝ በራስ-ሰር ይጠፋል; ቦታ ማስያዝ የተረጋገጠ ነው",
+    "notesLabel": "ማስታወሻዎች",
+    "notesPlaceholder": "ተጨማሪ ማስታወሻዎችን ያክሉ...",
+    "checkingAvailability": "መገኘት እየተፈተሸ ነው...",
+    "availabilitySuccess": "እቃ ለተመረጡት ቀናት እና መጠን ይገኛል",
+    "availabilityError": "በቂ እቃ አይገኝም",
+    "submit": "ቦታ ማስያዝ ይፍጠሩ",
+    "cancel": "ሰርዝ"
+  },
+  "validation": {
+    "serviceRequired": "አገልግሎት ያስፈልጋል",
+    "startDateRequired": "የመጀመሪያ ቀን ያስፈልጋል",
+    "endDateRequired": "የመጨረሻ ቀን ያስፈልጋል",
+    "quantityMin": "መጠን ቢያንስ 1 መሆን አለበት",
+    "endDateAfterStart": "የመጨረሻ ቀን ከመጀመሪያ ቀን በኋላ መሆን አለበት"
+  },
+  "messages": {
+    "createSuccess": "ቦታ ማስያዝ በተሳካ ሁኔታ ተፈጠረ",
+    "updateSuccess": "ቦታ ማስያዝ በተሳካ ሁኔታ ተዘመነ",
+    "cancelSuccess": "ቦታ ማስያዝ በተሳካ ሁኔታ ተሰረዘ",
+    "statusUpdateSuccess": "የቦታ ማስያዣ ሁኔታ በተሳካ ሁኔታ ተዘምኗል",
+    "loadError": "ማስያዣዎችን መጫን አልተሳካም",
+    "createError": "ቦታ ማስያዝ መፍጠር አልተሳካም",
+    "updateError": "ቦታ ማስያዝ ማዘመን አልተሳካም",
+    "cancelError": "ቦታ ማስያዝ መሰረዝ አልተሳካም",
+    "statusUpdateError": "ሁኔታ ማዘመን አልተሳካም",
+    "cancelConfirm": "እርግጠኛ ነዎት ይህን ቦታ ማስያዣ መሰረዝ ይፈልጋሉ?"
+  },
+  "pagination": {
+    "showing": "እያሳየ",
+    "to": "እስከ",
+    "of": "ከ",
+    "results": "ውጤቶች",
+    "previous": "ቀዳሚ",
+    "next": "ቀጣይ"
+  }
+}

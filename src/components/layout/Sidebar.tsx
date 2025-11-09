@@ -18,6 +18,7 @@ import {
   Zap,
   Moon,
   Sun,
+  Box,
 } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
@@ -72,6 +73,11 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
           titleKey: 'services',
           href: `/${locale}/dashboard/services`,
           icon: Package,
+        },
+        {
+          titleKey: 'inventory',
+          href: `/${locale}/dashboard/inventory`,
+          icon: Box,
         },
         {
           titleKey: 'bookings',

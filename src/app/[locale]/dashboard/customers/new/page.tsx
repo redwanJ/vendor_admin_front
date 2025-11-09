@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl';
 import { useToast } from '@/hooks/use-toast';
 import { customerService } from '@/services/customerService';
 import CustomerForm from '@/components/customers/CustomerForm';
-import type { CreateCustomerDto } from '@/types/customer';
+import type { CreateCustomerDto, UpdateCustomerDto } from '@/types/customer';
 
 export default function NewCustomerPage() {
   const router = useRouter();
@@ -17,10 +17,10 @@ export default function NewCustomerPage() {
   const tCommon = useTranslations('common');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (data: CreateCustomerDto) => {
+  const handleSubmit = async (data: CreateCustomerDto | UpdateCustomerDto) => {
     setIsSubmitting(true);
     try {
-      const result = await customerService.createCustomer(data);
+      const result = await customerService.createCustomer(data as CreateCustomerDto);
       toast({
         title: tCommon('messages.success'),
         description: t('toasts.createSuccess'),

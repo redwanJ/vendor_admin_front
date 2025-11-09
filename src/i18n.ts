@@ -31,6 +31,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       customers: (await import(`../locales/${locale}/customers.json`)).default,
       services: (await import(`../locales/${locale}/services.json`)).default,
       staff: (await import(`../locales/${locale}/staff.json`)).default,
+      inventory: (await import(`../locales/${locale}/inventory.json`)).default,
     },
   };
 });

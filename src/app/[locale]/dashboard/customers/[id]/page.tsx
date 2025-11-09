@@ -65,7 +65,7 @@ export default function CustomerDetailPage({ params: paramsPromise }: { params: 
   const handleDelete = async () => {
     await confirm({
       title: t('confirm.deleteTitle'),
-      description: t('confirm.delete', { name: customer?.fullName }),
+      description: t('confirm.delete', { name: customer?.fullName || 'this customer' }),
       confirmText: tCommon('actions.delete'),
       cancelText: tCommon('actions.cancel'),
       variant: 'destructive',

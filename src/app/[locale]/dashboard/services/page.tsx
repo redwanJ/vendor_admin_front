@@ -292,7 +292,7 @@ export default function ServicesPage() {
       label: 'Delete',
       icon: <Trash className="h-4 w-4 mr-2" />,
       onClick: async (service) => {
-        if (confirm(`Are you sure you want to delete "${service.name}"?`)) {
+        if (window.confirm(`Are you sure you want to delete "${service.name}"?`)) {
           await handleDelete(service.id);
         }
       },

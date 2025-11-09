@@ -1,0 +1,117 @@
+{
+  "title": "Inventory & Reservations",
+  "description": "Manage rental inventory and reservations",
+  "stats": {
+    "totalReservations": "Total Reservations",
+    "activeRentals": "Active Rentals",
+    "upcoming": "Upcoming",
+    "allTime": "All time reservations",
+    "inUse": "Currently in use",
+    "confirmed": "Confirmed reservations"
+  },
+  "quickActions": {
+    "title": "Quick Actions",
+    "description": "Manage your rental inventory",
+    "viewReservations": "View All Reservations",
+    "createReservation": "Create Reservation"
+  },
+  "rentalServices": {
+    "title": "Rental Services",
+    "description": "Services with inventory tracking",
+    "noServices": "No rental services found.",
+    "noServicesHint": "Create a service and configure it as a rental service to start tracking inventory.",
+    "units": "units",
+    "minRental": "Min rental",
+    "viewCalendar": "View Calendar"
+  },
+  "reservations": {
+    "title": "Reservations",
+    "description": "Manage all inventory reservations",
+    "noReservations": "No reservations found",
+    "noReservationsHint": "Create your first reservation to get started",
+    "adjustFilters": "Try adjusting your filters"
+  },
+  "filters": {
+    "search": "Search by customer or service...",
+    "status": "Filter by status",
+    "type": "Filter by type",
+    "allStatuses": "All Statuses",
+    "allTypes": "All Types"
+  },
+  "status": {
+    "Pending": "Pending",
+    "Confirmed": "Confirmed",
+    "InUse": "In Use",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
+    "NoShow": "No Show"
+  },
+  "type": {
+    "Booking": "Booking",
+    "SoftHold": "Soft Hold",
+    "Maintenance": "Maintenance",
+    "Blocked": "Blocked"
+  },
+  "actions": {
+    "confirm": "Confirm",
+    "markInUse": "Mark In Use",
+    "complete": "Complete",
+    "cancel": "Cancel",
+    "noShow": "No Show",
+    "edit": "Edit",
+    "view": "View Details"
+  },
+  "reservation": {
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "quantity": "Quantity",
+    "customer": "Customer",
+    "service": "Service",
+    "expired": "EXPIRED"
+  },
+  "createDialog": {
+    "title": "Create Reservation",
+    "description": "Reserve inventory for a customer or block it for maintenance",
+    "serviceLabel": "Service",
+    "servicePlaceholder": "Select a rental service",
+    "startDateLabel": "Start Date",
+    "endDateLabel": "End Date",
+    "quantityLabel": "Quantity",
+    "typeLabel": "Type",
+    "typeDescription": "Soft hold expires automatically; Booking is confirmed",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Add any additional notes...",
+    "checkingAvailability": "Checking availability...",
+    "availabilitySuccess": "Inventory is available for the selected dates and quantity",
+    "availabilityError": "Insufficient inventory available",
+    "submit": "Create Reservation",
+    "cancel": "Cancel"
+  },
+  "validation": {
+    "serviceRequired": "Service is required",
+    "startDateRequired": "Start date is required",
+    "endDateRequired": "End date is required",
+    "quantityMin": "Quantity must be at least 1",
+    "endDateAfterStart": "End date must be after start date"
+  },
+  "messages": {
+    "createSuccess": "Reservation created successfully",
+    "updateSuccess": "Reservation updated successfully",
+    "cancelSuccess": "Reservation cancelled successfully",
+    "statusUpdateSuccess": "Reservation status updated successfully",
+    "loadError": "Failed to load reservations",
+    "createError": "Failed to create reservation",
+    "updateError": "Failed to update reservation",
+    "cancelError": "Failed to cancel reservation",
+    "statusUpdateError": "Failed to update status",
+    "cancelConfirm": "Are you sure you want to cancel this reservation?"
+  },
+  "pagination": {
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "previous": "Previous",
+    "next": "Next"
+  }
+}
