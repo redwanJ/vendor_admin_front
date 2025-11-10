@@ -48,7 +48,7 @@ export function MobileNav({ user, open, onClose, onLogout }: MobileNavProps) {
     },
     {
       titleKey: 'bookings',
-      href: `/${locale}/bookings`,
+      href: `/${locale}/dashboard/bookings`,
       icon: Calendar,
     },
     {

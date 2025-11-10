@@ -306,16 +306,6 @@ export default function ReservationDetailModal({
                       </div>
                     </div>
 
-                    {/* Notes */}
-                    {reservation.notes && (
-                      <div className="flex gap-2 pt-2 border-t">
-                        <FileText className="h-4 w-4 text-muted-foreground mt-1" />
-                        <div className="flex-1">
-                          <p className="text-sm text-muted-foreground">Notes</p>
-                          <p className="text-sm mt-1">{reservation.notes}</p>
-                        </div>
-                      </div>
-                    )}
 
                     {/* Actions */}
                     {getStatusActions(reservation).length > 0 && (

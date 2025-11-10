@@ -1,0 +1,81 @@
+{
+  "title": "Bookings",
+  "description": "Manage customer bookings and reservations",
+  "paid": "paid",
+  "actions": {
+    "add": "New Booking",
+    "view": "View",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "cancelSelected": "Cancel Selected",
+    "confirmPayment": "Confirm Payment",
+    "clearAll": "Clear all",
+    "goBack": "Go Back"
+  },
+  "filters": {
+    "status": "Status",
+    "paymentStatus": "Payment Status",
+    "activeFilters": "Active filters:",
+    "allStatuses": "All Statuses",
+    "allPaymentStatuses": "All Payment Statuses"
+  },
+  "columns": {
+    "bookingNumber": "Booking #",
+    "customer": "Customer",
+    "eventDate": "Event Date",
+    "items": "Items",
+    "status": "Status",
+    "paymentStatus": "Payment",
+    "total": "Total",
+    "created": "Created"
+  },
+  "status": {
+    "Draft": "Draft",
+    "PendingPayment": "Pending Payment",
+    "Confirmed": "Confirmed",
+    "InProgress": "In Progress",
+    "Completed": "Completed",
+    "Cancelled": "Cancelled",
+    "NoShow": "No Show"
+  },
+  "paymentStatus": {
+    "Pending": "Pending",
+    "PartiallyPaid": "Partially Paid",
+    "Paid": "Paid",
+    "Refunded": "Refunded",
+    "Failed": "Failed"
+  },
+  "paymentMethod": {
+    "Cash": "Cash",
+    "CreditCard": "Credit Card",
+    "BankTransfer": "Bank Transfer",
+    "MobileMoney": "Mobile Money",
+    "Other": "Other"
+  },
+  "empty": {
+    "list": "No bookings found. Create your first booking to get started."
+  },
+  "confirm": {
+    "cancel": "Are you sure you want to cancel booking {number}?",
+    "bulkCancel": "Are you sure you want to cancel {count} booking(s)?",
+    "cancelTitle": "Cancel Booking",
+    "bulkCancelTitle": "Cancel Bookings"
+  },
+  "toasts": {
+    "loadError": "Failed to load bookings",
+    "cancelSuccess": "Booking cancelled successfully",
+    "cancelError": "Failed to cancel booking",
+    "bulkCancelSuccess": "{count} booking(s) cancelled successfully",
+    "bulkCancelError": "Failed to cancel bookings",
+    "createSuccess": "Booking created successfully",
+    "createError": "Failed to create booking",
+    "updateSuccess": "Booking updated successfully",
+    "updateError": "Failed to update booking",
+    "paymentSuccess": "Payment confirmed successfully",
+    "paymentError": "Failed to confirm payment"
+  },
+  "form": {
+    "newTitle": "New Booking",
+    "newDescription": "Create a new booking with multiple services"
+  }
+}

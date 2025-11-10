@@ -60,6 +60,18 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
   const { theme, setTheme } = useTheme();
   const [searchQuery, setSearchQuery] = React.useState('');
 
+  // Helper function to check if a nav item is active
+  const isNavItemActive = (itemHref: string) => {
+    // Exact match for dashboard only
+    if (itemHref === `/${locale}/dashboard`) {
+      return pathname === itemHref;
+    }
+
+    // For other routes, check if the current path starts with the item's href
+    // This allows sub-routes to highlight their parent menu item
+    return pathname.startsWith(itemHref);
+  };
+
   const navSections: NavSection[] = [
     {
       titleKey: 'main',
@@ -81,7 +93,7 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
         },
         {
           titleKey: 'bookings',
-          href: `/${locale}/bookings`,
+          href: `/${locale}/dashboard/bookings`,
           icon: Calendar,
         },
         {
@@ -134,7 +146,7 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
             {navSections.flatMap((section) =>
               section.items.map((item) => {
                 const Icon = item.icon;
-                const isActive = pathname === item.href;
+                const isActive = isNavItemActive(item.href);
 
                 return (
                   <Link
@@ -234,7 +246,7 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
                 <nav className="flex flex-col gap-1">
                   {section.items.map((item) => {
                     const Icon = item.icon;
-                    const isActive = pathname === item.href;
+                    const isActive = isNavItemActive(item.href);
 
                     return (
                       <Link

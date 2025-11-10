@@ -1,0 +1,81 @@
+{
+  "title": "የቦታ ቅድመ ማስያዝ",
+  "description": "የደንበኞች የቦታ ቅድመ ማስያዝ እና የቦታ ማስያዝ ያስተዳድሩ",
+  "paid": "ተከፍሏል",
+  "actions": {
+    "add": "አዲስ የቦታ ማስያዝ",
+    "view": "ይመልከቱ",
+    "edit": "ያስተካክሉ",
+    "cancel": "ይሰርዙ",
+    "cancelSelected": "የተመረጡትን ይሰርዙ",
+    "confirmPayment": "ክፍያ ያረጋግጡ",
+    "clearAll": "ሁሉንም ያጽዱ",
+    "goBack": "ተመለስ"
+  },
+  "filters": {
+    "status": "ሁኔታ",
+    "paymentStatus": "የክፍያ ሁኔታ",
+    "activeFilters": "ንቁ ማጣሪያዎች:",
+    "allStatuses": "ሁሉም ሁኔታዎች",
+    "allPaymentStatuses": "ሁሉም የክፍያ ሁኔታዎች"
+  },
+  "columns": {
+    "bookingNumber": "የቦታ ማስያዣ #",
+    "customer": "ደንበኛ",
+    "eventDate": "የዝግጅት ቀን",
+    "items": "እቃዎች",
+    "status": "ሁኔታ",
+    "paymentStatus": "ክፍያ",
+    "total": "ድምር",
+    "created": "የተፈጠረበት"
+  },
+  "status": {
+    "Draft": "ረቂቅ",
+    "PendingPayment": "ክፍያ በመጠበቅ ላይ",
+    "Confirmed": "ተረጋግጧል",
+    "InProgress": "በሂደት ላይ",
+    "Completed": "ተጠናቅቋል",
+    "Cancelled": "ተሰርዟል",
+    "NoShow": "አልታየም"
+  },
+  "paymentStatus": {
+    "Pending": "በመጠበቅ ላይ",
+    "PartiallyPaid": "በከፊል ተከፍሏል",
+    "Paid": "ተከፍሏል",
+    "Refunded": "ተመላሽ ተደርጓል",
+    "Failed": "ተሳክቶም አልታከል"
+  },
+  "paymentMethod": {
+    "Cash": "ጥሬ ገንዘብ",
+    "CreditCard": "ክሬዲት ካርድ",
+    "BankTransfer": "የባንክ ዝውውር",
+    "MobileMoney": "ሞባይል ገንዘብ",
+    "Other": "ሌላ"
+  },
+  "empty": {
+    "list": "ምንም የቦታ ማስያዝ አልተገኘም። የመጀመሪያውን የቦታ ማስያዣዎን ይፍጠሩ።"
+  },
+  "confirm": {
+    "cancel": "የቦታ ማስያዣ {number} መሰረዝ እርግጠኛ ነዎት?",
+    "bulkCancel": "{count} የቦታ ማስያዣ(ዎች) መሰረዝ እርግጠኛ ነዎት?",
+    "cancelTitle": "የቦታ ማስያዣ ይሰርዙ",
+    "bulkCancelTitle": "የቦታ ማስያዣዎችን ይሰርዙ"
+  },
+  "toasts": {
+    "loadError": "የቦታ ማስያዣዎችን መጫን አልተሳካም",
+    "cancelSuccess": "የቦታ ማስያዣ በስኬት ተሰርዟል",
+    "cancelError": "የቦታ ማስያዣ መሰረዝ አልተሳካም",
+    "bulkCancelSuccess": "{count} የቦታ ማስያዣ(ዎች) በስኬት ተሰርዘዋል",
+    "bulkCancelError": "የቦታ ማስያዣዎችን መሰረዝ አልተሳካም",
+    "createSuccess": "የቦታ ማስያዣ በስኬት ተፈጥሯል",
+    "createError": "የቦታ ማስያዣ መፍጠር አልተሳካም",
+    "updateSuccess": "የቦታ ማስያዣ በስኬት ዘመኗል",
+    "updateError": "የቦታ ማስያዣ ማዘመን አልተሳካም",
+    "paymentSuccess": "ክፍያ በስኬት ተረጋግጧል",
+    "paymentError": "ክፍያ ማረጋገጥ አልተሳካም"
+  },
+  "form": {
+    "newTitle": "አዲስ የቦታ ማስያዣ",
+    "newDescription": "ብዙ አገልግሎቶችን ያካተተ አዲስ የቦታ ማስያዣ ይፍጠሩ"
+  }
+}

@@ -18,7 +18,7 @@ export interface TenantLookup extends BaseLookup {
   // Add tenant-specific properties here if needed
 }
 
-export interface AddressDto {
+export interface ServiceLocationDto {
   street?: string;
   city?: string;
   state?: string;
@@ -68,7 +68,7 @@ export interface ServiceDto {
   teardownTimeMinutes?: number;
   leadTimeDays?: number;
   maxAdvanceBookingDays?: number;
-  location?: AddressDto;
+  location?: ServiceLocationDto;
   primaryImageUrl?: string;
   galleryImages: string[];
   features: string[];
@@ -104,7 +104,7 @@ export interface CreateServiceDto {
   teardownTimeMinutes?: number;
   leadTimeDays?: number;
   maxAdvanceBookingDays?: number;
-  location?: AddressDto;
+  location?: ServiceLocationDto;
   primaryImageUrl?: string;
   galleryImages?: string[];
   features?: string[];
