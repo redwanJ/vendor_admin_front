@@ -1,0 +1,229 @@
+{
+  "title": "Product Variants",
+  "description": "Manage product variants and inventory",
+  "columns": {
+    "sku": "SKU",
+    "options": "Options",
+    "price": "Price",
+    "cost": "Cost",
+    "trackInventory": "Inventory",
+    "status": "Status",
+    "stock": "Stock"
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive",
+    "tracked": "Tracked",
+    "notTracked": "Not Tracked"
+  },
+  "actions": {
+    "add": "Add Variant",
+    "view": "View Details",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteSelected": "Delete Selected",
+    "manageStock": "Manage Stock",
+    "adjustStock": "Adjust Stock",
+    "viewStock": "View Stock"
+  },
+  "confirm": {
+    "deleteTitle": "Delete Variant",
+    "delete": "Are you sure you want to delete this variant? This action cannot be undone.",
+    "bulkDeleteTitle": "Delete Variants",
+    "bulkDelete": "Are you sure you want to delete {count} variants? This action cannot be undone."
+  },
+  "toasts": {
+    "loadError": "Failed to load variants",
+    "createSuccess": "Variant created successfully",
+    "createError": "Failed to create variant",
+    "updateSuccess": "Variant updated successfully",
+    "updateError": "Failed to update variant",
+    "deleteSuccess": "Variant deleted successfully",
+    "deleteError": "Failed to delete variant",
+    "bulkDeleteSuccess": "{count} variants deleted successfully",
+    "bulkDeleteError": "Failed to delete variants"
+  },
+  "form": {
+    "newDescription": "Create a new product variant",
+    "editTitle": "Edit {sku}",
+    "editDescription": "Update variant information",
+    "basicInfo": {
+      "title": "Basic Information",
+      "description": "SKU and variant options"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "description": "Price and cost information"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Inventory tracking and status settings"
+    },
+    "fields": {
+      "sku": {
+        "label": "SKU",
+        "placeholder": "e.g., PROD-VAR-001",
+        "description": "Stock Keeping Unit - unique identifier for this variant"
+      },
+      "barcode": {
+        "label": "Barcode",
+        "placeholder": "e.g., 123456789012",
+        "description": "Product barcode (optional)"
+      },
+      "options": {
+        "label": "Options (JSON)",
+        "placeholder": "{\"size\": \"Large\", \"color\": \"Blue\", \"material\": \"Cotton\"}",
+        "description": "Variant options in JSON format (e.g., size, color, material)"
+      },
+      "price": {
+        "label": "Selling Price"
+      },
+      "currency": {
+        "label": "Currency"
+      },
+      "cost": {
+        "label": "Cost Price",
+        "description": "Your cost price (optional, used for profit margin calculation)"
+      },
+      "costCurrency": {
+        "label": "Cost Currency"
+      },
+      "trackInventory": {
+        "label": "Track Inventory",
+        "description": "Enable inventory tracking to manage stock levels for this variant"
+      },
+      "isActive": {
+        "label": "Active",
+        "description": "Make this variant available for sale"
+      }
+    }
+  },
+  "detail": {
+    "title": "Variant Details",
+    "basicInfo": "Basic Information",
+    "basicInfoDescription": "SKU and variant identification",
+    "pricing": "Pricing",
+    "pricingDescription": "Price and cost information",
+    "stock": "Stock Information",
+    "stockDescription": "Current inventory levels across all locations",
+    "settings": "Settings",
+    "settingsDescription": "Variant configuration",
+    "sku": "SKU",
+    "barcode": "Barcode",
+    "options": "Options",
+    "price": "Selling Price",
+    "cost": "Cost Price",
+    "margin": "Profit Margin",
+    "trackInventory": "Track Inventory",
+    "isActive": "Status",
+    "createdAt": "Created",
+    "updatedAt": "Last Updated",
+    "totalStock": "Total Stock",
+    "availableStock": "Available",
+    "reservedStock": "Reserved",
+    "noBarcode": "No barcode",
+    "noOptions": "No options specified"
+  },
+  "stock": {
+    "title": "Stock Management",
+    "description": "Manage inventory levels and stock movements",
+    "byLocation": "Stock by Location",
+    "movements": "Stock Movements",
+    "adjust": "Adjust Stock",
+    "receive": "Receive Stock",
+    "ship": "Ship Stock",
+    "transfer": "Transfer Stock",
+    "damage": "Mark as Damaged",
+    "location": "Location",
+    "warehouse": "Warehouse",
+    "onHand": "On Hand",
+    "reserved": "Reserved",
+    "available": "Available",
+    "quantity": "Quantity",
+    "reason": "Reason",
+    "type": "Type",
+    "performedAt": "Performed At",
+    "reference": "Reference",
+    "noStock": "No stock information available",
+    "noMovements": "No stock movements yet",
+    "types": {
+      "Adjust": "Adjustment",
+      "Receive": "Received",
+      "Ship": "Shipped",
+      "Transfer": "Transfer",
+      "Reserve": "Reserved",
+      "Release": "Released"
+    },
+    "actions": {
+      "adjustStock": "Adjust Stock",
+      "receiveStock": "Receive Stock",
+      "shipStock": "Ship Stock",
+      "transferStock": "Transfer Stock",
+      "markDamaged": "Mark as Damaged"
+    },
+    "form": {
+      "adjustTitle": "Adjust Stock",
+      "adjustDescription": "Increase or decrease stock quantity",
+      "receiveTitle": "Receive Stock",
+      "receiveDescription": "Add stock to a location",
+      "shipTitle": "Ship Stock",
+      "shipDescription": "Remove stock from a location",
+      "transferTitle": "Transfer Stock",
+      "transferDescription": "Move stock between locations",
+      "damageTitle": "Mark as Damaged",
+      "damageDescription": "Move stock to damaged location",
+      "fields": {
+        "location": {
+          "label": "Location",
+          "placeholder": "Select location"
+        },
+        "fromLocation": {
+          "label": "From Location",
+          "placeholder": "Select source location"
+        },
+        "toLocation": {
+          "label": "To Location",
+          "placeholder": "Select destination location"
+        },
+        "quantity": {
+          "label": "Quantity",
+          "placeholder": "Enter quantity"
+        },
+        "quantityDelta": {
+          "label": "Quantity Change",
+          "placeholder": "Enter amount (use negative for decrease)",
+          "description": "Positive number to increase, negative to decrease"
+        },
+        "reason": {
+          "label": "Reason",
+          "placeholder": "e.g., Recount adjustment, Received shipment, etc.",
+          "description": "Optional note about this stock movement"
+        },
+        "referenceType": {
+          "label": "Reference Type",
+          "placeholder": "e.g., PO, SO, etc."
+        },
+        "referenceId": {
+          "label": "Reference ID",
+          "placeholder": "e.g., PO-12345"
+        }
+      }
+    },
+    "toasts": {
+      "adjustSuccess": "Stock adjusted successfully",
+      "adjustError": "Failed to adjust stock",
+      "receiveSuccess": "Stock received successfully",
+      "receiveError": "Failed to receive stock",
+      "shipSuccess": "Stock shipped successfully",
+      "shipError": "Failed to ship stock",
+      "transferSuccess": "Stock transferred successfully",
+      "transferError": "Failed to transfer stock",
+      "damageSuccess": "Stock marked as damaged successfully",
+      "damageError": "Failed to mark stock as damaged",
+      "loadError": "Failed to load stock information"
+    }
+  },
+  "empty": {
+    "list": "No variants found for this product. Create your first variant to get started."
+  }
+}

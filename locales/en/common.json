@@ -86,6 +86,7 @@
     "main": "Main",
     "settings_section": "Settings",
     "dashboard": "Dashboard",
+    "products": "Products",
     "services": "Services",
     "api_keys": "API Keys",
     "bookings": "Bookings",

@@ -82,9 +82,14 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
           icon: LayoutDashboard,
         },
         {
+          titleKey: 'products',
+          href: `/${locale}/dashboard/products`,
+          icon: Package,
+        },
+        {
           titleKey: 'services',
           href: `/${locale}/dashboard/services`,
-          icon: Package,
+          icon: Zap,
         },
         {
           titleKey: 'inventory',

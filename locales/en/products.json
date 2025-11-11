@@ -1,0 +1,124 @@
+{
+  "title": "Products",
+  "description": "Manage your product catalog",
+  "columns": {
+    "name": "Name",
+    "status": "Status",
+    "tags": "Tags"
+  },
+  "status": {
+    "Draft": "Draft",
+    "Active": "Active",
+    "Inactive": "Inactive",
+    "Archived": "Archived"
+  },
+  "filters": {
+    "searchPlaceholder": "Search products by name or slug..."
+  },
+  "actions": {
+    "add": "Add Product",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "deleteSelected": "Delete Selected",
+    "manageVariants": "Manage Variants",
+    "clearAll": "Clear All"
+  },
+  "confirm": {
+    "deleteTitle": "Delete Product",
+    "delete": "Are you sure you want to delete this product? This action cannot be undone.",
+    "bulkDeleteTitle": "Delete Products",
+    "bulkDelete": "Are you sure you want to delete {count} products? This action cannot be undone."
+  },
+  "toasts": {
+    "loadError": "Failed to load products",
+    "createSuccess": "Product created successfully",
+    "createError": "Failed to create product",
+    "updateSuccess": "Product updated successfully",
+    "updateError": "Failed to update product",
+    "deleteSuccess": "Product deleted successfully",
+    "deleteError": "Failed to delete product",
+    "bulkDeleteSuccess": "{count} products deleted successfully",
+    "bulkDeleteError": "Failed to delete products"
+  },
+  "form": {
+    "newDescription": "Create a new product in your catalog",
+    "editTitle": "Edit {name}",
+    "editDescription": "Update product information",
+    "basicInfo": {
+      "title": "Basic Information",
+      "description": "Core product details and identification"
+    },
+    "attributes": {
+      "title": "Attributes & Images",
+      "description": "Product attributes and image URLs in JSON format"
+    },
+    "seo": {
+      "title": "SEO & Metadata",
+      "description": "Search engine optimization settings"
+    },
+    "fields": {
+      "name": {
+        "label": "Product Name",
+        "placeholder": "e.g., Wedding Decoration Package",
+        "description": "The display name of your product"
+      },
+      "slug": {
+        "label": "URL Slug",
+        "placeholder": "e.g., wedding-decoration-package",
+        "description": "URL-friendly identifier (auto-generated from name if empty)"
+      },
+      "description": {
+        "label": "Description",
+        "placeholder": "Describe your product in detail...",
+        "description": "Detailed product description visible to customers"
+      },
+      "tags": {
+        "label": "Tags",
+        "placeholder": "e.g., wedding, outdoor, premium, floral",
+        "description": "Comma-separated tags for categorization and search"
+      },
+      "attributes": {
+        "label": "Attributes (JSON)",
+        "placeholder": "{\"color\": \"gold\", \"material\": \"silk\", \"size\": \"large\"}",
+        "description": "Custom product attributes in JSON format"
+      },
+      "images": {
+        "label": "Images (JSON Array)",
+        "placeholder": "[\"https://example.com/image1.jpg\", \"https://example.com/image2.jpg\"]",
+        "description": "Array of image URLs in JSON format"
+      },
+      "metaTitle": {
+        "label": "Meta Title",
+        "placeholder": "SEO-friendly title",
+        "description": "Page title for search engines (recommended: 50-60 characters)"
+      },
+      "metaDescription": {
+        "label": "Meta Description",
+        "placeholder": "SEO-friendly description",
+        "description": "Page description for search engines (recommended: 150-160 characters)"
+      }
+    }
+  },
+  "detail": {
+    "basicInfo": "Basic Information",
+    "basicInfoDescription": "Core product details",
+    "metadata": "Metadata",
+    "metadataDescription": "Product metadata and timestamps",
+    "attributes": "Attributes",
+    "attributesDescription": "Custom product attributes",
+    "images": "Images",
+    "imagesDescription": "Product image URLs",
+    "seo": "SEO Settings",
+    "seoDescription": "Search engine optimization",
+    "slug": "URL Slug",
+    "description": "Description",
+    "createdAt": "Created",
+    "updatedAt": "Last Updated",
+    "metaTitle": "Meta Title",
+    "metaDescription": "Meta Description"
+  },
+  "empty": {
+    "list": "No products found. Create your first product to get started."
+  }
+}
