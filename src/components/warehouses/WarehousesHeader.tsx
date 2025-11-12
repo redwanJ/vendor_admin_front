@@ -1,0 +1,28 @@
+'use client';
+
+import { Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
+
+interface WarehousesHeaderProps {
+  title?: string;
+  description?: string;
+  onAdd: () => void;
+}
+
+export default function WarehousesHeader({ title, description, onAdd }: WarehousesHeaderProps) {
+  const t = useTranslations('warehouses');
+  return (
+    <div className="flex items-center justify-between">
+      <div>
+        <h1 className="text-3xl font-bold tracking-tight">{title ?? t('title')}</h1>
+        <p className="text-muted-foreground">{description ?? t('description')}</p>
+      </div>
+      <Button onClick={onAdd}>
+        <Plus className="h-4 w-4 mr-2" />
+        {t('actions.add')}
+      </Button>
+    </div>
+  );
+}
+

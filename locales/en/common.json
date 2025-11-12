@@ -1,143 +1,145 @@
 {
-  "app": {
-    "name": "Menal Hub Vendor Portal",
-    "description": "Vendor dashboard for Menal Hub",
-    "welcome": "Welcome"
-  },
-  "common": {
-    "rights": "All rights reserved"
-  },
-  "auth": {
-    "hero": {
-      "title": "Grow Your Business with Menal Hub",
-      "description": "Join thousands of vendors managing their services, bookings, and customers all in one powerful platform."
-    },
-    "features": {
-      "feature1": {
-        "title": "Easy Service Management",
-        "description": "Create and manage your services with our intuitive interface"
-      },
-      "feature2": {
-        "title": "Real-time Bookings",
-        "description": "Get instant notifications and manage bookings on the go"
-      },
-      "feature3": {
-        "title": "Customer Insights",
-        "description": "Track customer preferences and grow your business"
-      }
-    }
-  },
-  "landing": {
-    "header": {
-      "login": "Login",
-      "getStarted": "Get Started"
-    },
-    "hero": {
-      "title": "Manage Your Service Business with Ease",
-      "subtitle": "The all-in-one platform for service vendors to manage bookings, customers, and grow their business.",
-      "cta": "Start Free Trial",
-      "login": "Sign In"
-    },
-    "features": {
-      "title": "Everything You Need to Grow",
-      "subtitle": "Powerful tools designed specifically for service vendors",
-      "serviceManagement": {
-        "title": "Service Management",
-        "description": "Create, organize and showcase your services with beautiful galleries and detailed descriptions"
-      },
-      "bookingSystem": {
-        "title": "Smart Booking System",
-        "description": "Accept bookings 24/7 with automated scheduling and calendar management"
-      },
-      "customerManagement": {
-        "title": "Customer Management",
-        "description": "Build lasting relationships with customer profiles, communication history, and preferences"
-      },
-      "analytics": {
-        "title": "Business Analytics",
-        "description": "Track revenue, bookings, and customer trends with comprehensive analytics"
-      },
-      "notifications": {
-        "title": "Real-time Notifications",
-        "description": "Stay informed with instant alerts for bookings, payments, and customer inquiries"
-      },
-      "dashboard": {
-        "title": "Unified Dashboard",
-        "description": "Manage your entire business from one powerful, intuitive dashboard"
-      }
-    },
-    "benefits": {
-      "title": "Why Choose Menal Hub?",
-      "subtitle": "Join thousands of successful vendors already growing their businesses with us",
-      "benefit1": "Save time with automated scheduling and booking management",
-      "benefit2": "Increase revenue by accepting bookings 24/7",
-      "benefit3": "Build stronger customer relationships with powerful CRM tools",
-      "benefit4": "Make data-driven decisions with detailed analytics and insights",
-      "cta": "Join Menal Hub Today",
-      "imageAlt": "Dashboard Preview"
-    },
-    "cta": {
-      "title": "Ready to Transform Your Business?",
-      "subtitle": "Join Menal Hub today and start growing your service business with confidence",
-      "button": "Create Your Free Account"
-    }
-  },
-  "nav": {
-    "main": "Main",
-    "settings_section": "Settings",
-    "dashboard": "Dashboard",
-    "products": "Products",
-    "services": "Services",
-    "api_keys": "API Keys",
-    "bookings": "Bookings",
-    "inventory": "Inventory",
-    "customers": "Customers",
-    "staff": "Staff",
-    "settings": "Settings"
-  },
-  "actions": {
-    "save": "Save",
-    "cancel": "Cancel",
-    "delete": "Delete",
-    "edit": "Edit",
-    "create": "Create",
-    "search": "Search",
-    "filter": "Filter",
-    "export": "Export",
-    "import": "Import",
-    "submit": "Submit",
-    "reset": "Reset",
-    "back": "Back",
-    "next": "Next",
-    "previous": "Previous",
-    "loading": "Loading...",
-    "confirm": "Confirm"
-  },
-  "status": {
-    "active": "Active",
-    "inactive": "Inactive",
-    "pending": "Pending",
-    "suspended": "Suspended",
-    "approved": "Approved",
-    "rejected": "Rejected"
-  },
-  "messages": {
-    "success": "Operation completed successfully",
-    "error": "An error occurred",
-    "warning": "Warning",
-    "info": "Information",
-    "noData": "No data available",
-    "saving": "Saving...",
-    "confirmDelete": "Are you sure you want to delete this item?",
-    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
-  },
-  "validation": {
-    "required": "This field is required",
-    "email": "Invalid email address",
-    "minLength": "Minimum length is {min} characters",
-    "maxLength": "Maximum length is {max} characters",
-    "min": "Minimum value is {min}",
-    "max": "Maximum value is {max}",
-    "pattern": "Invalid format"
-  }
+    "app":  {
+                "name":  "Menal Hub Vendor Portal",
+                "description":  "Vendor dashboard for Menal Hub",
+                "welcome":  "Welcome"
+            },
+    "common":  {
+                   "rights":  "All rights reserved"
+               },
+    "auth":  {
+                 "hero":  {
+                              "title":  "Grow Your Business with Menal Hub",
+                              "description":  "Join thousands of vendors managing their services, bookings, and customers all in one powerful platform."
+                          },
+                 "features":  {
+                                  "feature1":  {
+                                                   "title":  "Easy Service Management",
+                                                   "description":  "Create and manage your services with our intuitive interface"
+                                               },
+                                  "feature2":  {
+                                                   "title":  "Real-time Bookings",
+                                                   "description":  "Get instant notifications and manage bookings on the go"
+                                               },
+                                  "feature3":  {
+                                                   "title":  "Customer Insights",
+                                                   "description":  "Track customer preferences and grow your business"
+                                               }
+                              }
+             },
+    "landing":  {
+                    "header":  {
+                                   "login":  "Login",
+                                   "getStarted":  "Get Started"
+                               },
+                    "hero":  {
+                                 "title":  "Manage Your Service Business with Ease",
+                                 "subtitle":  "The all-in-one platform for service vendors to manage bookings, customers, and grow their business.",
+                                 "cta":  "Start Free Trial",
+                                 "login":  "Sign In"
+                             },
+                    "features":  {
+                                     "title":  "Everything You Need to Grow",
+                                     "subtitle":  "Powerful tools designed specifically for service vendors",
+                                     "serviceManagement":  {
+                                                               "title":  "Service Management",
+                                                               "description":  "Create, organize and showcase your services with beautiful galleries and detailed descriptions"
+                                                           },
+                                     "bookingSystem":  {
+                                                           "title":  "Smart Booking System",
+                                                           "description":  "Accept bookings 24/7 with automated scheduling and calendar management"
+                                                       },
+                                     "customerManagement":  {
+                                                                "title":  "Customer Management",
+                                                                "description":  "Build lasting relationships with customer profiles, communication history, and preferences"
+                                                            },
+                                     "analytics":  {
+                                                       "title":  "Business Analytics",
+                                                       "description":  "Track revenue, bookings, and customer trends with comprehensive analytics"
+                                                   },
+                                     "notifications":  {
+                                                           "title":  "Real-time Notifications",
+                                                           "description":  "Stay informed with instant alerts for bookings, payments, and customer inquiries"
+                                                       },
+                                     "dashboard":  {
+                                                       "title":  "Unified Dashboard",
+                                                       "description":  "Manage your entire business from one powerful, intuitive dashboard"
+                                                   }
+                                 },
+                    "benefits":  {
+                                     "title":  "Why Choose Menal Hub?",
+                                     "subtitle":  "Join thousands of successful vendors already growing their businesses with us",
+                                     "benefit1":  "Save time with automated scheduling and booking management",
+                                     "benefit2":  "Increase revenue by accepting bookings 24/7",
+                                     "benefit3":  "Build stronger customer relationships with powerful CRM tools",
+                                     "benefit4":  "Make data-driven decisions with detailed analytics and insights",
+                                     "cta":  "Join Menal Hub Today",
+                                     "imageAlt":  "Dashboard Preview"
+                                 },
+                    "cta":  {
+                                "title":  "Ready to Transform Your Business?",
+                                "subtitle":  "Join Menal Hub today and start growing your service business with confidence",
+                                "button":  "Create Your Free Account"
+                            }
+                },
+    "nav":  {
+                "main":  "Main",
+                "settings_section":  "Settings",
+                "dashboard":  "Dashboard",
+                "products":  "Products",
+                "services":  "Services",
+                "api_keys":  "API Keys",
+                  "bookings":  "Bookings",
+                  "inventory":  "Inventory",
+                  "stock":  "Stock",
+                  "warehouses":  "Warehouses",
+                  "customers":  "Customers",
+                "staff":  "Staff",
+                "settings":  "Settings"
+            },
+    "actions":  {
+                    "save":  "Save",
+                    "cancel":  "Cancel",
+                    "delete":  "Delete",
+                    "edit":  "Edit",
+                    "create":  "Create",
+                    "search":  "Search",
+                    "filter":  "Filter",
+                    "export":  "Export",
+                    "import":  "Import",
+                    "submit":  "Submit",
+                    "reset":  "Reset",
+                    "back":  "Back",
+                    "next":  "Next",
+                    "previous":  "Previous",
+                    "loading":  "Loading...",
+                    "confirm":  "Confirm"
+                },
+    "status":  {
+                   "active":  "Active",
+                   "inactive":  "Inactive",
+                   "pending":  "Pending",
+                   "suspended":  "Suspended",
+                   "approved":  "Approved",
+                   "rejected":  "Rejected"
+               },
+    "messages":  {
+                     "success":  "Operation completed successfully",
+                     "error":  "An error occurred",
+                     "warning":  "Warning",
+                     "info":  "Information",
+                     "noData":  "No data available",
+                     "saving":  "Saving...",
+                     "confirmDelete":  "Are you sure you want to delete this item?",
+                     "unsavedChanges":  "You have unsaved changes. Are you sure you want to leave?"
+                 },
+    "validation":  {
+                       "required":  "This field is required",
+                       "email":  "Invalid email address",
+                       "minLength":  "Minimum length is {min} characters",
+                       "maxLength":  "Maximum length is {max} characters",
+                       "min":  "Minimum value is {min}",
+                       "max":  "Maximum value is {max}",
+                       "pattern":  "Invalid format"
+                   }
 }

@@ -7,6 +7,8 @@ import type {
   ShipStockDto,
   TransferStockDto,
   MarkDamagedDto,
+  PaginatedStockList,
+  StockListFilters,
 } from '@/types/stock';
 
 /**
@@ -18,6 +20,26 @@ export const stockService = {
    */
   async getStockByVariant(variantId: string): Promise<StockByLocationDto[]> {
     const response = await api.get<StockByLocationDto[]>(`/vendor/stock/variants/${variantId}`);
+    return response.data;
+  },
+
+  /**
+   * Get paginated stock list (variant-location rows) with optional multi-filters
+   */
+  async getStockList(filters?: StockListFilters): Promise<PaginatedStockList> {
+    const params = new URLSearchParams();
+    if (filters?.search) params.append('search', filters.search);
+    if (filters?.page) params.append('page', String(filters.page));
+    if (filters?.pageSize) params.append('pageSize', String(filters.pageSize));
+    if (filters?.warehouseIds && filters.warehouseIds.length > 0) {
+      for (const id of filters.warehouseIds) params.append('warehouseIds', id);
+    }
+    if (filters?.locationIds && filters.locationIds.length > 0) {
+      for (const id of filters.locationIds) params.append('locationIds', id);
+    }
+    const response = await api.get<PaginatedStockList>(
+      `/vendor/stock/list${params.toString() ? `?${params.toString()}` : ''}`
+    );
     return response.data;
   },
 

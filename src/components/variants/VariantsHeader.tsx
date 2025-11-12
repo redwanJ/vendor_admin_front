@@ -8,15 +8,24 @@ interface VariantsHeaderProps {
   title?: string;
   description?: string;
   onAdd: () => void;
+  onBack?: () => void;
 }
 
-export default function VariantsHeader({ title, description, onAdd }: VariantsHeaderProps) {
+export default function VariantsHeader({ title, description, onAdd, onBack }: VariantsHeaderProps) {
   const t = useTranslations('variants');
   return (
     <div className="flex items-center justify-between">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">{title ?? t('title')}</h1>
-        <p className="text-muted-foreground">{description ?? t('description')}</p>
+      <div className="flex items-center gap-3">
+        {onBack && (
+          <Button variant="ghost" size="icon" onClick={onBack} aria-label="Back">
+            {/* Simple left arrow using a unicode to avoid extra import */}
+            <span className="text-lg">←</span>
+          </Button>
+        )}
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{title ?? t('title')}</h1>
+          <p className="text-muted-foreground">{description ?? t('description')}</p>
+        </div>
       </div>
       <Button onClick={onAdd}>
         <Plus className="h-4 w-4 mr-2" />

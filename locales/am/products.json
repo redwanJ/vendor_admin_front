@@ -1,0 +1,124 @@
+{
+  "title": "ምርቶች",
+  "description": "የምርት ካታሎግዎን ያስተዳድሩ",
+  "columns": {
+    "name": "ስም",
+    "status": "ሁኔታ",
+    "tags": "መለያዎች"
+  },
+  "status": {
+    "Draft": "መረዳድ",
+    "Active": "ንቁ",
+    "Inactive": "እንቅስቃሴ የለውም",
+    "Archived": "ተመዝግቧል"
+  },
+  "filters": {
+    "searchPlaceholder": "ምርቶችን በስም ወይም በslug ይፈልጉ..."
+  },
+  "actions": {
+    "add": "ምርት ጨምር",
+    "view": "አሳይ",
+    "edit": "አርትዕ",
+    "delete": "ሰርዝ",
+    "deleteSelected": "የተመረጡትን ሰርዝ",
+    "manageVariants": "የተለያዩ አይነቶችን ያስተዳድሩ",
+    "clearAll": "ሁሉንም አጽዳ"
+  },
+  "confirm": {
+    "deleteTitle": "ምርት ሰርዝ",
+    "delete": "ይህን ምርት ለማስወገድ እርግጠኛ ነዎት? ይህ እርምጃ ሊመለስ አይችልም።",
+    "bulkDeleteTitle": "ምርቶችን ሰርዝ",
+    "bulkDelete": "{count} ምርቶችን ለማስወገድ እርግጠኛ ነዎት? ይህ እርምጃ ሊመለስ አይችልም።"
+  },
+  "toasts": {
+    "loadError": "ምርቶችን ማምጣት አልተሳካም",
+    "createSuccess": "ምርቱ በተሳካ ሁኔታ ተፈጥሯል",
+    "createError": "ምርት መፍጠር አልተሳካም",
+    "updateSuccess": "ምርቱ በተሳካ ሁኔታ ተሻሽሏል",
+    "updateError": "ምርት ማዘመን አልተሳካም",
+    "deleteSuccess": "ምርቱ በተሳካ ሁኔታ ተሰርዟል",
+    "deleteError": "ምርት ማስወገድ አልተሳካም",
+    "bulkDeleteSuccess": "{count} ምርቶች በተሳካ ሁኔታ ተሰርዘዋል",
+    "bulkDeleteError": "ምርቶችን ማስወገድ አልተሳካም"
+  },
+  "form": {
+    "newDescription": "በካታሎግዎ ውስጥ አዲስ ምርት ይፍጠሩ",
+    "editTitle": "{name} አርትዕ",
+    "editDescription": "የምርት መረጃ ያዘምኑ",
+    "basicInfo": {
+      "title": "መሰረታዊ መረጃ",
+      "description": "የምርት ዋና ዝርዝሮች እና ማንነት"
+    },
+    "attributes": {
+      "title": "ባህሪያት እና ምስሎች",
+      "description": "የምርት ባህሪያት እና የምስል URLs በJSON ቅርጸት"
+    },
+    "seo": {
+      "title": "SEO እና ሜታዳታ",
+      "description": "የፍለጋ ሞተር ማመቻቸት ቅንብሮች"
+    },
+    "fields": {
+      "name": {
+        "label": "የምርት ስም",
+        "placeholder": "ለምሳሌ፡ የዳግም ዕለት የጌጣጌጥ ፓኬጅ",
+        "description": "የምርትዎ የማሳያ ስም"
+      },
+      "slug": {
+        "label": "URL ስም",
+        "placeholder": "ለምሳሌ፡ wedding-decoration-package",
+        "description": "URL-ለማገልገል የሚመች ማንነት (ባዶ ከሆነ ከስም በራስ-ሰር ይፈጠራል)"
+      },
+      "description": {
+        "label": "መግለጫ",
+        "placeholder": "ምርትዎን በዝርዝር ይግለጹ...",
+        "description": "ለደንበኞች የሚታይ ዝርዝር የምርት መግለጫ"
+      },
+      "tags": {
+        "label": "መለያዎች",
+        "placeholder": "ለምሳሌ፡ ዳግም-ዕለት፣ ውጭ፣ ልዩ፣ የአበባ",
+        "description": "በነጠላ-ሰረዝ የተለዩ መለያዎች ለመደብነት እና ፍለጋ"
+      },
+      "attributes": {
+        "label": "ባህሪያት (JSON)",
+        "placeholder": "{\"ቀለም\": \"ወርቅ\", \"ቁሳቁስ\": \"ስልክ\", \"መጠን\": \"ትልቅ\"}",
+        "description": "ብጁ የምርት ባህሪያት በJSON ቅርጸት"
+      },
+      "images": {
+        "label": "ምስሎች (JSON ድርድር)",
+        "placeholder": "[\"https://example.com/image1.jpg\", \"https://example.com/image2.jpg\"]",
+        "description": "የምስል URLs ድርድር በJSON ቅርጸት"
+      },
+      "metaTitle": {
+        "label": "ሜታ አርዕስት",
+        "placeholder": "SEO-ለማገልገል የሚመች አርዕስት",
+        "description": "ለፍለጋ ሞተሮች የገጽ አርዕስት (የሚመከር፡ 50-60 ፊደሎች)"
+      },
+      "metaDescription": {
+        "label": "ሜታ መግለጫ",
+        "placeholder": "SEO-ለማገልገል የሚመች መግለጫ",
+        "description": "ለፍለጋ ሞተሮች የገጽ መግለጫ (የሚመከር፡ 150-160 ፊደሎች)"
+      }
+    }
+  },
+  "detail": {
+    "basicInfo": "መሰረታዊ መረጃ",
+    "basicInfoDescription": "የምርት ዋና ዝርዝሮች",
+    "metadata": "ሜታዳታ",
+    "metadataDescription": "የምርት ሜታዳታ እና የጊዜ ማህደሮች",
+    "attributes": "ባህሪያት",
+    "attributesDescription": "ብጁ የምርት ባህሪያት",
+    "images": "ምስሎች",
+    "imagesDescription": "የምርት ምስል URLs",
+    "seo": "SEO ቅንብሮች",
+    "seoDescription": "የፍለጋ ሞተር ማመቻቸት",
+    "slug": "URL ስም",
+    "description": "መግለጫ",
+    "createdAt": "ተፈጥሯል",
+    "updatedAt": "የመጨረሻ ጊዜ ተዘምኗል",
+    "metaTitle": "ሜታ አርዕስት",
+    "metaDescription": "ሜታ መግለጫ"
+  },
+  "empty": {
+    "list": "ምንም ምርቶች አልተገኙም። ለመጀመር የመጀመሪያ ምርትዎን ይፍጠሩ።"
+  }
+}

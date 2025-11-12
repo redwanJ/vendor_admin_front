@@ -91,6 +91,9 @@
     "bookings": "ቦታ ማስያዝ",
     "customers": "ደንበኞች",
     "staff": "ሰራተኞች",
+    "products": "products",
+    "inventory":  "Inventory",
+    "warehouses":  "Warehouses",
     "settings": "ቅንብሮች"
   },
   "actions": {

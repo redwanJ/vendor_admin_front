@@ -1,0 +1,229 @@
+{
+  "title": "የምርት ዓይነቶች",
+  "description": "የምርት ዓይነቶችን እና ክምችት ያስተዳድሩ",
+  "columns": {
+    "sku": "SKU",
+    "options": "አማራጮች",
+    "price": "ዋጋ",
+    "cost": "ወጪ",
+    "trackInventory": "ክምችት",
+    "status": "ሁኔታ",
+    "stock": "ክምችት"
+  },
+  "status": {
+    "active": "ንቁ",
+    "inactive": "እንቅስቃሴ የለውም",
+    "tracked": "ይከታተላል",
+    "notTracked": "አይከታተልም"
+  },
+  "actions": {
+    "add": "ዓይነት ጨምር",
+    "view": "ዝርዝሮችን አሳይ",
+    "edit": "አርትዕ",
+    "delete": "ሰርዝ",
+    "deleteSelected": "የተመረጡትን ሰርዝ",
+    "manageStock": "ክምችት ያስተዳድሩ",
+    "adjustStock": "ክምችት አስጠጋ",
+    "viewStock": "ክምችት አሳይ"
+  },
+  "confirm": {
+    "deleteTitle": "ዓይነት ሰርዝ",
+    "delete": "ይህን ዓይነት ለማስወገድ እርግጠኛ ነዎት? ይህ እርምጃ ሊመለስ አይችልም።",
+    "bulkDeleteTitle": "ዓይነቶችን ሰርዝ",
+    "bulkDelete": "{count} ዓይነቶችን ለማስወገድ እርግጠኛ ነዎት? ይህ እርምጃ ሊመለስ አይችልም።"
+  },
+  "toasts": {
+    "loadError": "ዓይነቶችን ማምጣት አልተሳካም",
+    "createSuccess": "ዓይነቱ በተሳካ ሁኔታ ተፈጥሯል",
+    "createError": "ዓይነት መፍጠር አልተሳካም",
+    "updateSuccess": "ዓይነቱ በተሳካ ሁኔታ ተሻሽሏል",
+    "updateError": "ዓይነት ማዘመን አልተሳካም",
+    "deleteSuccess": "ዓይነቱ በተሳካ ሁኔታ ተሰርዟል",
+    "deleteError": "ዓይነት ማስወገድ አልተሳካም",
+    "bulkDeleteSuccess": "{count} ዓይነቶች በተሳካ ሁኔታ ተሰርዘዋል",
+    "bulkDeleteError": "ዓይነቶችን ማስወገድ አልተሳካም"
+  },
+  "form": {
+    "newDescription": "አዲስ የምርት ዓይነት ይፍጠሩ",
+    "editTitle": "{sku} አርትዕ",
+    "editDescription": "የዓይነት መረጃ ያዘምኑ",
+    "basicInfo": {
+      "title": "መሰረታዊ መረጃ",
+      "description": "SKU እና የዓይነት አማራጮች"
+    },
+    "pricing": {
+      "title": "የዋጋ አሰጣጥ",
+      "description": "ዋጋ እና የወጪ መረጃ"
+    },
+    "settings": {
+      "title": "ቅንብሮች",
+      "description": "የክምችት መከታተል እና የሁኔታ ቅንብሮች"
+    },
+    "fields": {
+      "sku": {
+        "label": "SKU",
+        "placeholder": "ለምሳሌ፡ PROD-VAR-001",
+        "description": "የክምችት ክፍል - ለዚህ ዓይነት ልዩ መለያ"
+      },
+      "barcode": {
+        "label": "ባርኮድ",
+        "placeholder": "ለምሳሌ፡ 123456789012",
+        "description": "የምርት ባርኮድ (አማራጭ)"
+      },
+      "options": {
+        "label": "አማራጮች (JSON)",
+        "placeholder": "{\"size\": \"Large\", \"color\": \"Blue\", \"material\": \"Cotton\"}",
+        "description": "የዓይነት አማራጮች በJSON ቅርጸት (ለምሳሌ፡ መጠን፣ ቀለም፣ ቁሳቁስ)"
+      },
+      "price": {
+        "label": "የሽያጭ ዋጋ"
+      },
+      "currency": {
+        "label": "ምንዛሪ"
+      },
+      "cost": {
+        "label": "የወጪ ዋጋ",
+        "description": "የእርስዎ የወጪ ዋጋ (አማራጭ፣ ለትርፍ ስሌት ያገለግላል)"
+      },
+      "costCurrency": {
+        "label": "የወጪ ምንዛሪ"
+      },
+      "trackInventory": {
+        "label": "ክምችት አሳይ",
+        "description": "ለዚህ ዓይነት የክምችት ደረጃዎችን ለማስተዳደር የክምችት መከታተልን አንቃ"
+      },
+      "isActive": {
+        "label": "ንቁ",
+        "description": "ይህን ዓይነት ለሽያጭ ይፈቀዱ"
+      }
+    }
+  },
+  "detail": {
+    "title": "የዓይነት ዝርዝሮች",
+    "basicInfo": "መሰረታዊ መረጃ",
+    "basicInfoDescription": "SKU እና የዓይነት መለያ",
+    "pricing": "የዋጋ አሰጣጥ",
+    "pricingDescription": "ዋጋ እና የወጪ መረጃ",
+    "stock": "የክምችት መረጃ",
+    "stockDescription": "በሁሉም ቦታዎች ላይ ያለው የአሁኑ የክምችት ደረጃ",
+    "settings": "ቅንብሮች",
+    "settingsDescription": "የዓይነት ማዋቀሪያ",
+    "sku": "SKU",
+    "barcode": "ባርኮድ",
+    "options": "አማራጮች",
+    "price": "የሽያጭ ዋጋ",
+    "cost": "የወጪ ዋጋ",
+    "margin": "የትርፍ ህዳግ",
+    "trackInventory": "ክምችት አሳይ",
+    "isActive": "ሁኔታ",
+    "createdAt": "ተፈጥሯል",
+    "updatedAt": "የመጨረሻ ጊዜ ተዘምኗል",
+    "totalStock": "ጠቅላላ ክምችት",
+    "availableStock": "የሚገኝ",
+    "reservedStock": "የተያዘ",
+    "noBarcode": "ባርኮድ የለም",
+    "noOptions": "ምንም አማራጭ አልተገለጸም"
+  },
+  "stock": {
+    "title": "የክምችት አስተዳደር",
+    "description": "የክምችት ደረጃዎችን እና የክምችት እንቅስቃሴዎችን ያስተዳድሩ",
+    "byLocation": "ክምችት በቦታ",
+    "movements": "የክምችት እንቅስቃሴዎች",
+    "adjust": "ክምችት አስጠጋ",
+    "receive": "ክምችት ተቀበል",
+    "ship": "ክምችት ላክ",
+    "transfer": "ክምችት አስተላልፍ",
+    "damage": "እንደ የተበላሸ ምልክት አድርግ",
+    "location": "ቦታ",
+    "warehouse": "መጋዘን",
+    "onHand": "በእጅ",
+    "reserved": "የተያዘ",
+    "available": "የሚገኝ",
+    "quantity": "ብዛት",
+    "reason": "ምክንያት",
+    "type": "ዓይነት",
+    "performedAt": "የተከናወነበት ጊዜ",
+    "reference": "ማጣቀሻ",
+    "noStock": "የክምችት መረጃ አይገኝም",
+    "noMovements": "ምንም የክምችት እንቅስቃሴ የለም",
+    "types": {
+      "Adjust": "ማስጠጋጊያ",
+      "Receive": "ተቀብሏል",
+      "Ship": "ተልኳል",
+      "Transfer": "ማስተላለፊያ",
+      "Reserve": "የተያዘ",
+      "Release": "ተለቆ"
+    },
+    "actions": {
+      "adjustStock": "ክምችት አስጠጋ",
+      "receiveStock": "ክምችት ተቀበል",
+      "shipStock": "ክምችት ላክ",
+      "transferStock": "ክምችት አስተላልፍ",
+      "markDamaged": "እንደ የተበላሸ ምልክት አድርግ"
+    },
+    "form": {
+      "adjustTitle": "ክምችት አስጠጋ",
+      "adjustDescription": "የክምችት ብዛት ጨምር ወይም ቀንስ",
+      "receiveTitle": "ክምችት ተቀበል",
+      "receiveDescription": "ክምችት ወደ አንድ ቦታ ጨምር",
+      "shipTitle": "ክምችት ላክ",
+      "shipDescription": "ክምችት ከአንድ ቦታ አስወግድ",
+      "transferTitle": "ክምችት አስተላልፍ",
+      "transferDescription": "ክምችት በቦታዎች መካከል አንቀሳቅስ",
+      "damageTitle": "እንደ የተበላሸ ምልክት አድርግ",
+      "damageDescription": "ክምችት ወደ የተበላሹ እቃዎች ቦታ አንቀሳቅስ",
+      "fields": {
+        "location": {
+          "label": "ቦታ",
+          "placeholder": "ቦታ ምረጥ"
+        },
+        "fromLocation": {
+          "label": "ከቦታ",
+          "placeholder": "ምንጭ ቦታ ምረጥ"
+        },
+        "toLocation": {
+          "label": "ወደ ቦታ",
+          "placeholder": "መድረሻ ቦታ ምረጥ"
+        },
+        "quantity": {
+          "label": "ብዛት",
+          "placeholder": "ብዛት አስገባ"
+        },
+        "quantityDelta": {
+          "label": "የብዛት ለውጥ",
+          "placeholder": "መጠን አስገባ (ለመቀነስ አሉታዊ ቁጥር ይጠቀሙ)",
+          "description": "ለመጨመር አወንታዊ ቁጥር፣ ለመቀነስ አሉታዊ ቁጥር"
+        },
+        "reason": {
+          "label": "ምክንያት",
+          "placeholder": "ለምሳሌ፡ እንደገና ቆጠራ፣ የተቀበለው ክምችት፣ ወዘተ.",
+          "description": "ስለዚህ የክምችት እንቅስቃሴ አማራጭ ማስታወሻ"
+        },
+        "referenceType": {
+          "label": "የማጣቀሻ ዓይነት",
+          "placeholder": "ለምሳሌ፡ PO፣ SO፣ ወዘተ."
+        },
+        "referenceId": {
+          "label": "የማጣቀሻ ID",
+          "placeholder": "ለምሳሌ፡ PO-12345"
+        }
+      }
+    },
+    "toasts": {
+      "adjustSuccess": "ክምችቱ በተሳካ ሁኔታ ተስተካክሏል",
+      "adjustError": "ክምችት ማስተካከል አልተሳካም",
+      "receiveSuccess": "ክምችቱ በተሳካ ሁኔታ ተቀብሏል",
+      "receiveError": "ክምችት መቀበል አልተሳካም",
+      "shipSuccess": "ክምችቱ በተሳካ ሁኔታ ተልኳል",
+      "shipError": "ክምችት ማስላክ አልተሳካም",
+      "transferSuccess": "ክምችቱ በተሳካ ሁኔታ ተላልፏል",
+      "transferError": "ክምችት ማስተላለፍ አልተሳካም",
+      "damageSuccess": "ክምችቱ እንደ የተበላሸ በተሳካ ሁኔታ ምልክት ተደርጓል",
+      "damageError": "ክምችትን እንደ የተበላሸ ማምለክ አልተሳካም",
+      "loadError": "የክምችት መረጃ ማምጣት አልተሳካም"
+    }
+  },
+  "empty": {
+    "list": "ለዚህ ምርት ምንም ዓይነቶች አልተገኙም። ለመጀመር የመጀመሪያ ዓይነትዎን ይፍጠሩ።"
+  }
+}

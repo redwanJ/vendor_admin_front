@@ -34,6 +34,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
       inventory: (await import(`../locales/${locale}/inventory.json`)).default,
       bookings: (await import(`../locales/${locale}/bookings.json`)).default,
       products: (await import(`../locales/${locale}/products.json`)).default,
+      variants: (await import(`../locales/${locale}/variants.json`)).default,
+      warehouses: (await import(`../locales/${locale}/warehouses.json`)).default,
     },
   };
 });

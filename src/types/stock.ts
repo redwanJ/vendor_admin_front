@@ -83,3 +83,36 @@ export interface MarkDamagedDto {
   quantity: number;
   reason?: string;
 }
+
+// Stock List (variant-location flattened)
+export interface StockListItemDto {
+  productId: string;
+  variantId: string;
+  sku: string;
+  barcode?: string;
+  warehouseId: string;
+  warehouseCode: string;
+  warehouseName: string;
+  locationId: string;
+  locationCode: string;
+  locationType?: string;
+  onHandQty: number;
+  reservedQty: number;
+  availableQty: number;
+}
+
+export interface PaginatedStockList {
+  items: StockListItemDto[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
+}
+
+export interface StockListFilters {
+  search?: string;
+  warehouseIds?: string[];
+  locationIds?: string[];
+  page?: number;
+  pageSize?: number;
+}

@@ -119,6 +119,7 @@ export default function ProductVariantsPage() {
     <div className="space-y-6">
       {dialog}
       <VariantsHeader
+        onBack={() => router.push(`/${locale}/dashboard/products/${productId}`)}
         onAdd={() => router.push(`/${locale}/dashboard/products/${productId}/variants/new`)}
       />
 
