@@ -7,12 +7,14 @@ import { useTranslations } from 'next-intl';
 import {
   LayoutDashboard,
   Package,
-  Calendar,
   Users,
   Settings,
   LogOut,
   User,
-  X,
+  Boxes,
+  Building2,
+  UserPlus,
+  Key,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -33,35 +35,23 @@ export function MobileNav({ user, open, onClose, onLogout }: MobileNavProps) {
   const pathname = usePathname();
   const params = useParams();
   const locale = params.locale as string;
-  const t = useTranslations('nav');
+  const t = useTranslations('common.nav');
 
   const navItems = [
-    {
-      titleKey: 'dashboard',
-      href: `/${locale}/dashboard`,
-      icon: LayoutDashboard,
-    },
-    {
-      titleKey: 'services',
-      href: `/${locale}/dashboard/services`,
-      icon: Package,
-    },
-    {
-      titleKey: 'bookings',
-      href: `/${locale}/dashboard/bookings`,
-      icon: Calendar,
-    },
-    {
-      titleKey: 'customers',
-      href: `/${locale}/dashboard/customers`,
-      icon: Users,
-    },
-    {
-      titleKey: 'settings',
-      href: `/${locale}/settings`,
-      icon: Settings,
-    },
-  ];
+    { titleKey: 'dashboard', href: `/${locale}/dashboard`, icon: LayoutDashboard },
+    { titleKey: 'products', href: `/${locale}/dashboard/products`, icon: Package },
+    { titleKey: 'stock', href: `/${locale}/dashboard/stock`, icon: Boxes },
+    { titleKey: 'warehouses', href: `/${locale}/dashboard/warehouses`, icon: Building2 },
+    { titleKey: 'customers', href: `/${locale}/dashboard/customers`, icon: Users },
+    { titleKey: 'staff', href: `/${locale}/dashboard/staff`, icon: UserPlus },
+    { titleKey: 'settings', href: `/${locale}/settings`, icon: Settings },
+    { titleKey: 'api_keys', href: `/${locale}/dashboard/api-keys`, icon: Key },
+  ] as const;
+
+  const isNavItemActive = (itemHref: string) => {
+    if (itemHref === `/${locale}/dashboard`) return pathname === itemHref;
+    return pathname.startsWith(itemHref);
+  };
 
   const getInitials = (name: string) => {
     return name
@@ -87,7 +77,7 @@ export function MobileNav({ user, open, onClose, onLogout }: MobileNavProps) {
           <nav className="flex flex-col gap-1 px-4">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = isNavItemActive(item.href);
 
               return (
                 <Link

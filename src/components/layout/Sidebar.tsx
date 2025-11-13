@@ -58,7 +58,7 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
   const pathname = usePathname();
   const params = useParams();
   const locale = params.locale as string;
-  const t = useTranslations('nav');
+  const t = useTranslations('common.nav');
   const { theme, setTheme } = useTheme();
   const [searchQuery, setSearchQuery] = React.useState('');
 
@@ -88,16 +88,16 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
           href: `/${locale}/dashboard/products`,
           icon: Package,
         },
-        {
-          titleKey: 'services',
-          href: `/${locale}/dashboard/services`,
-          icon: Zap,
-        },
-        {
-          titleKey: 'inventory',
-          href: `/${locale}/dashboard/inventory`,
-          icon: Box,
-        },
+        // {
+        //   titleKey: 'services',
+        //   href: `/${locale}/dashboard/services`,
+        //   icon: Zap,
+        // },
+        // {
+        //   titleKey: 'inventory',
+        //   href: `/${locale}/dashboard/inventory`,
+        //   icon: Box,
+        // },
         {
           titleKey: 'stock',
           href: `/${locale}/dashboard/stock`,
@@ -108,11 +108,11 @@ export function Sidebar({ user, collapsed }: SidebarProps) {
           href: `/${locale}/dashboard/warehouses`,
           icon: Building2,
         },
-        {
-          titleKey: 'bookings',
-          href: `/${locale}/dashboard/bookings`,
-          icon: Calendar,
-        },
+        // {
+        //   titleKey: 'bookings',
+        //   href: `/${locale}/dashboard/bookings`,
+        //   icon: Calendar,
+        // },
         {
           titleKey: 'customers',
           href: `/${locale}/dashboard/customers`,
