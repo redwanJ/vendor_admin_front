@@ -1,6 +1,7 @@
 import { api } from '@/lib/axios';
 import type { ServiceTypeLookup, CategoryLookup } from '@/types/service';
-import type { WarehouseLookup, LocationLookup } from '@/types/lookups';
+import type { WarehouseLookup, LocationLookup, VariantLookup } from '@/types/lookups';
+import type { CourierLookup } from '@/types/lookups';
 
 export const lookupService = {
   /**
@@ -45,6 +46,28 @@ export const lookupService = {
     if (search) params.append('search', search);
     if (limit) params.append('limit', String(limit));
     const response = await api.get<LocationLookup[]>(`/lookups/locations?${params.toString()}`);
+    return response.data;
+  },
+
+  /**
+   * Get couriers lookup (global), supports search/limit
+   */
+  async getCouriers(search?: string, limit: number = 50): Promise<CourierLookup[]> {
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (limit) params.append('limit', String(limit));
+    const response = await api.get<CourierLookup[]>(`/lookups/couriers?${params.toString()}`);
+    return response.data;
+  },
+
+  /**
+   * Get variants lookup (tenant-scoped), supports search by SKU, barcode, or product name
+   */
+  async getVariants(search?: string, limit: number = 50): Promise<VariantLookup[]> {
+    const params = new URLSearchParams();
+    if (search) params.append('search', search);
+    if (limit) params.append('limit', String(limit));
+    const response = await api.get<VariantLookup[]>(`/lookups/variants?${params.toString()}`);
     return response.data;
   },
 };

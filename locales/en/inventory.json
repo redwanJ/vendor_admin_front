@@ -137,10 +137,42 @@
                                       "viewVariant":  "View Variant"
                                   },
                       "toasts":  {
-                                     "loadError":  "Failed to load stock"
+                                     "loadError":  "Failed to load stock",
+                                     "receiveSuccess":  "Stock received successfully",
+                                     "receiveError":  "Failed to receive stock"
                                  },
                       "empty":  {
                                     "list":  "No stock found. Adjust your filters."
-                                }
+                                },
+                      "receiveDialog":  {
+                                            "title":  "Receive Stock",
+                                            "description":  "Add variants manually or import from CSV. Format: variantId, locationId, quantity, reason (optional)",
+                                            "itemsLabel":  "Items to Receive",
+                                            "addItem":  "Add Item",
+                                            "importCSV":  "Import CSV",
+                                            "variantLabel":  "Variant",
+                                            "variantPlaceholder":  "Search variant...",
+                                            "variantSearchPlaceholder":  "Search by SKU, barcode...",
+                                            "locationLabel":  "Location",
+                                            "locationPlaceholder":  "Select location",
+                                            "quantityLabel":  "Quantity",
+                                            "reasonLabel":  "Note",
+                                            "reasonPlaceholder":  "Optional",
+                                            "commonReasonLabel":  "Common Reason (Optional)",
+                                            "commonReasonPlaceholder":  "Enter a common reason for all items (e.g., 'New shipment from supplier')",
+                                            "submit":  "Receive Stock",
+                                            "cancel":  "Cancel",
+                                            "removeItem":  "Remove item",
+                                            "csvFormat":  "CSV Format: variantId, locationId, quantity, reason (optional)",
+                                            "csvExample":  "Example: abc-123,loc-456,10,New shipment",
+                                            "validation":  {
+                                                               "variantRequired":  "Variant is required",
+                                                               "locationRequired":  "Location is required",
+                                                               "quantityMin":  "Quantity must be at least 1",
+                                                               "minItems":  "At least one item is required",
+                                                               "csvInvalid":  "Invalid CSV format",
+                                                               "csvEmpty":  "No valid data rows found in CSV"
+                                                           }
+                                        }
                   }
 }

@@ -4,11 +4,14 @@ import type {
   StockMovementDto,
   AdjustStockDto,
   ReceiveStockDto,
+  BulkReceiveStockDto,
   ShipStockDto,
   TransferStockDto,
   MarkDamagedDto,
   PaginatedStockList,
   StockListFilters,
+  ReserveStockDto,
+  ReleaseStockDto,
 } from '@/types/stock';
 
 /**
@@ -60,6 +63,14 @@ export const stockService = {
   },
 
   /**
+   * Receive multiple stock items in bulk
+   */
+  async bulkReceiveStock(data: BulkReceiveStockDto): Promise<StockMovementDto[]> {
+    const response = await api.post<StockMovementDto[]>('/vendor/stock/receive-bulk', data);
+    return response.data;
+  },
+
+  /**
    * Ship stock from a location
    */
   async shipStock(data: ShipStockDto): Promise<StockMovementDto> {
@@ -80,6 +91,22 @@ export const stockService = {
    */
   async markDamaged(data: MarkDamagedDto): Promise<StockMovementDto> {
     const response = await api.post<StockMovementDto>('/vendor/stock/damage', data);
+    return response.data;
+  },
+
+  /**
+   * Reserve stock at a location
+   */
+  async reserveStock(data: ReserveStockDto): Promise<StockMovementDto> {
+    const response = await api.post<StockMovementDto>('/vendor/stock/reserve', data);
+    return response.data;
+  },
+
+  /**
+   * Release reserved stock at a location
+   */
+  async releaseStock(data: ReleaseStockDto): Promise<StockMovementDto> {
+    const response = await api.post<StockMovementDto>('/vendor/stock/release', data);
     return response.data;
   },
 };

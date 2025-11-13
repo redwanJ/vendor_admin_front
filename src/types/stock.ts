@@ -29,6 +29,9 @@ export interface StockMovementDto {
   referenceId?: string;
   reason?: string;
   performedAt: string;
+  courierId?: string;
+  trackingNumber?: string;
+  trackingUrl?: string;
 }
 
 /**
@@ -49,6 +52,26 @@ export interface ReceiveStockDto {
   toLocationId: string;
   quantity: number;
   reason?: string;
+  courierId?: string;
+  trackingNumber?: string;
+}
+
+/**
+ * Receive Stock Item DTO (for bulk operations)
+ */
+export interface ReceiveStockItemDto {
+  variantId: string;
+  toLocationId: string;
+  quantity: number;
+  reason?: string;
+}
+
+/**
+ * Bulk Receive Stock DTO
+ */
+export interface BulkReceiveStockDto {
+  items: ReceiveStockItemDto[];
+  commonReason?: string;
 }
 
 /**
@@ -61,6 +84,26 @@ export interface ShipStockDto {
   referenceType?: string;
   referenceId?: string;
   reason?: string;
+  courierId?: string;
+  trackingNumber?: string;
+}
+
+export interface ReserveStockDto {
+  variantId: string;
+  locationId: string;
+  quantity: number;
+  reason?: string;
+  referenceType?: string;
+  referenceId?: string;
+}
+
+export interface ReleaseStockDto {
+  variantId: string;
+  locationId: string;
+  quantity: number;
+  reason?: string;
+  referenceType?: string;
+  referenceId?: string;
 }
 
 /**

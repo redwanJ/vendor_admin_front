@@ -8,6 +8,7 @@ import { ApiKeyListSkeleton } from '@/components/shared/ServiceSkeletons';
 import StockHeader from '@/components/stock/StockHeader';
 import StockFilters from '@/components/stock/StockFilters';
 import StockTable from '@/components/stock/StockTable';
+import ReceiveStockDialog from '@/components/stock/ReceiveStockDialog';
 import { stockService } from '@/services/stockService';
 import type { StockListItemDto } from '@/types/stock';
 
@@ -22,6 +23,7 @@ export default function StockListPage() {
   const [items, setItems] = useState<StockListItemDto[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [receiveDialogOpen, setReceiveDialogOpen] = useState(false);
 
   const [search, setSearch] = useState('');
   const [warehouseIds, setWarehouseIds] = useState<string[]>([]);
@@ -60,10 +62,18 @@ export default function StockListPage() {
     load();
   }, [load]);
 
+  const handleReceiveSuccess = () => {
+    toast({
+      title: tCommon('messages.success'),
+      description: 'Stock received successfully',
+    });
+    load();
+  };
+
   if (loading && items.length === 0) {
     return (
       <div className="space-y-6">
-        <StockHeader />
+        <StockHeader onReceiveStock={() => setReceiveDialogOpen(true)} />
         <ApiKeyListSkeleton count={10} />
       </div>
     );
@@ -71,7 +81,7 @@ export default function StockListPage() {
 
   return (
     <div className="space-y-6">
-      <StockHeader />
+      <StockHeader onReceiveStock={() => setReceiveDialogOpen(true)} />
       <StockFilters
         search={search}
         warehouseIds={warehouseIds}
@@ -93,6 +103,12 @@ export default function StockListPage() {
         onViewVariant={(item) => router.push(`/${locale}/dashboard/products/${item.productId}/variants/${item.variantId}`)}
         selectedIds={selectedIds}
         onSelectionChange={setSelectedIds}
+      />
+
+      <ReceiveStockDialog
+        open={receiveDialogOpen}
+        onOpenChange={setReceiveDialogOpen}
+        onSuccess={handleReceiveSuccess}
       />
     </div>
   );

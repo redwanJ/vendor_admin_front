@@ -12,3 +12,17 @@ export interface LocationLookup {
   type?: string;
 }
 
+export interface CourierLookup {
+  id: string;
+  code: string;
+  name: string;
+  trackingUrlTemplate?: string;
+}
+
+export interface VariantLookup {
+  id: string;
+  sku: string;
+  barcode?: string;
+  productId: string;
+  productName: string;
+}
